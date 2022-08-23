@@ -23,6 +23,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const app = document.querySelector("#app");
 
   let page = window.location.pathname.replace(/^\/|\/$/, '').replace(/\//, '.')
+  if (!page) {
+    return
+  }
   if (pages.hasOwnProperty(page)) {
     app.innerHTML = pages[page]({chats, icons, messages});
   } else {
