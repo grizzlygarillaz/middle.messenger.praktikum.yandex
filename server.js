@@ -1,8 +1,7 @@
-import express from 'express';
-
+const express = require('express')
 const PORT = 3000;
 const app = express();
-const root = '/dist'
+const root = __dirname + '/dist'
 
 app.use(express.static(root));
 

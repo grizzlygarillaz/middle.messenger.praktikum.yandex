@@ -1,10 +1,9 @@
 {
   "name": "sprint_1",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "scripts": {
-    "start": "npm run build && node ./server.js",
+    "start": "parcel build && node ./server.js",
     "build": "parcel build src/index.html",
     "dev": "parcel src/index.html --no-cache --port 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
