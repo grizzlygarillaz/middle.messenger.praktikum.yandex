@@ -1,0 +1,26 @@
+<ul class="chat-list">
+  {{#each chats}}
+    <li class="chat-item {{#if active}}chat-item_active{{/if}}">
+      <div class="chat-item__avatar"></div>
+      <div class="chat-item__message">
+        <span class="chat-item__name">{{ this.name }}</span>
+        <div class="last-message">
+          {{#if this.lastMessage.author}}
+            <span class="last-message__author">
+              {{ this.lastMessage.author }} :
+            </span>
+          {{/if}}
+          <span class="last-message__text">
+            {{ this.lastMessage.text }}
+          </span>
+        </div>
+      </div>
+      <div class="chat-item__info">
+        <span class="chat-item__date">{{ this.date }}</span>
+        {{#if this.unread}}
+          <span class="chat-item__badge">{{ this.unread }}</span>
+        {{/if}}
+      </div>
+    </li>
+  {{/each}}
+</ul>

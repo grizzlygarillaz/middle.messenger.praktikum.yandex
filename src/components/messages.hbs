@@ -1,0 +1,26 @@
+<div class="message {{#if message.own}}message_own{{/if}}">
+  <div class="message__block {{#if message.data.sticker}}message__block_sticker{{/if}} {{#if message.own}}message__block_own{{/if}}">
+    {{#if message.author}}
+      <span class="message__author">{{ message.author }}</span>
+    {{/if}}
+    <div class="message-data">
+      {{#if message.data.sticker}}
+        <div class="message__sticker"></div>
+      {{else}}
+        {{#if message.data.text}}
+          <span class="message-data__text">
+            {{ message.data.text }}
+          </span>
+        {{/if}}
+        {{#if message.data.media}}
+          <span class="message-data__media">
+            {{ message.data.media }}
+          </span>
+        {{/if}}
+      {{/if}}
+    </div>
+    <div class="message__info">
+      <span class="message__date">{{ message.date }}</span>
+    </div>
+  </div>
+</div>

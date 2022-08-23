@@ -1,0 +1,12 @@
+<div class="input">
+  <input type="{{#if type}}{{ type }}{{else}} text {{/if}}"
+         class="input__value"
+         name="{{ name }}"
+         value="{{ value }}"
+         title="{{ title }}"
+         required />
+  <span class="input__placeholder">{{ placeholder }}</span>
+  {{#if error}}
+    <span class="input__error">{{ error }}</span>
+  {{/if}}
+</div>

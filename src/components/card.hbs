@@ -1,0 +1,13 @@
+<div class="card">
+  {{#if title}}
+    <div class="card__header">
+      <span>{{ title }}</span>
+    </div>
+  {{/if}}
+  <div class="card__body">
+    {{> body }}
+  </div>
+  <div class="card__footer">
+    {{> footer }}
+  </div>
+</div>

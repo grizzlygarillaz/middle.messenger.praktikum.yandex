@@ -1,0 +1,30 @@
+.input
+  display: flex
+  align-items: flex-end
+  position: relative
+  height: 58px
+  border-bottom: 1px solid $dark
+
+.input__value
+  width: 100%
+  padding: 4px 0
+  font-size: 20px
+  background-color: transparent
+
+  &:not(:focus):valid,
+  &:focus
+    ~.input__placeholder
+      bottom: 50%
+      font-size: 16px
+
+.input__error
+  color: $red
+  font-size: 14px
+
+.input__placeholder
+  color: $gray
+  position: absolute
+  pointer-events: none
+  bottom: 0
+  font-size: 20px
+  transition: 0.2s ease all
