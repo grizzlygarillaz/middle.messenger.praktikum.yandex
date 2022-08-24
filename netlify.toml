@@ -2,3 +2,8 @@
   publish = "dist"
   command = "npm run start"
   port = "3000"
+
+[[redirects]]
+  from = "/*"
+  to = "/*"
+  status = 200
