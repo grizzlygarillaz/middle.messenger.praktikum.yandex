@@ -1,9 +1,8 @@
 [build]
   publish = "dist"
   command = "npm run start"
-  port = "3000"
 
 [[redirects]]
   from = "/*"
-  to = "/*"
+  to = "/index.html"
   status = 200
