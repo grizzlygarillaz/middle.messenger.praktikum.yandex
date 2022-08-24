@@ -10,14 +10,14 @@
   "author": "Zaripov Adel",
   "license": "ISC",
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars-precompile": "^1.*",
-    "@parcel/transformer-sass": "^2.7.0",
-    "handlebars": "^4.7.7",
-    "parcel": "^2.7.0",
-    "postcss": "^8.4.16"
   },
   "dependencies": {
     "express": "^4.18.1",
-    "express-handlebars": "^6.0.6"
+    "express-handlebars": "^6.0.6",
+    "handlebars": "^4.7.7",
+    "parcel": "^2.7.0",
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.*",
+    "@parcel/transformer-sass": "^2.7.0",
+    "postcss": "^8.4.16"
   }
 }
