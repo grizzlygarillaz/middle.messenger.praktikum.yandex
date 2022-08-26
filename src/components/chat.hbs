@@ -4,7 +4,7 @@
       <div class="chat-item__avatar"></div>
       <span>Chat name</span>
     </div>
-    <img class="chat__icon" src="{{icons.chat_settings}}" alt="">
+    <img class="chat__icon" src="{{icons.chat_settings}}" alt="Current chat image">
   </div>
   <div class="chat__body">
     {{#each messages}}
@@ -12,8 +12,8 @@
     {{/each}}
   </div>
   <div class="chat__footer">
-    <img class="icon__clip chat__icon" src="{{icons.clip}}" alt="">
+    <img class="icon__clip chat__icon" src="{{icons.clip}}" alt="Attach file">
     <textarea name="message" rows="1" class="chat__message" title="Напишите сообщение" placeholder="Сообщение"></textarea>
-    <img class="chat__icon" src="{{icons.send}}" alt="">
+    <img class="chat__icon" src="{{icons.send}}" alt="send message">
   </div>
 </div>

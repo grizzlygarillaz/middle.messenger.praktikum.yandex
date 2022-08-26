@@ -1,5 +1,9 @@
+const dotenv = require('dotenv');
 const express = require('express')
-const PORT = 3000;
+
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
 const app = express();
 const root = __dirname + '/dist'
 
