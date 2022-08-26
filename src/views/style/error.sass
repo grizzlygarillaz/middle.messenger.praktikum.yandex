@@ -1,0 +1,42 @@
+.error-box
+  display: flex
+  width: 1200px
+  height: 600px
+  border-radius: 12px
+  overflow: hidden
+
+.error-box__side
+  display: flex
+  align-items: center
+  padding: 50px
+
+.error-box__side_left
+  background-color: $dark
+  width: 40%
+  justify-content: end
+
+
+.error-box__side_right
+  display: flex
+  flex-direction: column
+  gap: 10px
+  background-color: $white
+  justify-content: center
+  align-items: start
+  width: 100%
+
+.error__code
+  height: fit-content
+  font-size: 94px
+  font-weight: 500
+  color: $white
+  &::first-letter
+    color: $red !important
+
+.error-box__message
+  font-size: 40px
+  font-weight: 500
+
+.error-box__option
+  color: $gray
+  font-size: 24px

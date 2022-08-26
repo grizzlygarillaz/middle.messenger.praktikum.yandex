@@ -1,0 +1,56 @@
+.chat
+  display: flex
+  flex-direction: column
+  height: 100%
+
+.chat__header
+  display: flex
+  justify-content: space-between
+  height: 100px
+  padding: 18px 32px
+  background-color: $dark
+  border-bottom: 1px solid $dark-gray
+  align-items: center
+
+.chat__info
+  display: flex
+  align-items: start
+  gap: 16px
+  color: $white
+  font-size: 24px
+
+.chat__icon
+  height: 40px
+  width: 40px
+  padding: 4px
+  filter: invert(60%)
+  border-radius: 100px
+  transition: all .2s
+  &:hover
+    cursor: pointer
+    filter: invert(80%)
+    background-color: $white
+
+.chat__body
+  display: flex
+  flex-direction: column
+  justify-content: end
+  gap: 10px
+  padding: 24px
+  height: 100%
+
+.chat__footer
+  background-color: $dark
+  display: flex
+  align-items: center
+  gap: 10px
+  padding: 10px
+
+.chat__message
+  background-color: $dark-gray
+  color: $light-gray
+  border-radius: 8px
+  padding: 4px 12px
+
+.chat__message
+  width: 100%
