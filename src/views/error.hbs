@@ -5,10 +5,12 @@
     </div>
     <div class="error-box__side error-box__side_right">
       <span class="error-box__message">{{ message }}</span>
-      <a href="/chats" class="error-box__option">
-        &#x2190;
-        Вернуться к списку чатов
-      </a>
+      {{#unless withoutReturn }}
+        <a href="/chats" class="error-box__option">
+          &#x2190;
+          Вернуться к списку чатов
+        </a>
+      {{/unless}}
     </div>
   </div>
 </div>

@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "color-hex-case": "lower"
+  },
+  "ignoreFiles": [
+    "build/*"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.sass"],
+      "customSyntax": "postcss-sass"
+    }
+  ]
+}
