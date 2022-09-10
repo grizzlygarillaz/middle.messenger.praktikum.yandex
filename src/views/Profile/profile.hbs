@@ -1,0 +1,40 @@
+<div class="container container_center">
+  <form action="/chat">
+    {{#Card}}
+      {{#CardHeader}}
+        <span>Профиль</span>
+      {{/CardHeader}}
+      {{#Link href="/chat" theme="dark"}}Назад{{/Link}}
+      {{#CardBody}}
+        {{{Input type="text"
+                 name="login"
+                 placeholder="Логин"
+        }}}
+        {{{Input type="text"
+                 name="first_name"
+                 placeholder="Имя"
+        }}}
+        {{{Input type="text"
+                 name="last_name"
+                 placeholder="Фамилия"
+        }}}
+        {{{Input type="email"
+                 name="email"
+                 placeholder="Почта"
+        }}}
+        {{{Input type="text"
+                 name="phone"
+                 placeholder="Телефон"
+        }}}
+        {{{Input type="password"
+                 name="password"
+                 placeholder="Пароль"
+        }}}
+      {{/CardBody}}
+      {{#CardFooter}}
+        {{#Button}}Сохранить{{/Button}}
+        {{#Link href="/login"}}Выйти{{/Link}}
+      {{/CardFooter}}
+    {{/Card}}
+  </form>
+</div>

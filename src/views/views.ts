@@ -1,15 +1,15 @@
-import chats from './chats.hbs';
-import login from './login.hbs';
-import registration from './registration.hbs';
-import error from './error.hbs';
-import test from './Test/test.hbs';
+import Chat from './Main';
+import Login from './Authentication/Login';
+import Registration from './Authentication/Registration';
+import Error from './Error';
+import Profile from './Profile';
 
-const pages = {
-  chats,
-  login,
-  registration,
-  error,
-  test,
+const pages: Record<string, any> = {
+  Chat,
+  Login,
+  Registration,
+  Error,
+  Profile,
 };
 
 export default pages;

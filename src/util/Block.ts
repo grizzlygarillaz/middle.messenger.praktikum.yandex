@@ -1,23 +1,23 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
-class Block {
+class Block<P extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
-  };
+  } as const;
 
   public id = nanoid(12);
 
-  protected props: Record<string, unknown>;
+  protected props: P = {} as P;
 
   protected children: Record<string, Block>;
 
   private _element: HTMLUnknownElement;
 
-  private _meta: { tagName: string, props? };
+  private _meta: { tagName: string, props?: P };
 
   private eventBus: () => EventBus;
 
@@ -27,14 +27,11 @@ class Block {
    *
    * @returns {void}
    */
-  constructor(tagName = 'div', childrenAndProps: any = {}) {
+  constructor(tagName = 'div', childrenAndProps: P = {} as P) {
     const eventBus = new EventBus();
     const { props, children } = this._getChildrenAndProps(childrenAndProps);
 
-    this._meta = {
-      tagName,
-      props,
-    };
+    this._meta = { tagName, props };
 
     this.children = children;
 
@@ -47,13 +44,13 @@ class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildrenAndProps(childrenAndProps: any) {
-    const props: Record<string, unknown> = {};
+  _getChildrenAndProps(childrenAndProps: P): { props: P, children: Record<string, Block> } {
+    const props: P = {} as P;
     const children: Record<string, Block> = {};
 
-    Object.entries(childrenAndProps).forEach(([key, value]) => {
+    Object.entries(childrenAndProps).forEach(([key, value]: [keyof P, any]) => {
       if (value instanceof Block) {
-        children[key] = value;
+        children[key as string] = value;
       } else {
         props[key] = value;
       }
@@ -63,14 +60,14 @@ class Block {
   }
 
   _addEvents() {
-    const { events = {} } = this.props as { events: Record<string, () => void> };
+    const { events = {} } = this.props;
 
     Object.keys(events).forEach((event) => {
-      this._element.addEventListener(event, events[event]);
+      this._element?.addEventListener(event, events[event]);
     });
   }
 
-  _registerEvents(eventBus) {
+  _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -78,7 +75,8 @@ class Block {
   }
 
   _createResources() {
-    // this._element = this._createDocumentElement();
+    const { tagName } = this._meta;
+    this._element = this._createDocumentElement(tagName);
   }
 
   _init() {
@@ -91,31 +89,37 @@ class Block {
 
   protected init() {}
 
-  _componentDidMount(oldProps) {
+  _componentDidMount(oldProps: any) {
     return this.props[oldProps];
   }
 
+  protected render(): DocumentFragment {
+    return new DocumentFragment();
+  }
+
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps) {
+  componentDidMount(oldProps: P) {
     return this._componentDidMount(oldProps);
   }
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+
+    Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps, newProps) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
     if (!this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
     return false;
   }
 
-  protected componentDidUpdate(oldProps: unknown, newProps: unknown) {
+  protected componentDidUpdate(oldProps: P, newProps: P) : boolean {
     return oldProps !== newProps;
   }
 
-  setProps = (nextProps) => {
+  setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
@@ -146,6 +150,7 @@ class Block {
       if (!stub) {
         return;
       }
+      component.getContent().append(...Array.from(stub.childNodes));
 
       stub.replaceWith(component.getContent()!);
     });
@@ -165,23 +170,19 @@ class Block {
     this._addEvents();
   }
 
-  protected render(): DocumentFragment {
-    return new DocumentFragment();
-  }
-
   getContent() {
     return this.element;
   }
 
-  _makePropsProxy(props) {
+  _makePropsProxy(props: P): any {
     const self = this;
 
-    return new Proxy(props, {
-      get(target, prop: string) {
+    return new Proxy(props as Record<string, any>, {
+      get(target: Record<string, any>, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: {}, prop: string, value: string) {
+      set(target: Record<string, any>, prop: string, value: string) {
         const oldValue = { ...target };
 
         target[prop] = value;
@@ -195,12 +196,9 @@ class Block {
     });
   }
 
-  _createDocumentElement(): HTMLUnknownElement {
-    return document.createElement(this._meta.tagName);
-  }
-
-  createDocumentElement(): HTMLUnknownElement {
-    return document.createElement(this._meta.tagName);
+  _createDocumentElement(tagName: string) {
+    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
+    return document.createElement(tagName);
   }
 
   show() {

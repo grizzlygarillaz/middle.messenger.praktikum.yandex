@@ -1,9 +1,14 @@
 import * as Handlebars from 'handlebars/dist/handlebars.runtime';
 import Block from './Block';
 
+interface HandlebarsProps {
+  data: Record<string, any>,
+  fn: (...arg: any) => void,
+  hash: any,
+}
+
 function registerComponent(name: string, Component: typeof Block) {
-  console.log(Component);
-  Handlebars.registerHelper(name, ({ data, fn, hash }) => {
+  Handlebars.registerHelper(name, ({ data, fn, hash }: HandlebarsProps) => {
     const component = new Component(hash);
 
     if (!data.root.children) {
@@ -12,7 +17,9 @@ function registerComponent(name: string, Component: typeof Block) {
 
     data.root.children[component.id] = component;
 
-    return `<div data-id="${component.id}"></div>`;
+    const contents = fn ? fn(this) : '';
+
+    return `<div data-id="${component.id}">${contents}</div>`;
   });
 }
 

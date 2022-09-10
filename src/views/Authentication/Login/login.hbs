@@ -1,0 +1,28 @@
+<form action="/chat" class="container container_center">
+  {{#Card}}
+    {{#CardHeader}}
+      <span>Вход</span>
+    {{/CardHeader}}
+    {{#CardBody}}
+      {{{InputBox type="text"
+                  name="login"
+                  placeholder="Логин"
+                  minLength=3
+                  maxLength=30
+                  regex=''
+                  error="От 3 до 20 символов, латиница, без спец символов"
+      }}}
+      {{{InputBox type="password"
+                  name="password"
+                  placeholder="Пароль"
+                  minLength=8
+                  maxLength=40
+                  error="От 8 до 40 символов, хотя бы одна заглавная буква и цифра"
+      }}}
+    {{/CardBody}}
+    {{#CardFooter}}
+      {{#Button onClick=../onClick}}Вход{{/Button}}
+      {{#Link href="/registration"}}Зарегистрироваться{{/Link}}
+    {{/CardFooter}}
+  {{/Card}}
+</form>

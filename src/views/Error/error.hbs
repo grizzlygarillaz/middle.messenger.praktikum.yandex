@@ -1,0 +1,16 @@
+<div class="container container_center">
+  <div class="error-box">
+    <div class="error-box__side error-box__side_left">
+      <span class="error__code">{{ code }}</span>
+    </div>
+    <div class="error-box__side error-box__side_right">
+      <span class="error-box__message">{{ message }}</span>
+      {{#unless withoutReturn }}
+        <a href="/chat" class="error-box__option">
+          &#x2190;
+          Вернуться к списку чатов
+        </a>
+      {{/unless}}
+    </div>
+  </div>
+</div>

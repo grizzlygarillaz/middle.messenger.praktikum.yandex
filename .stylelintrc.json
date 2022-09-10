@@ -1,9 +1,11 @@
 {
+  "extends": "stylelint-config-recommended",
   "rules": {
     "color-hex-case": "lower"
   },
   "ignoreFiles": [
-    "build/*"
+    "build/*",
+    "dist/*"
   ],
   "overrides": [
     {

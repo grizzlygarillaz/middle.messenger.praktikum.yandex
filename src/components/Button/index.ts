@@ -1,18 +1,20 @@
 import Block from '../../util/Block';
 import template from './button.hbs';
+import ButtonProps from './type';
 
-interface ButtonProps {
-  label:string,
-  events: Record<string, () => void>
-}
-
-class Button extends Block {
+class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
-    super('button', props);
+    super('button', {
+      ...props,
+      type: props.type ?? 'submit',
+      events: {
+        click: props.onClick,
+      },
+    });
   }
 
   protected render() {
-    return this.compile(template, { label: this.props.label });
+    return this.compile(template, this.props);
   }
 }
 

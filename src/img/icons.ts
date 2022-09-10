@@ -1,13 +1,11 @@
 import arrowBack from './arrow-back.svg';
 import clip from './clip.svg';
-import chatSettings from './chat_settings.svg';
+import chat_settings from './chat_settings.svg';
 import send from './send.svg';
 
-const icons = {
+export {
   arrowBack,
   clip,
-  chatSettings,
+  chat_settings,
   send,
 };
-
-export default icons;
