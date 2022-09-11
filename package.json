@@ -31,7 +31,6 @@
     "eslint": "8.22.0",
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-plugin-import": "2.25.3",
-    "parcel-packager-svg-sprite": "2.0.0",
     "stylelint": "14.11.0",
     "stylelint-config-recommended": "9.0.0"
   }
