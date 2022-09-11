@@ -4,9 +4,9 @@
       <div class="chat-item__avatar"></div>
       <span>{{current_chat}}</span>
     </div>
-    <svg class="chat__icon" viewBox="0 0 48 48" aria-label="settings">
-      <use href="{{icons.chat_settings}}"/>
-    </svg>
+    <div class="chat__icon">
+      {{{icons.chat_settings}}}
+    </div>
   </div>
   <div class="chat__body">
     {{#each messages}}
@@ -14,12 +14,12 @@
     {{/each}}
   </div>
   <div class="chat__footer">
-    <svg class="icon__clip chat__icon" viewBox="0 0 48 48" aria-label="clip">
-      <use href="{{icons.clip}}"/>
-    </svg>
+    <div class="chat__icon icon__clip">
+      {{{icons.clip}}}
+    </div>
     <textarea name="message" rows="1" class="chat__message" title="Напишите сообщение" placeholder="Сообщение"></textarea>
-    <svg class="chat__icon" viewBox="0 0 48 48" aria-label="send">
-      <use href="{{icons.send}}"/>
-    </svg>
+    <div class="chat__icon">
+      {{{icons.send}}}
+    </div>
   </div>
 </div>

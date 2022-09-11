@@ -20,20 +20,18 @@
   font-size: 24px
 
 .chat__icon
-  height: 40px
-  width: 40px
-  border-radius: 100px
-  padding: 4px
+  position: relative
+  height: 48px
+  width: 48px
   transition: all .2s
 
-  & use
+  & svg
     fill: $gray
-    transition: all .2s ease-in-out
+    transition: fill .2s ease-in-out
 
   &:hover
     cursor: pointer
-    background-color: $dark_gray
-    & use
+    & svg
       fill: white
 
 .chat__body
