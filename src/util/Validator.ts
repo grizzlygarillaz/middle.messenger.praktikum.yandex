@@ -6,17 +6,18 @@ interface RegexParse {
 }
 
 function Validator(value: string, rule: Rule = {}): boolean {
+  const { maxLength, minLength, regex } = rule;
+
   const isRegex = /^\/(?<body>\S+)\/(?<options>[gmiysud]*)$/;
+
   if (value) {
-    if (rule.maxLength !== undefined && value.length > rule.maxLength) {
+    if (maxLength !== undefined && value.length > maxLength) {
       return false;
     }
-    if (rule.minLength !== undefined && value.length < rule.minLength) {
+    if (minLength !== undefined && value.length < minLength) {
       return false;
     }
   }
-
-  const { regex } = rule;
 
   if (regex !== undefined) {
     const query: RegexParse = isRegex.test(regex) ? (isRegex.exec(regex)!.groups as {} as RegexParse) : { body: regex, options: '' };

@@ -1,15 +1,13 @@
 type Handler<A extends any[] = unknown[]> = (...args: A) => void;
 type EventInterface<P> = P[keyof P];
 
-class EventBus <E extends Record<string, string> = Record<string, string>,
-    Args extends Record<EventInterface<E>, any[]> = Record<string, any[]>> {
+class EventBus <
+        E extends Record<string, string> = Record<string, string>,
+        Args extends Record<EventInterface<E>, any[]> = Record<string, any[]>,
+      > {
   private readonly listeners: {
     [K in EventInterface<E>]?: Handler<Args[K]>[]
   } = {};
-  //
-  // constructor() {
-  //   this.listeners = {};
-  // }
 
   on<Event extends EventInterface<E>>(event: Event, callback: Handler<Args[Event]>) {
     if (!this.listeners[event]) {

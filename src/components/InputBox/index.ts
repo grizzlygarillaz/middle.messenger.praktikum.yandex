@@ -13,9 +13,6 @@ class InputBox extends Block<InputBoxProps> {
         focusout: () => {
           this.toggleError();
         },
-        focusin: () => {
-          this.toggleError();
-        },
       },
     });
   }

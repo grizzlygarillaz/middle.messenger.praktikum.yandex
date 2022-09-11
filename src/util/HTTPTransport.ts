@@ -75,7 +75,7 @@ class HTTPTransport {
 
     if (data) {
       Object.keys(data).forEach((key: keyof HttpBody) => {
-        const value = Array.isArray(data[key]) ? (data[key] as []).join(',') : data[key];
+        const value = Array.isArray(data[key]) ? (data[key] as []).join(',') : JSON.stringify(data[key]);
         stringData.push(`${key}=${value}`);
       });
 

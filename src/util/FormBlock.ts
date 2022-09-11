@@ -10,7 +10,9 @@ class FormBlock<P extends Record<string, any> = any> extends Block<P> {
         submit: (e: Event) => {
           this.validate();
           e.preventDefault();
+
           console.log(this.inputsValue);
+
           if (this.valid) {
             (this.getContent() as HTMLFormElement).submit();
           }

@@ -1,8 +1,8 @@
 interface ButtonProps {
-  label:string,
+  label: string,
+  type: string,
   onClick: () => void,
   events: Record<string, () => void>
-  type:string,
 }
 
 export default ButtonProps;
