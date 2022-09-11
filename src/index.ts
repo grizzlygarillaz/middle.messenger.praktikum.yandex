@@ -12,12 +12,10 @@ window.addEventListener('DOMContentLoaded', () => {
     .replace(/^\/|\/$/, '')
     .replace(/\//, '.');
 
-  const pageName = pagePath[0].toUpperCase() + pagePath.slice(1);
-
   let page;
 
-  if (pages.hasOwnProperty(pageName)) {
-    page = new pages[pageName]();
+  if (pages.hasOwnProperty(pagePath)) {
+    page = new pages[pagePath ?? 'login']();
   } else {
     page = new pages.Error({
       code: 404,

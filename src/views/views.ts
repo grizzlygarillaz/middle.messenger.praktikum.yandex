@@ -1,15 +1,15 @@
-import Chat from './Main';
-import Login from './Authentication/Login';
-import Registration from './Authentication/Registration';
-import Error from './Error';
-import Profile from './Profile';
+import chat from './Main';
+import login from './Authentication/Login';
+import registration from './Authentication/Registration';
+import error from './Error';
+import profile from './Profile';
 
 const pages: Record<string, any> = {
-  Chat,
-  Login,
-  Registration,
-  Error,
-  Profile,
+  chat,
+  login,
+  registration,
+  error,
+  profile,
 };
 
 export default pages;
