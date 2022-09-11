@@ -1,0 +1,25 @@
+<div class="chat">
+  <div class="chat__header">
+    <div class="chat__info">
+      <div class="chat-item__avatar"></div>
+      <span>{{current_chat}}</span>
+    </div>
+    <div class="chat__icon">
+      {{{icons.chat_settings}}}
+    </div>
+  </div>
+  <div class="chat__body">
+    {{#each messages}}
+      {{{Message message=this}}}
+    {{/each}}
+  </div>
+  <div class="chat__footer">
+    <div class="chat__icon icon__clip">
+      {{{icons.clip}}}
+    </div>
+    <textarea name="message" rows="1" class="chat__message" title="Напишите сообщение" placeholder="Сообщение"></textarea>
+    <div class="chat__icon">
+      {{{icons.send}}}
+    </div>
+  </div>
+</div>

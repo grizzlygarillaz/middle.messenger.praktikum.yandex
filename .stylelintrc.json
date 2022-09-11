@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-recommended",
+  "rules": {
+    "color-hex-case": "lower"
+  },
+  "ignoreFiles": [
+    "node_modules/*",
+    "dist/*"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.sass"],
+      "customSyntax": "postcss-sass"
+    }
+  ]
+}

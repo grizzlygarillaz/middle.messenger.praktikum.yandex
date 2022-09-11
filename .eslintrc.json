@@ -1,0 +1,17 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["airbnb-base", "airbnb-typescript/base"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "rules": {
+    "no-prototype-builtins": "off",
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
+    "class-methods-use-this": "off"
+  }
+}
