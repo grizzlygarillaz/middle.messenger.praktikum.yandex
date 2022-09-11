@@ -1,5 +1,5 @@
 interface Rule {
-  regex?: string | RegExp,
+  regex?: string,
   maxLength?: number,
   minLength?: number,
 }

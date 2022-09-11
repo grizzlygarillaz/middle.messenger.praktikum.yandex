@@ -10,11 +10,15 @@ const icons: Record<string, SVGAElement> = {
 };
 
 class Chat extends Block<ChatProps> {
+  constructor(props: ChatProps) {
+    super('div', props);
+  }
+
   protected render() {
     return this.compile(template, {
+      ...this.props,
       children: this.children,
       icons,
-      ...this.props,
     });
   }
 }

@@ -13,9 +13,12 @@ class LoginPage extends FormBlock<LoginPageProps> {
       ...props,
       events: {
         submit: (e: Event) => {
+          e.preventDefault();
           console.log(this.inputsValue);
           this.validate();
-          e.preventDefault();
+          if (this.valid) {
+            (this.getContent() as HTMLFormElement).submit();
+          }
         },
       },
     });

@@ -3,10 +3,14 @@ import template from './chat_item.hbs';
 import ChatItemProps from './type';
 
 class ChatItem extends Block<ChatItemProps> {
+  constructor(props: ChatItemProps) {
+    super('div', props);
+  }
+
   protected render() {
     return this.compile(template, {
-      children: this.children,
       ...this.props,
+      children: this.children,
     });
   }
 }

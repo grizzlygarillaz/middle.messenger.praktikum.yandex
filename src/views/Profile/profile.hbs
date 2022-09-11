@@ -6,29 +6,45 @@
       {{/CardHeader}}
       {{#Link href="/chat" theme="dark"}}Назад{{/Link}}
       {{#CardBody}}
-        {{{Input type="text"
-                 name="login"
-                 placeholder="Логин"
+        {{{InputBox type="text"
+                    name="login"
+                    placeholder="Логин"
+                    minLength=3
+                    maxLength=30
+                    regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
+                    error="От 3 до 20 символов, латиница, без спец символов (кроме -_)"
         }}}
-        {{{Input type="text"
-                 name="first_name"
-                 placeholder="Имя"
+        {{{InputBox type="text"
+                    name="first_name"
+                    placeholder="Имя"
+                    regex="^[A-ZА-Я][a-zа-я-]+[a-zа-я]$"
+                    error="Некорректное имя"
         }}}
-        {{{Input type="text"
-                 name="last_name"
-                 placeholder="Фамилия"
+        {{{InputBox type="text"
+                    name="second_name"
+                    placeholder="Фамилия"
+                    regex="^[A-ZА-Я][a-zа-я-]+[a-zа-я]$"
+                    error="Некорректная фамилия"
         }}}
-        {{{Input type="email"
-                 name="email"
-                 placeholder="Почта"
+        {{{InputBox type="email"
+                    name="email"
+                    placeholder="Почта"
+                    regex="^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$"
         }}}
-        {{{Input type="text"
-                 name="phone"
-                 placeholder="Телефон"
+        {{{InputBox type="text"
+                    name="phone"
+                    placeholder="Телефон"
+                    minLength=10
+                    maxLength=15
+                    regex='^\+?\d+$'
         }}}
-        {{{Input type="password"
-                 name="password"
-                 placeholder="Пароль"
+        {{{InputBox type="password"
+                    name="password"
+                    placeholder="Пароль"
+                    minLength=8
+                    maxLength=40
+                    regex='^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).+\S$'
+                    error="От 8 до 40 символов, хотя бы одна заглавная буква и цифра"
         }}}
       {{/CardBody}}
       {{#CardFooter}}

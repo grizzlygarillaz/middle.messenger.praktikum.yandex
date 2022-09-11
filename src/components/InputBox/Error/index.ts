@@ -6,7 +6,7 @@ class InputError extends Block<ErrorProps> {
   constructor(props: ErrorProps) {
     super('span', {
       ...props,
-      error: props.error ?? 'Something was wrong(',
+      error: props.error ?? 'Некорректный формат ввода',
     });
   }
 

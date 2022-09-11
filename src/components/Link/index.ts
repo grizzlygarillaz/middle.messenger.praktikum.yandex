@@ -13,7 +13,10 @@ class Link extends Block<LinkProps> {
   }
 
   protected render() {
-    return this.compile(template, { theme: Themes[this.props.theme ?? 'light'] });
+    return this.compile(template, {
+      ...this.props,
+      theme: Themes[this.props.theme ?? 'light'],
+    });
   }
 }
 

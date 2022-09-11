@@ -81,9 +81,10 @@ class MainPage extends Block {
 
   render() {
     return this.compile(template, {
+      ...this.props,
       messages,
       chats,
-      ...this.props,
+      children: this.children,
     });
   }
 }

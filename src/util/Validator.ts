@@ -1,6 +1,12 @@
 import Rule from '../typings/interfaces/rule';
 
+interface RegexParse {
+  body: string,
+  options?: string
+}
+
 function Validator(value: string, rule: Rule = {}): boolean {
+  const isRegex = /^\/(?<body>\S+)\/(?<options>[gmiysud]*)$/;
   if (value) {
     if (rule.maxLength !== undefined && value.length > rule.maxLength) {
       return false;
@@ -10,12 +16,14 @@ function Validator(value: string, rule: Rule = {}): boolean {
     }
   }
 
-  let { regex } = rule;
-  if (typeof regex === 'string') {
-    regex = new RegExp(regex);
+  const { regex } = rule;
+
+  if (regex !== undefined) {
+    const query: RegexParse = isRegex.test(regex) ? (isRegex.exec(regex)!.groups as {} as RegexParse) : { body: regex, options: '' };
+    return new RegExp(query.body, query?.options).test(value);
   }
 
-  return regex !== undefined ? regex.test(value) : true;
+  return true;
 }
 
 export default Validator;

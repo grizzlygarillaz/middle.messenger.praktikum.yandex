@@ -8,6 +8,6 @@ export interface InputProps extends Rule {
   required: boolean,
   className: string,
   valid: boolean,
-  value?: unknown,
+  value: string,
   events: Record<string, () => void>
 }

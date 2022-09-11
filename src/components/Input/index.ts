@@ -33,6 +33,14 @@ class Input extends Block<InputProps> {
     return this.props.valid;
   }
 
+  get value() {
+    return (this.getContent() as HTMLInputElement).value;
+  }
+
+  get name() {
+    return this.props.name;
+  }
+
   protected render() {
     return this.compile(template, {
       ...this.props,

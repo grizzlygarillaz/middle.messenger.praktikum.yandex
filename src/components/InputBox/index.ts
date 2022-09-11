@@ -2,6 +2,7 @@ import Block from '../../util/Block';
 import template from './input_box.hbs';
 import { InputBoxProps } from './type';
 import Input from '../Input';
+import InputError from './Error';
 
 class InputBox extends Block<InputBoxProps> {
   constructor(props: InputBoxProps) {
@@ -20,7 +21,7 @@ class InputBox extends Block<InputBoxProps> {
   }
 
   toggleError() {
-    this.props.valid = Object.values(this.inputs).some((input) => (input as Input).valid);
+    this.props.valid = Object.values(this.inputs).every((input) => (input as Input).valid);
     this.errors.forEach((error) => {
       if (this.props.valid) {
         error.hide();
@@ -32,12 +33,12 @@ class InputBox extends Block<InputBoxProps> {
 
   get inputs() : Block[] {
     return Object.values(this.children)
-      .filter((child) => child.getContent().tagName === 'INPUT');
+      .filter((child) => child instanceof Input);
   }
 
   get errors() : Block[] {
     return Object.values(this.children)
-      .filter((child) => child.getContent().classList.contains('input__error'));
+      .filter((child) => child instanceof InputError);
   }
 
   protected render() {
