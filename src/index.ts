@@ -6,13 +6,18 @@ import { arrowBack } from './img/icons';
 window.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('#app')!;
 
-  const pagePath = window
+  let pagePath = window
     .location
     .pathname
     .replace(/^\/|\/$/, '')
     .replace(/\//, '.');
 
   let page;
+
+  if (!pagePath) {
+    pagePath = 'login';
+    window.location.href = '/login';
+  }
 
   if (pages.hasOwnProperty(pagePath)) {
     page = new pages[pagePath ?? 'login']();
