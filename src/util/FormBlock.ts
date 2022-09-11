@@ -3,6 +3,22 @@ import InputBox from '../components/InputBox';
 import Input from '../components/Input';
 
 class FormBlock<P extends Record<string, any> = any> extends Block<P> {
+  constructor(props: P) {
+    super('form', {
+      ...props,
+      events: {
+        submit: (e: Event) => {
+          this.validate();
+          e.preventDefault();
+          console.log(this.inputsValue);
+          if (this.valid) {
+            (this.getContent() as HTMLFormElement).submit();
+          }
+        },
+      },
+    });
+  }
+
   get inputsValue() {
     return this.inputs.reduce((previousValue, currentValue) => {
       const input = (currentValue as Input);

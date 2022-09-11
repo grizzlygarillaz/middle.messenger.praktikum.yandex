@@ -1,11 +1,7 @@
-import Block from '../../../util/Block';
 import template from './registration.hbs';
+import FormBlock from '../../../util/FormBlock';
 
-class RegistrationPage extends Block {
-  constructor() {
-    super('div');
-  }
-
+class RegistrationPage extends FormBlock {
   render(): DocumentFragment {
     return this.compile(template, {
       children: this.children,

@@ -1,11 +1,7 @@
-import Block from '../../util/Block';
 import template from './profile.hbs';
+import FormBlock from '../../util/FormBlock';
 
-class ProfilePage extends Block {
-  constructor() {
-    super('div');
-  }
-
+class ProfilePage extends FormBlock {
   render(): DocumentFragment {
     return this.compile(template, {
       children: this.children,
