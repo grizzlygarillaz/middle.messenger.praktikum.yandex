@@ -1,0 +1,31 @@
+<div class="modal__background">
+  <div class="modal">
+    <div class="modal__card">
+      <div class="modal__card_header">
+        <div class="modal__card_title">Модальное окно Lorem ipsum dolor sit amet.</div>
+        {{{CloseButton onClick=closeModal}}}
+      </div>
+      <div class="modal__card_body">
+        {{{InputBox type="text"
+                    name="login"
+                    placeholder="Логин"
+                    minLength=3
+                    maxLength=30
+                    regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
+                    error="От 3 до 20 символов, латиница, без спец символов"
+        }}}
+        {{{InputBox type="text"
+                    name="login2"
+                    placeholder="Логин"
+                    minLength=3
+                    maxLength=30
+                    regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
+                    error="От 3 до 20 символов, латиница, без спец символов"
+        }}}
+      </div>
+      <div class="modal__card_footer">
+        {{#Button}}Вход{{/Button}}
+      </div>
+    </div>
+  </div>
+</div>

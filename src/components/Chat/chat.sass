@@ -11,16 +11,16 @@
   background-color: $dark
   border-bottom: 1px solid $dark-gray
   align-items: center
+  z-index: 1
 
 .chat__info
   display: flex
   align-items: start
   gap: 16px
   color: $white
-  font-size: 24px
+  font-size: 20px
 
 .chat__icon
-  position: relative
   height: 48px
   width: 48px
   transition: all .2s
@@ -35,12 +35,17 @@
       fill: white
 
 .chat__body
-  display: flex
-  flex-direction: column
-  justify-content: end
-  gap: 10px
+  display: block
   padding: 24px
   height: 100%
+  overflow: auto
+
+.chat__list
+  display: flex
+  gap: 10px
+  flex-direction: column
+  justify-content: flex-end
+  min-height: 100%
 
 .chat__footer
   background-color: $dark
@@ -48,6 +53,7 @@
   align-items: center
   gap: 10px
   padding: 10px
+// TODO fix hiding
 
 .chat__message
   background-color: $dark-gray
@@ -55,3 +61,6 @@
   border-radius: 8px
   padding: 4px 12px
   width: 100%
+
+.icon__clip
+  transform: rotate(-135deg)

@@ -1,11 +1,11 @@
-import Block from '../../util/Block';
+import Block from '../../util/Blocks/Block';
 import template from './input.hbs';
 import { InputProps } from './type';
 import Validator from '../../util/Validator';
 
 class Input extends Block<InputProps> {
   constructor(props: InputProps) {
-    super('input', {
+    super({
       ...props,
       events: {
         blur: () => {

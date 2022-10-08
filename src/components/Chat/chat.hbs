@@ -9,9 +9,11 @@
     </div>
   </div>
   <div class="chat__body">
-    {{#each messages}}
-      {{{Message message=this}}}
-    {{/each}}
+    <div class="chat__list">
+      {{#each messages}}
+        {{{Message message=this}}}
+      {{/each}}
+    </div>
   </div>
   <div class="chat__footer">
     <div class="chat__icon icon__clip">

@@ -1,6 +1,7 @@
 import registerComponent from '../util/registerComponent';
 
 import Button from './Button';
+import CloseButton from './CloseButton';
 import Card from './Card';
 import CardBody from './Card/Body';
 import CardFooter from './Card/Footer';
@@ -12,8 +13,10 @@ import Message from './Message';
 import ChatItem from './ChatItem';
 import InputBox from './InputBox';
 import InputError from './InputBox/Error';
+import Modal from './Modal';
 
 registerComponent('Button', Button as any);
+registerComponent('CloseButton', CloseButton as any);
 registerComponent('Card', Card);
 registerComponent('CardBody', CardBody);
 registerComponent('CardFooter', CardFooter);
@@ -25,3 +28,4 @@ registerComponent('InputBox', InputBox as any);
 registerComponent('InputError', InputError as any);
 registerComponent('Link', Link as any);
 registerComponent('Message', Message as any);
+registerComponent('Modal', Modal as any);

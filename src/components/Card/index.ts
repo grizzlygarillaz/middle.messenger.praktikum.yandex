@@ -1,4 +1,4 @@
-import Block from '../../util/Block';
+import Block from '../../util/Blocks/Block';
 import template from './card.hbs';
 
 class Card extends Block {

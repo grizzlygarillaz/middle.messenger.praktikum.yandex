@@ -33,7 +33,7 @@ class EventBus <
 
   eventExist(event: EventInterface<E>) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      return `Нет события: ${event}`;
     }
     return true;
   }

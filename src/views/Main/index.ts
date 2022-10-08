@@ -1,6 +1,8 @@
-import Block from '../../util/Block';
+import Block from '../../util/Blocks/Block';
 import template from './main.hbs';
 import MainProps from './type';
+import withStore from '../../util/Store/withStore';
+import store from '../../util/Store/Store';
 
 const messages = [
   {
@@ -74,14 +76,13 @@ const chats = [
   },
 ];
 
-class MainPage extends Block {
-  constructor(props: MainProps) {
-    super('div', props);
-  }
-
+class MainPage extends Block<MainProps> {
   render() {
+    const { user } = store.getState();
+
     return this.compile(template, {
       ...this.props,
+      user,
       messages,
       chats,
       children: this.children,
@@ -89,4 +90,6 @@ class MainPage extends Block {
   }
 }
 
-export default MainPage;
+const withUser = withStore((state) => ({ ...state.user }));
+
+export default withUser(MainPage as typeof Block);

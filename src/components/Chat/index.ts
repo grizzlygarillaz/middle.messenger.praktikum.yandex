@@ -1,4 +1,4 @@
-import Block from '../../util/Block';
+import Block from '../../util/Blocks/Block';
 import template from './chat.hbs';
 import ChatProps from './type';
 import { clip, send, chat_settings } from '../../img/icons';
@@ -10,10 +10,6 @@ const icons: Record<string, SVGAElement> = {
 };
 
 class Chat extends Block<ChatProps> {
-  constructor(props: ChatProps) {
-    super('div', props);
-  }
-
   protected render() {
     return this.compile(template, {
       ...this.props,

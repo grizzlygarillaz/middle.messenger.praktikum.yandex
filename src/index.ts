@@ -1,33 +1,47 @@
 import './components/components';
 import './style.sass';
+import './bootstrap';
+import Router from './util/Router/Router';
 import pages from './views/views';
-import { arrowBack } from './img/icons';
+import AuthController from './controllers/AuthController';
+import store from './util/Store/Store';
 
-window.addEventListener('DOMContentLoaded', () => {
-  const app = document.querySelector('#app')!;
+enum Routes {
+  LOGIN = '/',
+  REGISTER = '/register',
+  MAIN = '/messenger',
+}
 
-  let pagePath = window
-    .location
-    .pathname
-    .replace(/^\/|\/$/, '')
-    .replace(/\//, '.');
+window.addEventListener('DOMContentLoaded', async () => {
+  Router
+    .use('/', pages.login)
+    .use('/registration', pages.registration)
+    .use('/messenger', pages.chat)
+    .start();
 
-  let page;
+  let protectedRoute = true;
 
-  if (!pagePath) {
-    pagePath = 'login';
-    window.location.href = '/login';
+  switch (window.location.pathname) {
+    case Routes.LOGIN:
+    case Routes.REGISTER:
+      protectedRoute = false;
+      break;
+    default:
+  }
+  // const user = AuthController.read();
+  //
+  // console.log(user.then());
+  try {
+    await AuthController.read();
+
+    if (!protectedRoute) {
+      Router.go(Routes.MAIN);
+    }
+  } catch (e) {
+    if (!protectedRoute) {
+      Router.go(Routes.LOGIN);
+    }
   }
 
-  if (pages.hasOwnProperty(pagePath)) {
-    page = new pages[pagePath ?? 'login']();
-  } else {
-    page = new pages.Error({
-      code: 404,
-      message: 'Страница не найдена',
-      arrowIcon: arrowBack,
-    });
-  }
-
-  app.append(page.getContent());
+  console.log(store.getState());
 });

@@ -1,12 +1,8 @@
-import Block from '../../util/Block';
+import Block from '../../util/Blocks/Block';
 import template from './error.hbs';
 import ErrorProps from './type';
 
-class ErrorPage extends Block {
-  constructor(props: ErrorProps) {
-    super('div', props);
-  }
-
+class ErrorPage extends Block<ErrorProps> {
   render(): DocumentFragment {
     return this.compile(template, {
       children: this.children,

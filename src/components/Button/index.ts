@@ -1,10 +1,10 @@
-import Block from '../../util/Block';
+import Block from '../../util/Blocks/Block';
 import template from './button.hbs';
 import ButtonProps from './type';
 
 class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
-    super('button', {
+    super({
       ...props,
       type: props.type ?? 'submit',
       events: {
