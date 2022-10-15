@@ -1,4 +1,4 @@
-import Store from './util/Store/Store';
+import Store from './core/Store';
 
 declare global {
   interface Window {

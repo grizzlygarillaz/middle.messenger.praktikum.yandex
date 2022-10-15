@@ -1,5 +1,5 @@
-import Route from './Route';
-import Block from '../Blocks/Block';
+import Route from 'core/Route';
+import Block from 'core/Block';
 
 class Router {
   private static __instance: Router;

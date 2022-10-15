@@ -1,4 +1,4 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
 import template from './modal.hbs';
 import ModalProps from './type';
 
@@ -15,7 +15,6 @@ class Modal extends Block<ModalProps> {
       ...this.props,
       children: this.children,
       closeModal: () => {
-        console.log('close');
         this.hide();
       },
     });

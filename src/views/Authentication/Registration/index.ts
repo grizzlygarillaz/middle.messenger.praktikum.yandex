@@ -1,7 +1,7 @@
+import FormBlock from 'util/FormBlock';
+import { SignUpData } from 'api/AuthAPI';
+import AuthController from 'controllers/AuthController';
 import template from './registration.hbs';
-import FormBlock from '../../../util/Blocks/FormBlock';
-import { SignUpData } from '../../../api/AuthAPI';
-import AuthController from '../../../controllers/AuthController';
 
 class RegistrationPage extends FormBlock {
   constructor() {

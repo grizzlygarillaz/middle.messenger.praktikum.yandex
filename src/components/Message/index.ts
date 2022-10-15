@@ -1,4 +1,4 @@
-import Block from '../../util/Blocks/Block';
+import Block from '../../core/Block';
 import template from './message.hbs';
 import MessageProps from './type';
 

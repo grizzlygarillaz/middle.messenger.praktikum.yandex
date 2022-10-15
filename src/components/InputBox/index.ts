@@ -1,8 +1,8 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
+import InputBoxProps from 'components/InputBox/type';
+import InputError from 'components/InputBox/Error';
+import Input from 'components/Input';
 import template from './input_box.hbs';
-import { InputBoxProps } from './type';
-import Input from '../Input';
-import InputError from './Error';
 
 class InputBox extends Block<InputBoxProps> {
   constructor(props: InputBoxProps) {

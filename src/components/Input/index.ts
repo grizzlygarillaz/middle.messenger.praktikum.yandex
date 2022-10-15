@@ -1,7 +1,7 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
+import Validator from 'util/Validator';
+import { InputProps } from 'components/Input/type';
 import template from './input.hbs';
-import { InputProps } from './type';
-import Validator from '../../util/Validator';
 
 class Input extends Block<InputProps> {
   constructor(props: InputProps) {

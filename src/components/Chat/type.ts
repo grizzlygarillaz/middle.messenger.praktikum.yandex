@@ -1,8 +1,6 @@
-import MessageProps from '../Message/type';
+import MessageProps from 'components/Message/type';
 
-interface ChatProps {
+export default interface ChatProps {
   current_chat: string,
   messages: MessageProps[]
 }
-
-export default ChatProps;

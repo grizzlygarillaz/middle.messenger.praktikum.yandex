@@ -2,9 +2,34 @@
   <div class="chat__left-side">
     <div class="chat-panel">
       <div class="chat-panel__tools">
-        <a class="chat-panel__avatar" href="/profile">
-          <img src="#" alt="{{ "profile" }}">
-        </a>
+        {{#ModalBlock}}
+          {{#ModalTrigger modal="profile" className="chat-panel__avatar"}}
+            <img src="#" alt="{{ "profile" }}">
+          {{/ModalTrigger}}
+          {{#Modal}}
+            {{#ModalBody}}
+              {{{InputBox type="text"
+                          name="login"
+                          placeholder="Логин"
+                          minLength=3
+                          maxLength=30
+                          regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
+                          error="От 3 до 20 символов, латиница, без спец символов"
+              }}}
+              {{{InputBox type="text"
+                          name="login2"
+                          placeholder="Логин"
+                          minLength=3
+                          maxLength=30
+                          regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
+                          error="От 3 до 20 символов, латиница, без спец символов"
+              }}}
+            {{/ModalBody}}
+            {{#ModalFooter}}
+              {{{Button label="Сохранить"}}}
+            {{/ModalFooter}}
+          {{/Modal}}
+        {{/ModalBlock}}
         <input class="chat-panel__search" type="text" placeholder="🔍 Поиск" title="Поиск по диалогам">
       </div>
       <ul class="chat-list">
@@ -17,5 +42,4 @@
   <div class="chat__right-side">
     {{{Chat messages=messages current_chat="Chat number 1"}}}
   </div>
-  {{{Modal}}}
 </div>

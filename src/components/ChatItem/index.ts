@@ -1,12 +1,11 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
+import ChatItemProps from 'components/ChatItem/type';
 import template from './chat_item.hbs';
-import ChatItemProps from './type';
 
 class ChatItem extends Block<ChatItemProps> {
   protected render() {
     return this.compile(template, {
       ...this.props,
-      children: this.children,
     });
   }
 }

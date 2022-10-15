@@ -1,5 +1,5 @@
-import { set } from '../helpers';
-import EventBus from '../EventBus';
+import { set } from 'util/helpers';
+import EventBus from './EventBus';
 
 enum StoreEvents {
   UPDATED = 'UPDATED',

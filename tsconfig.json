@@ -8,6 +8,19 @@
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "paths": {
+      "api/*": ["./api/*"],
+      "components/*": ["./components/*"],
+      "controllers/*": ["./controllers/*"],
+      "core/*": ["./core/*"],
+      "helpers/*": ["./helpers/*"],
+      "img/*": ["./img/*"],
+      "typings/*": ["./typings/*"],
+      "util/*": ["./util/*"],
+      "views/*": ["./views/*"]
+    },
     "lib": [
       "ESNext",
       "DOM"

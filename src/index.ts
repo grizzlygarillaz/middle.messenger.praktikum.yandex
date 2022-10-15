@@ -1,10 +1,10 @@
-import './components/components';
+import 'components/components';
 import './style.sass';
 import './bootstrap';
-import Router from './util/Router/Router';
-import pages from './views/views';
-import AuthController from './controllers/AuthController';
-import store from './util/Store/Store';
+import Router from 'core/Router';
+import pages from 'views/views';
+import AuthController from 'controllers/AuthController';
+import store from 'core/Store';
 
 enum Routes {
   LOGIN = '/',

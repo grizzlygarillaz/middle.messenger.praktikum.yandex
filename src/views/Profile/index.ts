@@ -1,5 +1,5 @@
+import FormBlock from 'util/FormBlock';
 import template from './profile.hbs';
-import FormBlock from '../../util/Blocks/FormBlock';
 
 class ProfilePage extends FormBlock {
   render(): DocumentFragment {

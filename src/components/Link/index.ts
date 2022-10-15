@@ -1,7 +1,7 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
+import { withRouter } from 'util/withRouter';
+import LinkProps from 'components/Link/type';
 import template from './link.hbs';
-import LinkProps from './type';
-import { withRouter } from '../../util/Router/withRouter';
 
 const Themes: Record<string, string> = {
   light: 'link_light',

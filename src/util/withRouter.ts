@@ -1,5 +1,5 @@
-import Router from './Router';
-import Block from '../Blocks/Block';
+import Router from 'core/Router';
+import Block from 'core/Block';
 
 interface PropsWithRouter {
   router: typeof Router,

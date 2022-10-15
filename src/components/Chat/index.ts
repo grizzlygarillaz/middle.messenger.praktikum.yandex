@@ -1,7 +1,7 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
+import ChatProps from 'components/Chat/type';
+import { chat_settings, clip, send } from 'img/icons';
 import template from './chat.hbs';
-import ChatProps from './type';
-import { clip, send, chat_settings } from '../../img/icons';
 
 const icons: Record<string, SVGAElement> = {
   clip,

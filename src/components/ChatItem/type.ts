@@ -1,4 +1,4 @@
-interface ChatItemProps {
+export default interface ChatItemProps {
   name: string,
   active: boolean,
   date: string,
@@ -8,5 +8,3 @@ interface ChatItemProps {
     author?: string
   }
 }
-
-export default ChatItemProps;

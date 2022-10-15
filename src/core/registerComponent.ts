@@ -1,5 +1,5 @@
 import * as Handlebars from 'handlebars/dist/handlebars.runtime';
-import Block from './Blocks/Block';
+import Block from 'core/Block';
 
 interface HandlebarsProps {
   data: Record<string, any>,

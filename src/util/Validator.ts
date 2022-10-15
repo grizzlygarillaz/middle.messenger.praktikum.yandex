@@ -1,4 +1,4 @@
-import Rule from '../typings/interfaces/rule';
+import Rule from '../typings/interfaces/Rule';
 
 interface RegexParse {
   body: string,

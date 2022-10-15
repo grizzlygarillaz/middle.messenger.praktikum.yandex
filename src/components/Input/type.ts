@@ -1,4 +1,4 @@
-import Rule from '../../typings/interfaces/rule';
+import Rule from '../../typings/interfaces/Rule';
 
 export interface InputProps extends Rule {
   type: string,

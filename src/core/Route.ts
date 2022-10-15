@@ -1,4 +1,4 @@
-import Block from '../Blocks/Block';
+import Block from 'core/Block';
 
 function render(query: string, block: Block) {
   const root = document.querySelector(query);
@@ -23,13 +23,6 @@ class Route {
     private readonly BlockClass: typeof Block,
   ) {
   }
-  //
-  // navigate(pathname: string) {
-  //   if (this.match(pathname)) {
-  //     this.pathname = pathname;
-  //     this.render();
-  //   }
-  // }
 
   leave() {
     this.block = null;

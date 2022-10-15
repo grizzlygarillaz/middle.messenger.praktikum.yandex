@@ -1,7 +1,8 @@
 import { nanoid } from 'nanoid';
-import EventBus from '../EventBus';
+import EventBus from 'core/EventBus';
+import BlockProps from 'typings/interfaces/Block';
 
-class Block<P extends Record<string, any> = any> {
+class Block<P extends Record<string, any> = BlockProps> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -185,3 +186,5 @@ class Block<P extends Record<string, any> = any> {
 }
 
 export default Block;
+
+export { BlockProps };

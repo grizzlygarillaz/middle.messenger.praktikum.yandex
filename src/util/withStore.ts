@@ -1,6 +1,6 @@
-import Block from '../Blocks/Block';
-import store, { StoreEvents } from './Store';
-import { isEqual } from '../helpers';
+import Block from 'core/Block';
+import store, { StoreEvents } from 'core/Store';
+import { isEqual } from './helpers';
 
 function withStore(mapStateProps: (state: any) => any) {
   return function wrap(Component: typeof Block) : typeof Block {

@@ -1,12 +1,13 @@
 import Block from 'core/Block';
-import template from './body.hbs';
+import template from './modal_trigger.hbs';
 
-class CardBody extends Block {
+class ModalTrigger extends Block {
   protected render() {
     return this.compile(template, {
+      ...this.props,
       children: this.children,
     });
   }
 }
 
-export default CardBody;
+export default ModalTrigger;

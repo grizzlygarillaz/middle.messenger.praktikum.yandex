@@ -1,7 +1,7 @@
-import Block from '../../util/Blocks/Block';
+import CloseButtonProps from 'components/CloseButton/type';
+import Block from 'core/Block';
+import { close } from 'img/icons';
 import template from './close_button.hbs';
-import CloseButtonProps from './type';
-import { close } from '../../img/icons';
 
 class CloseButton extends Block<CloseButtonProps> {
   constructor(props: CloseButtonProps) {

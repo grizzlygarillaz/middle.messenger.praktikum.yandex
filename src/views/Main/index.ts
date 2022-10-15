@@ -1,8 +1,8 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
+import withStore from 'util/withStore';
+import store from 'core/Store';
 import template from './main.hbs';
 import MainProps from './type';
-import withStore from '../../util/Store/withStore';
-import store from '../../util/Store/Store';
 
 const messages = [
   {

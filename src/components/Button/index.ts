@@ -1,6 +1,6 @@
-import Block from '../../util/Blocks/Block';
+import Block from 'core/Block';
+import ButtonProps from 'components/Button/type';
 import template from './button.hbs';
-import ButtonProps from './type';
 
 class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {

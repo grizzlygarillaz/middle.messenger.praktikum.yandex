@@ -1,8 +1,6 @@
-interface ErrorProps {
+export default interface ErrorProps {
   code: number,
   message: string,
   arrowIcon: SVGAElement,
   withoutReturn?: boolean,
 }
-
-export default ErrorProps;

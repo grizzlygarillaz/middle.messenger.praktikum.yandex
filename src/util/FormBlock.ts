@@ -1,14 +1,9 @@
-import Block from './Block';
-import InputBox from '../../components/InputBox';
-import Input from '../../components/Input';
+import Block from 'core/Block';
+import InputBox from 'components/InputBox';
+import BlockProps from 'typings/interfaces/Block';
+import Input from 'components/Input';
 
-class FormBlock<P extends Record<string, any> = any> extends Block<P> {
-  constructor(props: P) {
-    super({
-      ...props,
-    });
-  }
-
+export default class FormBlock<T extends Record<string, any> = BlockProps> extends Block<T> {
   get valid() {
     return this.inputs.every((input) => (input as Input).valid);
   }
@@ -16,8 +11,8 @@ class FormBlock<P extends Record<string, any> = any> extends Block<P> {
   get inputs() {
     return Object
       .values(this.children)
-      .filter((child) => child instanceof InputBox)
-      .reduce((previous: Block[], current) => previous.concat((current as InputBox).inputs), []);
+      .filter((child: Block) => child instanceof InputBox)
+      .reduce((acc: Block[], current: Block) => acc.concat((current as InputBox).inputs), []);
   }
 
   validate() {
@@ -42,5 +37,3 @@ class FormBlock<P extends Record<string, any> = any> extends Block<P> {
     );
   }
 }
-
-export default FormBlock;

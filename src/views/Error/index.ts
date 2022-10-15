@@ -1,6 +1,6 @@
-import Block from '../../util/Blocks/Block';
+import ErrorProps from 'views/Error/type';
+import Block from 'core/Block';
 import template from './error.hbs';
-import ErrorProps from './type';
 
 class ErrorPage extends Block<ErrorProps> {
   render(): DocumentFragment {

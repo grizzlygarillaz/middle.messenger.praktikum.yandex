@@ -1,9 +1,8 @@
+import FormBlock from 'util/FormBlock';
+import { SignUpData } from 'api/AuthAPI';
+import AuthController from 'controllers/AuthController';
+import withStore from 'util/withStore';
 import template from './login.hbs';
-import FormBlock from '../../../util/Blocks/FormBlock';
-import AuthController from '../../../controllers/AuthController';
-import { SignUpData } from '../../../api/AuthAPI';
-import withStore from '../../../util/Store/withStore';
-import Block from '../../../util/Blocks/Block';
 
 interface LoginPageProps {
   events: {
@@ -35,4 +34,4 @@ class LoginPage extends FormBlock<LoginPageProps> {
   }
 }
 
-export default withStore((state) => ({ ...state.user }))(LoginPage as typeof Block);
+export default withStore((state) => ({ ...state.user }))(LoginPage as typeof FormBlock);

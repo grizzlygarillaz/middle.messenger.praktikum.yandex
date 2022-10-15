@@ -1,4 +1,4 @@
-import { PropsWithRouter } from '../../util/Router/withRouter';
+import { PropsWithRouter } from '../../util/withRouter';
 
 interface LinkProps extends PropsWithRouter {
   label: string,

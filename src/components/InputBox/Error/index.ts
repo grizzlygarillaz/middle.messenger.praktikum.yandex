@@ -1,6 +1,6 @@
-import Block from '../../../util/Blocks/Block';
+import Block from 'core/Block';
+import ErrorProps from 'components/InputBox/Error/type';
 import template from './error.hbs';
-import ErrorProps from './type';
 
 class InputError extends Block<ErrorProps> {
   constructor(props: ErrorProps) {
