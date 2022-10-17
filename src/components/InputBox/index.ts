@@ -2,7 +2,7 @@ import Block from 'core/Block';
 import InputBoxProps from 'components/InputBox/type';
 import InputError from 'components/InputBox/Error';
 import Input from 'components/Input';
-import template from './input_box.hbs';
+import template from 'bundle-text:./input_box.hbs';
 
 class InputBox extends Block<InputBoxProps> {
   constructor(props: InputBoxProps) {
@@ -39,14 +39,9 @@ class InputBox extends Block<InputBoxProps> {
   }
 
   protected render() {
-    const fragment = this.compile(template, {
-      ...this.props,
-      children: this.children,
-    });
-
     this.errors.forEach((error) => { error.hide(); });
 
-    return fragment;
+    return template;
   }
 }
 

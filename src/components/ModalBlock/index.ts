@@ -1,8 +1,8 @@
 import Block from 'core/Block';
-import template from './modal.hbs';
+import template from 'bundle-text:./modal.hbs';
 import ModalProps from './type';
 
-class Modal extends Block<ModalProps> {
+class ModalBlock extends Block<ModalProps> {
   constructor(props: ModalProps) {
     super({
       ...props,
@@ -11,14 +11,8 @@ class Modal extends Block<ModalProps> {
   }
 
   protected render() {
-    return this.compile(template, {
-      ...this.props,
-      children: this.children,
-      closeModal: () => {
-        this.hide();
-      },
-    });
+    return template;
   }
 }
 
-export default Modal;
+export default ModalBlock;

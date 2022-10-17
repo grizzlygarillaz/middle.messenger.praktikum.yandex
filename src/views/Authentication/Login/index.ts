@@ -2,7 +2,8 @@ import FormBlock from 'util/FormBlock';
 import { SignUpData } from 'api/AuthAPI';
 import AuthController from 'controllers/AuthController';
 import withStore from 'util/withStore';
-import template from './login.hbs';
+import template from 'bundle-text:./login.hbs';
+import Block from 'core/Block';
 
 interface LoginPageProps {
   events: {
@@ -26,12 +27,9 @@ class LoginPage extends FormBlock<LoginPageProps> {
     });
   }
 
-  render(): DocumentFragment {
-    return this.compile(template, {
-      ...this.props,
-      children: this.children,
-    });
+  render() {
+    return template;
   }
 }
 
-export default withStore((state) => ({ ...state.user }))(LoginPage as typeof FormBlock);
+export default withStore((state) => ({ ...state.user }))(LoginPage as typeof Block);

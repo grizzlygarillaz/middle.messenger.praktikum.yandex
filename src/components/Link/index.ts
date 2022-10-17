@@ -1,7 +1,7 @@
 import Block from 'core/Block';
 import { withRouter } from 'util/withRouter';
 import LinkProps from 'components/Link/type';
-import template from './link.hbs';
+import template from 'bundle-text:./link.hbs';
 
 const Themes: Record<string, string> = {
   light: 'link_light',
@@ -15,15 +15,12 @@ class BaseLink extends Block<LinkProps> {
       events: {
         click: () => this.navigate(),
       },
+      theme: Themes[props.theme ?? 'light'],
     });
   }
 
   protected render() {
-    return this.compile(template, {
-      ...this.props,
-      children: this.children,
-      theme: Themes[this.props.theme ?? 'light'],
-    });
+    return template;
   }
 
   navigate() {

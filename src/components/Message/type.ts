@@ -1,6 +1,6 @@
 import { BlockProps } from 'core/Block';
 
-interface MessageProps extends BlockProps {
+export interface MessageProps extends BlockProps {
   own: boolean,
   date: string,
   author: string,
@@ -10,5 +10,3 @@ interface MessageProps extends BlockProps {
     media?: File
   }
 }
-
-export default MessageProps;

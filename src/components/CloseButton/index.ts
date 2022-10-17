@@ -1,7 +1,7 @@
 import CloseButtonProps from 'components/CloseButton/type';
 import Block from 'core/Block';
 import { close } from 'img/icons';
-import template from './close_button.hbs';
+import template from 'bundle-text:./close_button.hbs';
 
 class CloseButton extends Block<CloseButtonProps> {
   constructor(props: CloseButtonProps) {
@@ -10,14 +10,14 @@ class CloseButton extends Block<CloseButtonProps> {
       events: {
         click: props.onClick,
       },
+      icons: {
+        close,
+      },
     });
   }
 
   protected render() {
-    return this.compile(template, {
-      ...this.props,
-      closeIcon: close,
-    });
+    return template;
   }
 }
 

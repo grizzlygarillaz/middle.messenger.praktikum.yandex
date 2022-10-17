@@ -1,7 +1,7 @@
 import Block from 'core/Block';
 import ChatProps from 'components/Chat/type';
 import { chat_settings, clip, send } from 'img/icons';
-import template from './chat.hbs';
+import template from 'bundle-text:./chat.hbs';
 
 const icons: Record<string, SVGAElement> = {
   clip,
@@ -10,12 +10,12 @@ const icons: Record<string, SVGAElement> = {
 };
 
 class Chat extends Block<ChatProps> {
+  constructor(props: ChatProps) {
+    super({ ...props, icons });
+  }
+
   protected render() {
-    return this.compile(template, {
-      ...this.props,
-      children: this.children,
-      icons,
-    });
+    return template;
   }
 }
 

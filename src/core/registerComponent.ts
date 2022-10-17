@@ -1,26 +1,53 @@
-import * as Handlebars from 'handlebars/dist/handlebars.runtime';
-import Block from 'core/Block';
+import Handlebars, { HelperOptions } from 'handlebars';
+import Block from './Block';
 
-interface HandlebarsProps {
-  data: Record<string, any>,
-  fn: (...arg: any) => void,
-  hash: any,
+interface BlockConstructable<
+      Props extends Record<string, any> = {},
+      IncomingProps extends Record<string, any> = {},
+    > {
+  new(props: IncomingProps): Block<Props>;
 }
 
-function registerComponent(name: string, Component: typeof Block) {
-  Handlebars.registerHelper(name, ({ data, fn, hash }: HandlebarsProps) => {
-    const component = new Component(hash);
+export default function registerComponent<
+      Props extends Record<string, any> = {},
+      IncomingProps extends Record<string, any> = {},
+    >(Component: BlockConstructable<Props, IncomingProps>) {
+  Handlebars.registerHelper(
+    Component.name,
+    function (this: Props, { hash: { ref, ...hash }, data, fn }: HelperOptions) {
+      if (!data.root.children) {
+        data.root.children = {};
+      }
 
-    if (!data.root.children) {
-      data.root.children = {};
-    }
+      if (!data.root.refs) {
+        data.root.refs = {};
+      }
 
-    data.root.children[component.id] = component;
+      const { children, refs } = data.root;
 
-    const contents = fn ? fn(this) : '';
+      /**
+     * Костыль для того, чтобы передавать переменные
+     * внутрь блоков вручную подменяя значение
+     */
+      (Object.keys(hash) as any).forEach((key: keyof Props) => {
+        if (this[key] && typeof this[key] === 'string') {
+          hash[key] = hash[key].replace(new RegExp(`{{${key as string}}}`, 'i'), this[key]);
+        }
+      });
 
-    return `<div data-id="${component.id}">${contents}</div>`;
-  });
+      const component = new Component(hash);
+
+      children[component.id] = component;
+
+      if (ref) {
+        refs[ref] = component;
+      }
+
+      const contents = fn ? fn(this) : '';
+
+      // console.log(contents)
+
+      return `<div data-id="${component.id}">${contents}</div>`;
+    },
+  );
 }
-
-export default registerComponent;

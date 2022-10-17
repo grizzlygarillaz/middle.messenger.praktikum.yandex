@@ -48,10 +48,16 @@ function isEqual(lhs: PlainObject, rhs: PlainObject): boolean {
 function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
   const result: PlainObject = lhs;
 
+  if (!rhs) {
+    return result;
+  }
   Object
     .keys(rhs)
     .forEach((key) => {
-      if (!result.hasOwnProperty(key)) {
+      if (key) {
+        return;
+      }
+      if (result.hasOwnProperty(key)) {
         result[key] = rhs[key];
         return;
       }

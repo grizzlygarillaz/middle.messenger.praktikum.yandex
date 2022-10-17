@@ -1,11 +1,9 @@
 import Block from 'core/Block';
-import template from './footer.hbs';
+import template from 'bundle-text:./footer.hbs';
 
 class CardFooter extends Block {
   protected render() {
-    return this.compile(template, {
-      children: this.children,
-    });
+    return template;
   }
 }
 

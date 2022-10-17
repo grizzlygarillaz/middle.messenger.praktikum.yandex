@@ -1,13 +1,10 @@
 import Block from 'core/Block';
-import template from './modal_block.hbs';
+import template from 'bundle-text:./modal_block.hbs';
 
-class ModalBlock extends Block {
+class Modal extends Block {
   protected render() {
-    return this.compile(template, {
-      ...this.props,
-      children: this.children,
-    });
+    return template;
   }
 }
 
-export default ModalBlock;
+export default Modal;

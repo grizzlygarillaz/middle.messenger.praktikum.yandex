@@ -3,7 +3,7 @@ import store, { StoreEvents } from 'core/Store';
 import { isEqual } from './helpers';
 
 function withStore(mapStateProps: (state: any) => any) {
-  return function wrap(Component: typeof Block) : typeof Block {
+  return function wrap(Component: typeof Block): typeof Block<any> {
     let previousState: any;
 
     return class WithStore extends Component<any> {

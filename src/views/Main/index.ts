@@ -1,7 +1,7 @@
 import Block from 'core/Block';
 import withStore from 'util/withStore';
 import store from 'core/Store';
-import template from './main.hbs';
+import template from 'bundle-text:./main.hbs';
 import MainProps from './type';
 
 const messages = [
@@ -77,16 +77,23 @@ const chats = [
 ];
 
 class MainPage extends Block<MainProps> {
-  render() {
+  constructor(props: MainProps) {
     const { user } = store.getState();
-
-    return this.compile(template, {
-      ...this.props,
+    super({
+      ...props,
       user,
-      messages,
       chats,
-      children: this.children,
+      messages,
     });
+  }
+
+  render() {
+    return template;
+  }
+
+  componentDidMount(props: MainProps) {
+    console.log(this.children);
+    super.componentDidMount(props);
   }
 }
 

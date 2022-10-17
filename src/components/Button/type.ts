@@ -1,6 +1,7 @@
-export default interface ButtonProps {
+import BlockProps from 'typings/interfaces/Block';
+
+export default interface ButtonProps extends BlockProps {
   label: string,
   type: string,
-  onClick: () => void,
-  events: Record<string, () => void>
+  onClick: () => void
 }

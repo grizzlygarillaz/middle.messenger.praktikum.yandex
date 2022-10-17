@@ -1,11 +1,9 @@
 import FormBlock from 'util/FormBlock';
-import template from './profile.hbs';
+import template from 'bundle-text:./profile.hbs';
 
 class ProfilePage extends FormBlock {
-  render(): DocumentFragment {
-    return this.compile(template, {
-      children: this.children,
-    });
+  render() {
+    return template;
   }
 }
 

@@ -1,13 +1,10 @@
 import ErrorProps from 'views/Error/type';
 import Block from 'core/Block';
-import template from './error.hbs';
+import template from 'bundle-text:./error.hbs';
 
 class ErrorPage extends Block<ErrorProps> {
-  render(): DocumentFragment {
-    return this.compile(template, {
-      children: this.children,
-      ...this.props,
-    });
+  render() {
+    return template;
   }
 }
 

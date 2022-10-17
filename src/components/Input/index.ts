@@ -1,7 +1,7 @@
 import Block from 'core/Block';
 import Validator from 'util/Validator';
 import { InputProps } from 'components/Input/type';
-import template from './input.hbs';
+import template from 'bundle-text:./input.hbs';
 
 class Input extends Block<InputProps> {
   constructor(props: InputProps) {
@@ -42,10 +42,7 @@ class Input extends Block<InputProps> {
   }
 
   protected render() {
-    return this.compile(template, {
-      ...this.props,
-      children: this.children,
-    });
+    return template;
   }
 }
 
