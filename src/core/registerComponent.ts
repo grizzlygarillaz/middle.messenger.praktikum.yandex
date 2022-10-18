@@ -18,7 +18,6 @@ export default function registerComponent<
       if (!data.root.children) {
         data.root.children = {};
       }
-
       if (!data.root.refs) {
         data.root.refs = {};
       }

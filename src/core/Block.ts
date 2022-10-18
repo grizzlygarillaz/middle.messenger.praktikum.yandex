@@ -30,9 +30,6 @@ class Block<P extends Record<string, any> = BlockProps,
   constructor(props: P = {} as P) {
     const eventBus = new EventBus();
     // console.log(childrenAndProps);
-    // const { props, children } = this._getChildrenAndProps(childrenAndProps);
-    //
-    // this.children = children;
     this.props = this._makePropsProxy(props);
 
     this.eventBus = () => eventBus;
@@ -41,23 +38,6 @@ class Block<P extends Record<string, any> = BlockProps,
 
     eventBus.emit(Block.EVENTS.INIT);
   }
-
-  // private _getChildrenAndProps(childrenAndProps: P): {
-  // props: P, children: Record<string, Block>
-  // } {
-  //   const props: P = {} as P;
-  //   const children: Record<string, Block> = {};
-  //
-  //   Object.entries(childrenAndProps).forEach(([key, value]: [keyof P, any]) => {
-  //     if (value instanceof Block) {
-  //       children[key as string] = value;
-  //     } else {
-  //       props[key] = value;
-  //     }
-  //   });
-  //
-  //   return { props, children };
-  // }
 
   private _addEvents() {
     const { events = {} } = this.props as P & { events: Record<string, () => void> };

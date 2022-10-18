@@ -92,7 +92,6 @@ class MainPage extends Block<MainProps> {
   }
 
   componentDidMount(props: MainProps) {
-    console.log(this.children);
     super.componentDidMount(props);
   }
 }
