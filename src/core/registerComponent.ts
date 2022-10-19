@@ -1,17 +1,12 @@
 import Handlebars, { HelperOptions } from 'handlebars';
 import Block from './Block';
 
-interface BlockConstructable<
-      Props extends Record<string, any> = {},
-      IncomingProps extends Record<string, any> = {},
-    > {
+interface BlockConstructable<Props extends AnyRecord = any, IncomingProps = any> {
   new(props: IncomingProps): Block<Props>;
 }
 
-export default function registerComponent<
-      Props extends Record<string, any> = {},
-      IncomingProps extends Record<string, any> = {},
-    >(Component: BlockConstructable<Props, IncomingProps>) {
+function registerComponent<Props extends AnyRecord = {},
+    IncomingProps extends AnyRecord= {}>(Component: BlockConstructable<Props, IncomingProps>) {
   Handlebars.registerHelper(
     Component.name,
     function (this: Props, { hash: { ref, ...hash }, data, fn }: HelperOptions) {
@@ -23,7 +18,6 @@ export default function registerComponent<
       }
 
       const { children, refs } = data.root;
-
       /**
      * Костыль для того, чтобы передавать переменные
      * внутрь блоков вручную подменяя значение
@@ -33,7 +27,6 @@ export default function registerComponent<
           hash[key] = hash[key].replace(new RegExp(`{{${key as string}}}`, 'i'), this[key]);
         }
       });
-
       const component = new Component(hash);
 
       children[component.id] = component;
@@ -41,12 +34,11 @@ export default function registerComponent<
       if (ref) {
         refs[ref] = component;
       }
-
       const contents = fn ? fn(this) : '';
-
-      // console.log(contents)
 
       return `<div data-id="${component.id}">${contents}</div>`;
     },
   );
 }
+
+export default registerComponent;

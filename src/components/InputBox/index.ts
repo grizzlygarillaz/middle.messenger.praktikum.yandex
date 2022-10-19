@@ -18,14 +18,22 @@ class InputBox extends Block<InputBoxProps> {
   }
 
   toggleError() {
-    this.props.valid = Object.values(this.inputs).every((input) => (input as Input).valid);
-    this.errors.forEach((error) => {
-      if (this.props.valid) {
-        error.hide();
-      } else {
-        error.show();
-      }
-    });
+    const { input, error } = this.refs;
+
+    if ((input as Input).valid) {
+      (error as InputError).setProps({ error: '' });
+    } else {
+      (error as InputError).setProps({ error: this.props.error });
+    }
+
+    // this.props.valid = Object.values(this.inputs).every((input) => (input as Input).valid);
+    // this.errors.forEach((error) => {
+    //   if (this.props.valid) {
+    //     error.hide();
+    //   } else {
+    //     error.show();
+    //   }
+    // });
   }
 
   get inputs() : Block[] {
@@ -39,8 +47,6 @@ class InputBox extends Block<InputBoxProps> {
   }
 
   protected render() {
-    this.errors.forEach((error) => { error.hide(); });
-
     return template;
   }
 }

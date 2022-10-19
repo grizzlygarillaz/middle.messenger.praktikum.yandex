@@ -90,10 +90,6 @@ class MainPage extends Block<MainProps> {
   render() {
     return template;
   }
-
-  componentDidMount(props: MainProps) {
-    super.componentDidMount(props);
-  }
 }
 
 const withUser = withStore((state) => ({ ...state.user }));

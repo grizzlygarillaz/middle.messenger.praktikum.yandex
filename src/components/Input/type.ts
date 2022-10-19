@@ -8,5 +8,5 @@ export interface InputProps extends Rule, BlockProps {
   title: string,
   required: boolean,
   valid: boolean,
-  value: string,
+  value?: string,
 }

@@ -6,8 +6,7 @@ import Handlebars from 'handlebars';
 
 type Events = ValueOf<typeof Block.EVENTS>;
 
-class Block<P extends Record<string, any> = BlockProps,
-    Refs extends Record<string, Block<any>> = {}> {
+class Block<P extends Record<string, any> = BlockProps> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -25,7 +24,7 @@ class Block<P extends Record<string, any> = BlockProps,
 
   private eventBus: () => EventBus<Events>;
 
-  protected refs: Refs;
+  protected refs: { [key: string]: Block } = {};
 
   constructor(props: P = {} as P) {
     const eventBus = new EventBus();
@@ -48,16 +47,10 @@ class Block<P extends Record<string, any> = BlockProps,
   }
 
   private _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
+    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-  }
-
-  private _init() {
-    this.init();
-
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   _createDocumentElement(tagName: string) {
@@ -84,12 +77,12 @@ class Block<P extends Record<string, any> = BlockProps,
   public componentDidMount(props: P) {
     this.props = merge(this.props, props) as P;
   }
-
-  public dispatchComponentDidMount() {
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-
-    Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
-  }
+  //
+  // public dispatchComponentDidMount() {
+  //   this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+  //
+  //   Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
+  // }
 
   private _componentDidUpdate(oldProps: P, newProps: P) {
     if (!this.componentDidUpdate(oldProps, newProps)) {
@@ -107,7 +100,8 @@ class Block<P extends Record<string, any> = BlockProps,
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    this.props = merge(nextProps, this.props) as P;
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   };
 
   get element() {
@@ -135,6 +129,11 @@ class Block<P extends Record<string, any> = BlockProps,
        * Заменяем заглушку на component._element
        */
       const content = component.getContent();
+
+      if ((component.props as BlockProps).className) {
+        content.classList.add((component.props as BlockProps).className!.toString());
+      }
+
       stub.replaceWith(content);
 
       /**
@@ -162,6 +161,8 @@ class Block<P extends Record<string, any> = BlockProps,
   }
 
   private _render() {
+    this.initModalTrigger();
+
     const fragment = this._compile();
 
     this._removeEvents();
@@ -230,6 +231,23 @@ class Block<P extends Record<string, any> = BlockProps,
 
   public hide() {
     this.getContent().style.display = 'none';
+  }
+
+  protected initModalTrigger() {
+    const children = merge({}, this.children);
+
+    console.log(children);
+
+    // .forEach((trigger: ModalTrigger) => {
+    //   trigger.setProps({
+    //     events: {
+    //       click: () => {
+    //         console.log('test');
+    //       },
+    //     },
+    //   });
+    //   console.log(trigger.props.modal);
+    // });
   }
 }
 

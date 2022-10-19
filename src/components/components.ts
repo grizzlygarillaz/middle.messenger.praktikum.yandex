@@ -1,8 +1,8 @@
 import registerComponent from 'core/registerComponent';
-import ModalTrigger from 'components/ModalBlock/ModalTrigger';
-import Modal from 'components/ModalBlock/Modal';
-import ModalBody from 'components/ModalBlock/Modal/ModalBody';
-import ModalFooter from 'components/ModalBlock/Modal/ModalFooter';
+import ModalTrigger from 'components/ModalTrigger';
+import Modal from 'components/Modal';
+import ModalBody from 'components/Modal/ModalBody';
+import ModalFooter from 'components/Modal/ModalFooter';
 import Button from 'components/Button';
 import CloseButton from 'components/CloseButton';
 import Card from 'components/Card';
@@ -16,7 +16,6 @@ import InputBox from 'components/InputBox';
 import InputError from 'components/InputBox/Error';
 import Link from 'components/Link';
 import Message from 'components/Message';
-import ModalBlock from 'components/ModalBlock';
 
 registerComponent(Button);
 registerComponent(CloseButton);
@@ -32,7 +31,6 @@ registerComponent(InputError);
 registerComponent(Link);
 registerComponent(Message);
 registerComponent(Modal);
-registerComponent(ModalBlock);
 registerComponent(ModalTrigger);
 registerComponent(ModalBody);
 registerComponent(ModalFooter);

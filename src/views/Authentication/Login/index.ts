@@ -28,6 +28,7 @@ class LoginPage extends FormBlock<LoginPageProps> {
   }
 
   render() {
+    console.log(this);
     return template;
   }
 }

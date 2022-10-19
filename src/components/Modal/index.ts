@@ -1,9 +1,16 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./modal_block.hbs';
+import template from 'bundle-text:./modal.hbs';
+import ModalProps from 'components/Modal/type';
 
-class Modal extends Block {
+class Modal extends Block<ModalProps> {
+  constructor(props: ModalProps) {
+    super({
+      ...props,
+      closeModal: () => this.hide(),
+    });
+  }
+
   protected render() {
-    console.log(this.children);
     return template;
   }
 }

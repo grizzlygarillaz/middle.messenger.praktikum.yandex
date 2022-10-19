@@ -46,25 +46,29 @@ function isEqual(lhs: PlainObject, rhs: PlainObject): boolean {
 }
 
 function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
-  const result: PlainObject = lhs;
-
   if (!rhs) {
-    return result;
+    return lhs;
   }
   Object
     .keys(rhs)
     .forEach((key) => {
-      if (key) {
+      console.log(key);
+      if (key && !lhs.hasOwnProperty(key)) {
         return;
       }
-      if (result.hasOwnProperty(key)) {
-        result[key] = rhs[key];
-        return;
+      try {
+        if (rhs[key] instanceof Object) {
+          rhs[key] = merge(lhs[key] as PlainObject, rhs[key] as PlainObject);
+        } else {
+          lhs[key] = rhs[key];
+        }
+      } catch (e) {
+        lhs[key] = rhs[key];
       }
-      result[key] = merge(result[key] as PlainObject, rhs[key] as PlainObject);
+      lhs[key] = merge(lhs[key] as PlainObject, rhs[key] as PlainObject);
     });
 
-  return result;
+  return lhs;
 }
 
 function set(object: PlainObject | unknown, path: string, value: unknown): PlainObject | unknown {
