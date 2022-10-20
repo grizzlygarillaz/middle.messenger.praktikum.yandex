@@ -172,8 +172,6 @@ class Block<P extends Record<string, any> = BlockProps> {
   }
 
   private _render() {
-    this.initModalTrigger();
-
     const fragment = this._compile();
 
     this._removeEvents();
@@ -242,23 +240,6 @@ class Block<P extends Record<string, any> = BlockProps> {
 
   public hide() {
     this.getContent().style.display = 'none';
-  }
-
-  protected initModalTrigger() {
-    Object.entries(this.children).forEach(([id, child]) => {
-      console.log(child, id);
-    });
-
-    // .forEach((trigger: ModalTrigger) => {
-    //   trigger.setProps({
-    //     events: {
-    //       click: () => {
-    //         console.log('test');
-    //       },
-    //     },
-    //   });
-    //   console.log(trigger.props.modal);
-    // });
   }
 }
 

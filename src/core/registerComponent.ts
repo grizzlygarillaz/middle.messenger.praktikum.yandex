@@ -1,12 +1,7 @@
 import Handlebars, { HelperOptions } from 'handlebars';
 import Block from './Block';
 
-interface BlockConstructable<Props extends AnyRecord = any, IncomingProps = any> {
-  new(props: IncomingProps): Block<Props>;
-}
-
-function registerComponent<Props extends AnyRecord = {},
-    IncomingProps extends AnyRecord= {}>(Component: BlockConstructable<Props, IncomingProps>) {
+function registerComponent<Props extends AnyRecord = {}>(Component: typeof Block<Props>) {
   Handlebars.registerHelper(
     Component.name,
     function (this: Props, { hash: { ref, modal, ...hash }, data, fn }: HelperOptions) {
