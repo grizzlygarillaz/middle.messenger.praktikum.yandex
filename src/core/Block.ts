@@ -3,6 +3,7 @@ import EventBus from 'core/EventBus';
 import BlockProps from 'typings/interfaces/Block';
 import { merge } from 'util/helpers';
 import Handlebars from 'handlebars';
+import ModalTrigger from 'components/ModalTrigger';
 
 type Events = ValueOf<typeof Block.EVENTS>;
 
@@ -18,13 +19,15 @@ class Block<P extends Record<string, any> = BlockProps> {
 
   protected props: P;
 
-  protected children: { [id: string]: Block<{}> } = {};
+  protected children: Record<string, Block> = {};
 
   private _element: HTMLUnknownElement;
 
   private eventBus: () => EventBus<Events>;
 
   protected refs: { [key: string]: Block } = {};
+
+  protected modals: { [key: string]: Block } = {};
 
   constructor(props: P = {} as P) {
     const eventBus = new EventBus();
@@ -112,7 +115,9 @@ class Block<P extends Record<string, any> = BlockProps> {
     const fragment = document.createElement('template');
 
     const template = Handlebars.compile(this.render());
-    fragment.innerHTML = template({ ...this.props, children: this.children, refs: this.refs });
+    fragment.innerHTML = template({
+      ...this.props, children: this.children, refs: this.refs, modals: this.modals,
+    });
     Object.entries(this.children).forEach(([id, component]) => {
       /**
        * Ищем заглушку по id
@@ -129,6 +134,12 @@ class Block<P extends Record<string, any> = BlockProps> {
        * Заменяем заглушку на component._element
        */
       const content = component.getContent();
+
+      if (component.constructor.name === 'ModalTrigger') {
+        content.addEventListener('click', () => {
+          this.modals[(component as ModalTrigger).props.openModal].show();
+        });
+      }
 
       if ((component.props as BlockProps).className) {
         content.classList.add((component.props as BlockProps).className!.toString());
@@ -234,9 +245,9 @@ class Block<P extends Record<string, any> = BlockProps> {
   }
 
   protected initModalTrigger() {
-    const children = merge({}, this.children);
-
-    console.log(children);
+    Object.entries(this.children).forEach(([id, child]) => {
+      console.log(child, id);
+    });
 
     // .forEach((trigger: ModalTrigger) => {
     //   trigger.setProps({

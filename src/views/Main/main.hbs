@@ -2,7 +2,7 @@
   <div class="chat__left-side">
     <div class="chat-panel">
       <div class="chat-panel__tools">
-        {{#ModalTrigger className="chat-panel__avatar" modal="profileModal"}}
+        {{#ModalTrigger className="chat-panel__avatar" openModal="profileModal"}}
           <img src="#" alt="{{ "profile" }}">
         {{/ModalTrigger}}
         <input class="chat-panel__search" type="text" placeholder="🔍 Поиск" title="Поиск по диалогам">
@@ -17,7 +17,7 @@
   <div class="chat__right-side">
     {{{Chat messages=messages current_chat="Chat number 1"}}}
   </div>
-  {{#Modal ref="profileModal"}}
+  {{#Modal modal="profileModal"}}
     {{#ModalBody}}
       {{{InputBox type="text"
                   name="login"

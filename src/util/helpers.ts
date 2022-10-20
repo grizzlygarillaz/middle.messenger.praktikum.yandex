@@ -52,7 +52,6 @@ function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
   Object
     .keys(rhs)
     .forEach((key) => {
-      console.log(key);
       if (key && !lhs.hasOwnProperty(key)) {
         return;
       }
