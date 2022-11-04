@@ -75,7 +75,7 @@ class HTTPTransport {
     const {
       method,
       body,
-      headers = { 'Content-Type': 'application/json' },
+      headers = {},
     } = options;
 
     url = `${this.endpoint}/${url.replace(/^\//, '')}`;

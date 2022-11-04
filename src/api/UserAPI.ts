@@ -44,7 +44,6 @@ class UserAPI extends BaseAPI implements
     return this.http.put('/profile/avatar', {
       body: data,
       headers: {
-        'Content-Type': false,
         accept: 'application/json',
       },
     });
