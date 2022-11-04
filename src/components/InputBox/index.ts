@@ -5,6 +5,8 @@ import Input from 'components/Input';
 import template from 'bundle-text:./input_box.hbs';
 
 class InputBox extends Block<InputBoxProps> {
+  static componentName = 'InputBox';
+
   constructor(props: InputBoxProps) {
     super({
       ...props,

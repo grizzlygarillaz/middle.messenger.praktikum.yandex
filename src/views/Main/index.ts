@@ -5,6 +5,8 @@ import withStore from 'util/withStore';
 import MainProps from './type';
 
 class MainPage extends Block<MainProps> {
+  static componentName = 'MainPage';
+
   render() {
     return template;
   }

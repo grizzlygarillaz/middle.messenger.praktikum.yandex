@@ -8,6 +8,8 @@ const Themes: Record<string, string> = {
 };
 
 class Link extends Block<LinkProps> {
+  static componentName = 'Link';
+
   constructor(props: LinkProps) {
     super({
       ...props,

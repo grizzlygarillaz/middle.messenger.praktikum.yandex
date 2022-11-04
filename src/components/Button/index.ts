@@ -3,6 +3,8 @@ import ButtonProps from 'components/Button/type';
 import template from 'bundle-text:./button.hbs';
 
 class Button extends Block<ButtonProps> {
+  static componentName = 'Button';
+
   constructor(props: ButtonProps) {
     super({
       ...props,

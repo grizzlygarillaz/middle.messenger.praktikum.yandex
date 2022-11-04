@@ -4,6 +4,8 @@ import { close } from 'img/icons';
 import template from 'bundle-text:./close_button.hbs';
 
 class CloseButton extends Block<CloseButtonProps> {
+  static componentName = 'CloseButton';
+
   constructor(props: CloseButtonProps) {
     super({
       ...props,

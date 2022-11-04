@@ -13,6 +13,8 @@ interface UserItemProps extends BlockProps {
 }
 
 class UserItem extends Block<UserItemProps> {
+  static componentName = 'UserItem';
+
   constructor(props: UserItemProps) {
     super({
       ...props,

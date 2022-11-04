@@ -7,6 +7,8 @@ import withStore from 'util/withStore';
 import { Block } from 'core/index';
 
 class RegistrationPage extends FormBlock {
+  static componentName = 'RegistrationPage';
+
   constructor(props: FormProps) {
     super({
       ...props,

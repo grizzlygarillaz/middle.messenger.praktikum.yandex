@@ -3,6 +3,8 @@ import ErrorProps from 'components/InputBox/Error/type';
 import template from 'bundle-text:./error.hbs';
 
 class InputError extends Block<ErrorProps> {
+  static componentName = 'InputError';
+
   protected render() {
     return template;
   }

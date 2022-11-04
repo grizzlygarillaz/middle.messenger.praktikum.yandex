@@ -7,6 +7,8 @@ interface SpinnerProps {
 }
 
 class Spinner extends Block<SpinnerProps> {
+  static componentName = 'Spinner';
+
   constructor(props: SpinnerProps) {
     super({
       ...props,

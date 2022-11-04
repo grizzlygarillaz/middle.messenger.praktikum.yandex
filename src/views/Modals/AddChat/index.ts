@@ -3,6 +3,8 @@ import template from 'bundle-text:./add_chat.hbs';
 import { addChat } from 'services/chat';
 
 class AddChatModal extends FormBlock {
+  static componentName = 'AddChatModal';
+
   constructor(props: FormProps) {
     super({ ...props, submit: () => { this.submit(); } });
   }

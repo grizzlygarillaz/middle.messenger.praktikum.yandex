@@ -8,7 +8,7 @@ interface BlockConstructable<Props = any> {
 
 function registerComponent<Props extends AnyRecord = {}>(Component: BlockConstructable<Props>) {
   Handlebars.registerHelper(
-    Component.componentName || Component.name,
+    Component.componentName ?? Component.name,
     function (this: Props, { hash: { ref, modal, ...hash }, data, fn }: HelperOptions) {
       if (!data.root.children) {
         data.root.children = {};

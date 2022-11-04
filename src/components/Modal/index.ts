@@ -3,6 +3,8 @@ import template from 'bundle-text:./modal.hbs';
 import ModalProps from 'components/Modal/type';
 
 class Modal extends Block<ModalProps> {
+  static componentName = 'Modal';
+
   constructor(props: ModalProps) {
     super({
       ...props,

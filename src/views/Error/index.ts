@@ -15,6 +15,8 @@ export const ERROR_TEMPLATE = {
 };
 
 class ErrorPage extends Block<ErrorProps> {
+  static componentName = 'ErrorPage';
+
   constructor(props: ErrorProps) {
     const values = { ...props, ...defaultError, ...window.store.getState().error };
     super(values);

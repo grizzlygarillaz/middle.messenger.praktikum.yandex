@@ -1,7 +1,6 @@
 import FormBlock, { FormProps } from 'util/FormBlock';
 import template from 'bundle-text:./profile.hbs';
 import { logout } from 'services/auth';
-import withStore from 'util/withStore';
 import { Block } from 'core/index';
 import { updateUser } from 'services/user';
 
@@ -11,6 +10,8 @@ interface ProfileModalProps extends FormProps {
 }
 
 class ProfileModal extends FormBlock<ProfileModalProps> {
+  static componentName = 'ProfileModal';
+
   constructor(props: ProfileModalProps) {
     super({
       ...props,
@@ -24,8 +25,7 @@ class ProfileModal extends FormBlock<ProfileModalProps> {
           formData.append('avatar', data.avatar[0]);
           data.avatar = formData;
         }
-        console.log(data);
-        this.props.store.dispatch(updateUser, data);
+        window.store.dispatch(updateUser, data);
       },
     });
   }
@@ -35,11 +35,9 @@ class ProfileModal extends FormBlock<ProfileModalProps> {
   }
 
   protected componentDidMount(props: ProfileModalProps) {
-    this.props.user = this.props.store.getState().user!;
+    this.props.user = window.store.getState().user!;
     super.componentDidMount(props);
   }
 }
 
-// TODO edit profile
-
-export default withStore(ProfileModal as typeof Block);
+export default ProfileModal as typeof Block;

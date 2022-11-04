@@ -7,6 +7,8 @@ import { withRouter } from 'util/withRouter';
 import { login } from 'services/auth';
 
 class LoginPage extends FormBlock<FormProps> {
+  static componentName = 'LoginPage';
+
   constructor(props: FormProps) {
     super({
       ...props,

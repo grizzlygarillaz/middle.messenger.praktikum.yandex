@@ -4,6 +4,8 @@ import { InputProps } from 'components/Input/type';
 import template from 'bundle-text:./input.hbs';
 
 class Input extends Block<InputProps> {
+  static componentName = 'Input';
+
   constructor(props: InputProps) {
     super({
       ...props,

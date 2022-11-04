@@ -2,6 +2,8 @@ import Block from 'core/Block';
 import template from 'bundle-text:./footer.hbs';
 
 class CardFooter extends Block {
+  static componentName = 'CardFooter';
+
   protected render() {
     return template;
   }
