@@ -43,9 +43,7 @@ class UserAPI extends BaseAPI implements
   public updateAvatar(data: FormData): Promise<User> {
     return this.http.put('/profile/avatar', {
       body: data,
-      headers: {
-        accept: 'application/json',
-      },
+      headers: {},
     });
   }
 
