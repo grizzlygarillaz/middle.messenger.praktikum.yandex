@@ -1,31 +1,34 @@
-import Block from 'core/Block';
-import store, { StoreEvents } from 'core/Store';
-import { isEqual } from './helpers';
+import { Block, Store } from 'core/index';
+import { StoreEvents } from 'core/Store/Store';
+import { isEqual } from 'util/helpers';
 
-function withStore(mapStateProps: (state: any) => any) {
-  return function wrap(Component: typeof Block) : typeof Block {
-    let previousState: any;
+type WithStateProps = { store: Store<AppState> };
 
-    return class WithStore extends Component<any> {
-      constructor(props: any) {
-        previousState = mapStateProps(store.getState());
+export function withStore<P extends WithStateProps>(WrappedBlock: typeof Block) {
+  return class extends WrappedBlock<P> {
+    public static componentName = WrappedBlock.name;
 
-        super({ ...props, ...previousState });
+    constructor(props: P) {
+      super({ ...props, store: window.store });
+    }
 
-        store.on(StoreEvents.UPDATED, () => {
-          const stateProps = mapStateProps(store.getState());
-
-          if (isEqual(previousState, stateProps)) {
-            return;
-          }
-
-          previousState = stateProps;
-
-          this.setProps({ ...stateProps });
-        });
+    __onChangeStoreCallback = (prevState: AppState, nextState: AppState) => {
+      if (isEqual(prevState, nextState)) {
+        return;
       }
+      this.setProps({ store: window.store });
     };
-  };
+
+    componentDidMount(props: P) {
+      super.componentDidMount(props);
+      window.store.on(StoreEvents.UPDATED, this.__onChangeStoreCallback);
+    }
+
+    componentWillUnmount() {
+      super.componentWillUnmount();
+      window.store.off(StoreEvents.UPDATED, this.__onChangeStoreCallback);
+    }
+  } as typeof Block<Omit<P, 'store'>>;
 }
 
 export default withStore;

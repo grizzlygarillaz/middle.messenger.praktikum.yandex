@@ -2,26 +2,38 @@ import Block from 'core/Block';
 import InputBox from 'components/InputBox';
 import BlockProps from 'typings/interfaces/Block';
 import Input from 'components/Input';
+import { Store } from 'core/index';
 
-export default class FormBlock<T extends Record<string, any> = BlockProps> extends Block<T> {
+export interface FormProps extends BlockProps {
+  submit: () => void,
+  formError?: string,
+  store: Store<AppState>
+}
+
+export default class FormBlock<T extends {} = FormProps> extends Block<T> {
   get valid() {
-    return this.inputs.every((input) => (input as Input).valid);
+    return this.inputComponents.every((input: Block) => (input as Input).checkValid());
+  }
+
+  get inputComponents() {
+    return Object
+      .values(this.children)
+      .filter((child: Block) => child instanceof InputBox || child instanceof Input);
   }
 
   get inputs() {
-    return Object
-      .values(this.children)
-      .filter((child: Block) => child instanceof InputBox)
-      .reduce((acc: Block[], current: Block) => acc.concat((current as InputBox).inputs), []);
+    return this.inputComponents
+      .reduce((acc: Block[], current) => {
+        const input = current instanceof InputBox ? current.inputs : current;
+        return acc.concat(input);
+      }, []);
   }
 
   validate() {
-    this.inputs.every((input) => (input as Input).checkValid());
+    this.inputComponents.every((input) => (input as Input).checkValid());
   }
 
-  onSubmit(e: Event) {
-    e.preventDefault();
-
+  onSubmit() {
     this.validate();
 
     console.log(this.form_value);
@@ -30,6 +42,12 @@ export default class FormBlock<T extends Record<string, any> = BlockProps> exten
   get form_value() {
     return this.inputs.reduce(
       (acc: Record<string, any>, child) => {
+        const input = (child as Input).getContent() as HTMLInputElement;
+
+        if (input.type === 'file') {
+          acc[(child as Input).name] = input.files;
+          return acc;
+        }
         acc[(child as Input).name] = (child as Input).value;
         return acc;
       },

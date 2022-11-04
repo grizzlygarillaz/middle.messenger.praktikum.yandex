@@ -1,0 +1,89 @@
+{{#Modal title="Профиль"}}
+  <div class="profile__block">
+    <div class="profile__block_left">
+      <h3>Основное</h3>
+      {{#ModalBody}}
+        {{{InputBox type="text"
+                    name="display_name"
+                    placeholder="Псевдоним"
+                    oldValue=user.displayName
+        }}}
+        {{{InputBox type="text"
+                    name="login"
+                    placeholder="Логин"
+                    oldValue=user.login
+                    minLength=3
+                    maxLength=30
+                    regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
+                    error="От 3 до 20 символов, латиница, без спец символов (кроме -_)"
+        }}}
+        {{{InputBox type="text"
+                    name="first_name"
+                    oldValue=user.firstName
+                    placeholder="Имя"
+                    regex="^[A-ZА-Я][a-zа-я-]+[a-zа-я]$"
+                    error="Некорректное имя"
+        }}}
+        {{{InputBox type="text"
+                    name="second_name"
+                    oldValue=user.secondName
+                    placeholder="Фамилия"
+                    regex="^[A-ZА-Я][a-zа-я-]+[a-zа-я]$"
+                    error="Некорректная фамилия"
+        }}}
+        {{{InputBox type="text"
+                    name="email"
+                    oldValue=user.email
+                    placeholder="Почта"
+                    regex="^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$"
+        }}}
+        {{{InputBox type="text"
+                    name="phone"
+                    oldValue=user.phone
+                    placeholder="Телефон"
+                    minLength=10
+                    maxLength=15
+                    regex='^\+?\d+$'
+        }}}
+      {{/ModalBody}}
+    </div>
+    <div class="profile__block_right">
+      <div>
+        <h3>Аватар</h3>
+        {{#ModalBody}}
+          {{#if user.avatar}}
+            <img class="user-avatar user-avatar_large" src="https://ya-praktikum.tech/api/v2/resources/{{user.avatar}}" alt="profile avatar">
+          {{else}}
+            Нет фото
+          {{/if}}
+          {{{Input type="file" name="avatar"}}}
+        {{/ModalBody}}
+      </div>
+      <div>
+        <h3>Пароль</h3>
+        {{#ModalBody}}
+          {{{InputBox type="password"
+                      name="oldPassword"
+                      placeholder="Старый пароль"
+          }}}
+          {{{InputBox type="password"
+                      name="newPassword"
+                      placeholder="Новый пароль"
+                      minLength=8
+                      maxLength=40
+                      regex='^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).+\S$'
+                      error="От 8 до 40 символов, хотя бы одна заглавная буква и цифра"
+          }}}
+        {{/ModalBody}}
+      </div>
+    </div>
+    </div>
+  {{#ModalFooter}}
+    {{{Button label="Сохранить" onClick=submit}}}
+    <div class="container_middle container">
+      {{#Trigger onClick=logout}}
+        {{{Link label="выйти"}}}
+      {{/Trigger}}
+    </div>
+  {{/ModalFooter}}
+{{/Modal}}

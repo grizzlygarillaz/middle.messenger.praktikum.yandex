@@ -4,13 +4,16 @@
       <span class="error__code">{{ code }}</span>
     </div>
     <div class="error-box__side error-box__side_right">
-      <span class="error-box__message">{{ message }}</span>
-      {{#unless withoutReturn }}
-        <a href="/chat" class="error-box__option">
-          &#x2190;
-          Вернуться к списку чатов
-        </a>
-      {{/unless}}
+      <div class="error-box__message">
+        <span class="error-message">{{ message }}</span>
+        <hr class="delimiter delimiter_red">
+        {{#unless withoutReturn }}
+          {{#Link theme="dark" href="/" className="error-box__option"}}
+            &#11176;
+            Вернуться на главную страницу
+          {{/Link}}
+        {{/unless}}
+      </div>
     </div>
   </div>
 </div>

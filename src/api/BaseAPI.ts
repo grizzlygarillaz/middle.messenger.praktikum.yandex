@@ -17,15 +17,15 @@ interface StoreApiMethod {
 }
 
 interface ReadApiMethod {
-  read(id: string): Promise<unknown>
+  read(data: unknown): Promise<unknown>
 }
 
 interface UpdateApiMethod {
-  update(id: string, data: unknown): Promise<unknown>
+  update(id: string | number, data: unknown): Promise<unknown>
 }
 
 interface DeleteApiMethod {
-  delete(id: string): Promise<unknown>
+  delete(id: string | number): Promise<unknown>
 }
 
 export {

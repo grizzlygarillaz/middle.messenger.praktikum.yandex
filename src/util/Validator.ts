@@ -10,13 +10,12 @@ function Validator(value: string, rule: Rule = {}): boolean {
 
   const isRegex = /^\/(?<body>\S+)\/(?<options>[gmiysud]*)$/;
 
-  if (value) {
-    if (maxLength !== undefined && value.length > maxLength) {
-      return false;
-    }
-    if (minLength !== undefined && value.length < minLength) {
-      return false;
-    }
+  if (maxLength !== undefined && value.length > maxLength) {
+    return false;
+  }
+
+  if (minLength !== undefined && value.length < minLength) {
+    return false;
   }
 
   if (regex !== undefined) {

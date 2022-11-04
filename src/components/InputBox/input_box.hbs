@@ -1,14 +1,14 @@
 <div class="input_box">
-  {{{Input className='input_box__input'
+  {{{Input className="input_box__input"
            type=type
            name=name
-           value=value
-           title=placeholder
-           placeholder=placeholder
+           oldValue=oldValue
            regex=regex
            minLength=minLength
            maxLength=maxLength
-           required=true}}}
+           required=true
+           ref="input"
+  }}}
   <span class="input__placeholder">{{ placeholder }}</span>
-  {{{InputError error=error }}}
+  {{{InputError ref="error" }}}
 </div>

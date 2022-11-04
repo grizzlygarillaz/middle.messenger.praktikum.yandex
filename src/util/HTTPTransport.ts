@@ -11,7 +11,7 @@ type HttpBody = Document | XMLHttpRequestBodyInit | null | Record<string, any>;
 
 interface DataProps {
   body?: HttpBody,
-  headers?: Record<string, string>,
+  headers?: Record<string, any>,
   timeout?: number,
   retries?: number,
 }
@@ -75,7 +75,7 @@ class HTTPTransport {
     const {
       method,
       body,
-      headers = {},
+      headers = { 'Content-Type': 'application/json' },
     } = options;
 
     url = `${this.endpoint}/${url.replace(/^\//, '')}`;
@@ -86,8 +86,6 @@ class HTTPTransport {
         url += this.queryStringify(body as Record<string, any>);
       }
       xhr.open(method, url);
-
-      xhr.setRequestHeader('Content-Type', 'application/json');
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);

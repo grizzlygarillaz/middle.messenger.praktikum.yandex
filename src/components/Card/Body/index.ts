@@ -1,11 +1,9 @@
 import Block from 'core/Block';
-import template from './body.hbs';
+import template from 'bundle-text:./body.hbs';
 
 class CardBody extends Block {
   protected render() {
-    return this.compile(template, {
-      children: this.children,
-    });
+    return template;
   }
 }
 

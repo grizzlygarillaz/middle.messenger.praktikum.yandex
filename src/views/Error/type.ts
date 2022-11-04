@@ -1,5 +1,5 @@
 export default interface ErrorProps {
-  code: number,
+  code: number | string,
   message: string,
   arrowIcon: SVGAElement,
   withoutReturn?: boolean,

@@ -1,22 +1,26 @@
-<li class="chat-item {{#if chat_item.active}}chat-item_active{{/if}}">
+<li class="chat-item {{#if active}}chat-item_active{{/if}}">
   <div class="chat-item__avatar"></div>
   <div class="chat-item__message">
-    <span class="chat-item__name">{{ chat_item.name }}</span>
-    <div class="last-message">
-      {{#if chat_item.lastMessage.author}}
-        <span class="last-message__author">
-              {{ chat_item.lastMessage.author }} :
-            </span>
-      {{/if}}
-      <span class="last-message__text">
-        {{ chat_item.lastMessage.text }}
-      </span>
-    </div>
+    <span class="chat-item__name">{{ chat.title }}</span>
+    {{#if chat.lastMessage}}
+      <div class="last-message">
+        {{#if chat.lastMessage.user}}
+          <span class="last-message__author">
+                  {{ chat.lastMessage.user.firstName }} :
+                </span>
+        {{/if}}
+        <span class="last-message__text">
+          {{ chat.lastMessage.content }}
+        </span>
+      </div>
+    {{else}}
+      <span class="last-message__text last-message__text_empty">Здесь пока нет сообщений</span>
+    {{/if}}
   </div>
   <div class="chat-item__info">
-    <time class="chat-item__date">{{ chat_item.date }}</time>
-    {{#if chat_item.unread}}
-      <span class="chat-item__badge">{{ chat_item.unread }}</span>
+    <time class="chat-item__date">{{time}}</time>
+    {{#if chat.unreadCount}}
+      <span class="chat-item__badge">{{ chat.unreadCount }}</span>
     {{/if}}
   </div>
 </li>

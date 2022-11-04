@@ -11,7 +11,7 @@
   "alias": {
     "api": "./src/api",
     "components": "./src/components",
-    "controllers": "./src/controllers",
+    "services": "./src/services",
     "core": "./src/core",
     "helpers": "./src/helpers",
     "img": "./src/img",
@@ -30,12 +30,13 @@
     "nanoid": "3.2.0",
     "parcel": "2.7.0",
     "postcss": "8.4.16",
-    "postcss-sass": "0.5.0"
+    "postcss-sass": "0.5.0",
+    "process": "^0.11.10"
   },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
-    "@parcel/transformer-sass": "2.7.0",
     "@parcel/transformer-inline-string": "2.7.0",
+    "@parcel/transformer-sass": "2.7.0",
     "@typescript-eslint/eslint-plugin": "5.13.0",
     "@typescript-eslint/parser": "5.36.1",
     "eslint": "8.22.0",

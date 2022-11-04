@@ -1,6 +1,6 @@
 import Block from 'core/Block';
 import ButtonProps from 'components/Button/type';
-import template from './button.hbs';
+import template from 'bundle-text:./button.hbs';
 
 class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
@@ -14,7 +14,7 @@ class Button extends Block<ButtonProps> {
   }
 
   protected render() {
-    return this.compile(template, this.props);
+    return template;
   }
 }
 

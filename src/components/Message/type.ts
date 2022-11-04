@@ -1,14 +1,7 @@
 import { BlockProps } from 'core/Block';
+import { Store } from 'core/index';
 
-interface MessageProps extends BlockProps {
-  own: boolean,
-  date: string,
-  author: string,
-  data?: {
-    text?: string,
-    sticker?: SVGAElement,
-    media?: File
-  }
+export interface MessageProps extends BlockProps {
+  messages: Message[],
+  store: Store<AppState>
 }
-
-export default MessageProps;

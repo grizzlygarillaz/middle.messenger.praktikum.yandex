@@ -1,0 +1,8 @@
+<div class="chat__user-item">
+  <span>{{user.firstName}} <span class="chat__user-item_login">({{user.login}})</span></span>
+  {{#if owner}}
+    {{{Label label="Админимстратор"}}}
+  {{else}}
+    {{{Button label="Удалить" theme="danger" size="small" onClick=deleteUser }}}
+  {{/if}}
+</div>
