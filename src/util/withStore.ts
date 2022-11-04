@@ -6,7 +6,7 @@ type WithStateProps = { store: Store<AppState> };
 
 export function withStore<P extends WithStateProps>(WrappedBlock: typeof Block) {
   return class extends WrappedBlock<P> {
-    public static componentName = WrappedBlock.name;
+    public static componentName = WrappedBlock.componentName ?? WrappedBlock.name;
 
     constructor(props: P) {
       super({ ...props, store: window.store });

@@ -5,7 +5,7 @@
         <div class="chat-item__avatar"></div>
         <span>{{currentChat.title}}</span>
       </div>
-      {{#Trigger openModal=settingsModal}}
+      {{#Trigger openModal="chatSettings"}}
         <div class="chat__icon">
           {{{icons.chat_settings}}}
         </div>
@@ -13,7 +13,7 @@
     </div>
       {{{Messages messages=messages}}}
     <div class="chat__footer">
-      {{{Input name="message" className="chat__message" placeholder="Сообщение" }}}
+      {{{Input name="message" className="chat__message" placeholder="Сообщение" ref="send_message"}}}
       {{#Trigger onClick=sendMessage className="chat__icon"}}
         {{{icons.send}}}
       {{/Trigger}}
@@ -29,7 +29,7 @@
   {{#Modal modal="chatSettings" title=currentChat.title}}
     {{#ModalBody}}
       {{{InputBox type="text"
-                  name="addUser"
+                  name="login"
                   placeholder="Введите логин пользователя"
                   minLength=3
                   maxLength=30

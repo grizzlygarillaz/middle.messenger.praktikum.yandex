@@ -28,7 +28,6 @@ class UserItem extends Block<UserItemProps> {
   }
 
   protected componentDidMount(props: UserItemProps) {
-    console.log(this.props.store.getState().currentChat?.createdBy, this.props.user.id);
     this.props.owner = this.props.store.getState().currentChat?.createdBy === this.props.user.id;
     super.componentDidMount(props);
   }

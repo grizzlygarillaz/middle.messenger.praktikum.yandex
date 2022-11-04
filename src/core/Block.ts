@@ -123,7 +123,6 @@ class Block<P extends Record<string, any> = BlockProps> {
 
       if (this.modals && (component.constructor as typeof Block).componentName === 'Trigger') {
         content.addEventListener('click', () => {
-          console.log(this);
           const modalName: string = (component as Trigger).props?.openModal;
           if (modalName) {
             this.modals[modalName].show();

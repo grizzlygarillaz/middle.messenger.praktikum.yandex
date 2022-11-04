@@ -8,8 +8,6 @@ class ChatList extends Block<ChatListProps> {
   static componentName = 'ChatList';
 
   constructor(props: ChatListProps) {
-    window.store.dispatch(getChats);
-
     super({
       ...props,
       loading: true,
@@ -17,7 +15,9 @@ class ChatList extends Block<ChatListProps> {
   }
 
   protected componentDidMount(props: ChatListProps) {
-    this.setProps({ chats: this.props.store.getState().chats, loading: false });
+    this.props.store.dispatch(getChats);
+    this.props.chats = this.props.store.getState().chats;
+    this.props.loading = false;
     super.componentDidMount(props);
   }
 

@@ -6,7 +6,6 @@ import withStore from 'util/withStore';
 import { addUserToChat, deleteChat } from 'services/chat';
 import FormBlock from 'util/FormBlock';
 import { objectToCamelCase, padTime } from 'util/helpers';
-import { Input } from 'components/index';
 
 class Chat extends FormBlock<ChatProps> {
   static componentName = 'Chat';
@@ -110,9 +109,7 @@ class Chat extends FormBlock<ChatProps> {
       type: 'message',
     }));
 
-    this.inputComponents.forEach((input: Input) => {
-      (input.getContent() as HTMLInputElement).value = '';
-    });
+    (this.refs.send_message.getContent() as HTMLInputElement).value = '';
   }
 
   deleteChat() {
@@ -125,7 +122,6 @@ class Chat extends FormBlock<ChatProps> {
 
   addUser() {
     const { login } = this.form_value;
-
     if (login) {
       this.props.store.dispatch(addUserToChat, { login, chatId: this.props.currentChat?.id });
     }

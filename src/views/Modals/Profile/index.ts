@@ -3,6 +3,7 @@ import template from 'bundle-text:./profile.hbs';
 import { logout } from 'services/auth';
 import { Block } from 'core/index';
 import { updateUser } from 'services/user';
+import withStore from 'util/withStore';
 
 interface ProfileModalProps extends FormProps {
   logout: () => void,
@@ -16,7 +17,7 @@ class ProfileModal extends FormBlock<ProfileModalProps> {
     super({
       ...props,
       logout: () => {
-        window.store.dispatch(logout);
+        this.props.store.dispatch(logout);
       },
       submit: () => {
         const data = this.form_value;
@@ -25,7 +26,7 @@ class ProfileModal extends FormBlock<ProfileModalProps> {
           formData.append('avatar', data.avatar[0]);
           data.avatar = formData;
         }
-        window.store.dispatch(updateUser, data);
+        this.props.store.dispatch(updateUser, data);
       },
     });
   }
@@ -35,9 +36,9 @@ class ProfileModal extends FormBlock<ProfileModalProps> {
   }
 
   protected componentDidMount(props: ProfileModalProps) {
-    this.props.user = window.store.getState().user!;
+    this.props.user = this.props.store.getState().user!;
     super.componentDidMount(props);
   }
 }
 
-export default ProfileModal as typeof Block;
+export default withStore(ProfileModal as typeof Block);

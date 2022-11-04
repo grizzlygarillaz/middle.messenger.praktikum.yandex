@@ -1,6 +1,5 @@
 import Block from 'core/Block';
 import template from 'bundle-text:./main.hbs';
-import { withRouter } from 'util/withRouter';
 import withStore from 'util/withStore';
 import MainProps from './type';
 
@@ -12,15 +11,14 @@ class MainPage extends Block<MainProps> {
   }
 
   protected componentDidUpdate(oldProps: MainProps, newProps: MainProps): boolean {
-    this.props.user = this.props.store.getState().user;
-    console.log(this.props);
+    this.props.user = window.store.getState().user;
     return super.componentDidUpdate(oldProps, newProps);
   }
 
   protected componentDidMount(props: MainProps) {
-    this.props.user = this.props.store.getState().user;
+    this.props.user = window.store.getState().user;
     super.componentDidMount(props);
   }
 }
 
-export default withRouter(withStore(MainPage as typeof Block));
+export default withStore(MainPage as typeof Block);
