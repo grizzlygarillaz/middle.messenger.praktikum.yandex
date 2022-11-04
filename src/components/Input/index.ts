@@ -22,15 +22,11 @@ class Input extends Block<InputProps> {
     const { value } = this.element as HTMLInputElement;
     const { regex, minLength, maxLength } = this.props;
 
-    this.props.valid = Validator(value, {
+    return Validator(value, {
       regex,
       minLength,
       maxLength,
     });
-  }
-
-  get valid() {
-    return this.props.valid;
   }
 
   get value() {

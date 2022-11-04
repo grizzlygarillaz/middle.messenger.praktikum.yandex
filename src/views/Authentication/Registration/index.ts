@@ -1,25 +1,23 @@
-import FormBlock from 'util/FormBlock';
+import FormBlock, { FormProps } from 'util/FormBlock';
 import { SignUpData } from 'api/AuthAPI';
-import AuthController from 'controllers/AuthController';
 import template from 'bundle-text:./registration.hbs';
+import { register } from 'services/auth';
+import { withRouter } from 'util/withRouter';
+import withStore from 'util/withStore';
+import { Block } from 'core/index';
 
 class RegistrationPage extends FormBlock {
-  constructor() {
+  constructor(props: FormProps) {
     super({
-      events: {
-        submit: (e: Event) => {
-          e.preventDefault();
+      ...props,
+      submit: () => {
+        const data = this.form_value as SignUpData;
 
-          const data = this.form_value as SignUpData;
+        console.log(data);
 
-          AuthController.signUp(data);
-        },
+        this.props.store.dispatch(register, data);
       },
     });
-  }
-
-  init() {
-    super.init();
   }
 
   render() {
@@ -27,4 +25,4 @@ class RegistrationPage extends FormBlock {
   }
 }
 
-export default RegistrationPage;
+export default withRouter(withStore(RegistrationPage as typeof Block));

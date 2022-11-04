@@ -1,27 +1,30 @@
 import Handlebars, { HelperOptions } from 'handlebars';
 import Block from './Block';
 
-interface BlockConstructable<Props extends AnyRecord = any, IncomingProps = any> {
-  new(props: IncomingProps): Block<Props>;
+interface BlockConstructable<Props = any> {
+  new (props: Props): Block;
+  componentName?: string;
 }
 
-function registerComponent<Props extends AnyRecord = {},
-    IncomingProps extends AnyRecord= {}>(Component: BlockConstructable<Props, IncomingProps>) {
+function registerComponent<Props extends AnyRecord = {}>(Component: BlockConstructable<Props>) {
   Handlebars.registerHelper(
-    Component.name,
-    function (this: Props, { hash: { ref, ...hash }, data, fn }: HelperOptions) {
+    Component.componentName || Component.name,
+    function (this: Props, { hash: { ref, modal, ...hash }, data, fn }: HelperOptions) {
       if (!data.root.children) {
         data.root.children = {};
       }
       if (!data.root.refs) {
         data.root.refs = {};
       }
+      if (!data.root.modals) {
+        data.root.modals = {};
+      }
 
-      const { children, refs } = data.root;
+      const { children, refs, modals } = data.root;
       /**
-     * Костыль для того, чтобы передавать переменные
-     * внутрь блоков вручную подменяя значение
-     */
+         * Костыль для того, чтобы передавать переменные
+         * внутрь блоков вручную подменяя значение
+         */
       (Object.keys(hash) as any).forEach((key: keyof Props) => {
         if (this[key] && typeof this[key] === 'string') {
           hash[key] = hash[key].replace(new RegExp(`{{${key as string}}}`, 'i'), this[key]);
@@ -33,6 +36,9 @@ function registerComponent<Props extends AnyRecord = {},
 
       if (ref) {
         refs[ref] = component;
+      }
+      if (modal) {
+        modals[modal] = component;
       }
       const contents = fn ? fn(this) : '';
 

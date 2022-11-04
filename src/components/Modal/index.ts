@@ -13,6 +13,11 @@ class Modal extends Block<ModalProps> {
   protected render() {
     return template;
   }
+
+  protected init() {
+    super.init();
+    this.hide();
+  }
 }
 
 export default Modal;

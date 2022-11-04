@@ -28,6 +28,7 @@
   & svg
     fill: $gray
     transition: fill .2s ease-in-out
+    transform: scale(0.8)
 
   &:hover
     cursor: pointer
@@ -40,27 +41,39 @@
   height: 100%
   overflow: auto
 
-.chat__list
-  display: flex
-  gap: 10px
-  flex-direction: column
-  justify-content: flex-end
-  min-height: 100%
-
 .chat__footer
   background-color: $dark
   display: flex
   align-items: center
   gap: 10px
   padding: 10px
-// TODO fix hiding
 
 .chat__message
   background-color: $dark-gray
   color: $light-gray
   border-radius: 8px
-  padding: 4px 12px
+  padding: 8px 12px
   width: 100%
+  font-size: 16px
 
 .icon__clip
   transform: rotate(-135deg)
+
+.chat__user-list
+  display: flex
+  flex-direction: column
+  padding: 8px
+
+.chat__user-item
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  &:not(:last-child)
+    margin-bottom: 8px
+    padding-bottom: 8px
+    border-bottom: 1px solid $light-gray
+
+
+.chat__user-item_login
+  color: $gray

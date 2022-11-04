@@ -1,0 +1,14 @@
+{{#Modal title="Создать новый чат"}}
+  {{#ModalBody}}
+    {{{InputBox type="text"
+                name="title"
+                placeholder="Название чата"
+                minLength=4
+                maxLength=24
+                error="Минимум 4 символа, но не более 24"
+    }}}
+  {{/ModalBody}}
+  {{#ModalFooter}}
+    {{{Button label="Создать" onClick=submit}}}
+  {{/ModalFooter}}
+{{/Modal}}

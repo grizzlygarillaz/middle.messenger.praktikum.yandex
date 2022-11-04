@@ -1,9 +1,14 @@
 import { nanoid } from 'nanoid';
 import EventBus from 'core/EventBus';
 import BlockProps from 'typings/interfaces/Block';
-import { merge } from 'util/helpers';
+import { isEqual, merge } from 'util/helpers';
 import Handlebars from 'handlebars';
+import { Trigger } from 'components/index';
 
+export interface BlockClass<P extends AnyRecord> extends Function {
+  new (props: P): Block<P>;
+  componentName?: string;
+}
 type Events = ValueOf<typeof Block.EVENTS>;
 
 class Block<P extends Record<string, any> = BlockProps> {
@@ -11,14 +16,17 @@ class Block<P extends Record<string, any> = BlockProps> {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount',
     FLOW_RENDER: 'flow:render',
   } as const;
 
   public id = nanoid(12);
 
+  public static componentName?: string;
+
   protected props: P;
 
-  protected children: { [id: string]: Block<{}> } = {};
+  protected children: { [id: string]: Block } = {};
 
   private _element: HTMLUnknownElement;
 
@@ -26,9 +34,11 @@ class Block<P extends Record<string, any> = BlockProps> {
 
   protected refs: { [key: string]: Block } = {};
 
+  protected modals: { [key: string]: Block } = {};
+
   constructor(props: P = {} as P) {
     const eventBus = new EventBus();
-    // console.log(childrenAndProps);
+
     this.props = this._makePropsProxy(props);
 
     this.eventBus = () => eventBus;
@@ -36,6 +46,11 @@ class Block<P extends Record<string, any> = BlockProps> {
     this._registerEvents(eventBus);
 
     eventBus.emit(Block.EVENTS.INIT);
+  }
+
+  protected init() {
+    this._createResources();
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
   private _addEvents() {
@@ -50,49 +65,16 @@ class Block<P extends Record<string, any> = BlockProps> {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createDocumentElement(tagName: string) {
+  private _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }
 
-  _createResources() {
+  private _createResources() {
     this._element = this._createDocumentElement('div');
-  }
-
-  // protected getStateFromProps(props: any): void {
-  //   this.state = {};
-  // }
-
-  init() {
-    this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
-  }
-
-  private _componentDidMount(props: P) {
-    this.componentDidMount(props);
-  }
-
-  public componentDidMount(props: P) {
-    this.props = merge(this.props, props) as P;
-  }
-  //
-  // public dispatchComponentDidMount() {
-  //   this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-  //
-  //   Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
-  // }
-
-  private _componentDidUpdate(oldProps: P, newProps: P) {
-    if (!this.componentDidUpdate(oldProps, newProps)) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
-    return false;
-  }
-
-  protected componentDidUpdate(oldProps: P, newProps: P) : boolean {
-    return oldProps !== newProps;
   }
 
   public setProps = (nextProps: any) => {
@@ -100,7 +82,8 @@ class Block<P extends Record<string, any> = BlockProps> {
       return;
     }
 
-    this.props = merge(nextProps, this.props) as P;
+    this.props = merge(this.props, nextProps) as P;
+
     this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   };
 
@@ -108,15 +91,26 @@ class Block<P extends Record<string, any> = BlockProps> {
     return this._element;
   }
 
+  public getContent() {
+    if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+      setTimeout(() => {
+        if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+          this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+        }
+      }, 100);
+    }
+
+    return this.element;
+  }
+
   private _compile(): DocumentFragment {
     const fragment = document.createElement('template');
 
     const template = Handlebars.compile(this.render());
-    fragment.innerHTML = template({ ...this.props, children: this.children, refs: this.refs });
+    fragment.innerHTML = template({
+      ...this.props, children: this.children, refs: this.refs, modals: this.modals,
+    });
     Object.entries(this.children).forEach(([id, component]) => {
-      /**
-       * Ищем заглушку по id
-       */
       const stub = fragment.content.querySelector(`[data-id="${id}"]`);
 
       if (!stub) {
@@ -125,13 +119,21 @@ class Block<P extends Record<string, any> = BlockProps> {
 
       const stubChildren = stub.childNodes.length ? stub.childNodes : [];
 
-      /**
-       * Заменяем заглушку на component._element
-       */
       const content = component.getContent();
 
-      if ((component.props as BlockProps).className) {
-        content.classList.add((component.props as BlockProps).className!.toString());
+      if (this.modals && component.constructor.name === 'Trigger') {
+        content.addEventListener('click', () => {
+          const modalName: string = (component as Trigger).props?.openModal;
+          if (modalName) {
+            this.modals[modalName].show();
+          }
+        });
+      }
+
+      const componentClass = component.props.className;
+      if (componentClass) {
+        const className = componentClass.toString();
+        content.classList.add(className);
       }
 
       stub.replaceWith(content);
@@ -161,8 +163,6 @@ class Block<P extends Record<string, any> = BlockProps> {
   }
 
   private _render() {
-    this.initModalTrigger();
-
     const fragment = this._compile();
 
     this._removeEvents();
@@ -175,7 +175,40 @@ class Block<P extends Record<string, any> = BlockProps> {
     this._addEvents();
   }
 
-  _removeEvents() {
+  protected render(): string {
+    return '';
+  }
+
+  private _componentDidMount(props: P) {
+    this._checkInDom();
+
+    this.componentDidMount(props);
+  }
+
+  protected componentDidMount(props: P) {
+    this.props = merge(this.props, props) as P;
+  }
+
+  private _componentDidUpdate(oldProps: P, newProps: P) {
+    const response = this.componentDidUpdate(oldProps, newProps);
+    if (!response) {
+      return;
+    }
+    this._render();
+  }
+
+  protected componentDidUpdate(oldProps: P, newProps: P) : boolean {
+    return !isEqual(oldProps, newProps);
+  }
+
+  private _componentWillUnmount() {
+    this.eventBus().destroy();
+    this.componentWillUnmount();
+  }
+
+  protected componentWillUnmount() {}
+
+  private _removeEvents() {
     const { events }: Record<string, () => void> = this.props;
 
     if (!events || !this._element) {
@@ -187,20 +220,15 @@ class Block<P extends Record<string, any> = BlockProps> {
     });
   }
 
-  protected render(): string {
-    return '';
-  }
+  _checkInDom() {
+    const elementInDOM = document.body.contains(this._element);
 
-  public getContent() {
-    if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-      setTimeout(() => {
-        if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
-          this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-        }
-      }, 100);
+    if (elementInDOM) {
+      setTimeout(() => this._checkInDom(), 1000);
+      return;
     }
 
-    return this.element;
+    this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
   }
 
   private _makePropsProxy(props: P): any {
@@ -216,7 +244,9 @@ class Block<P extends Record<string, any> = BlockProps> {
 
         target[prop] = value;
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldValue, target);
+        if (!isEqual(oldValue, target)) {
+          self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldValue, target);
+        }
         return true;
       },
       deleteProperty() {
@@ -233,21 +263,8 @@ class Block<P extends Record<string, any> = BlockProps> {
     this.getContent().style.display = 'none';
   }
 
-  protected initModalTrigger() {
-    const children = merge({}, this.children);
-
-    console.log(children);
-
-    // .forEach((trigger: ModalTrigger) => {
-    //   trigger.setProps({
-    //     events: {
-    //       click: () => {
-    //         console.log('test');
-    //       },
-    //     },
-    //   });
-    //   console.log(trigger.props.modal);
-    // });
+  protected refresh() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, {}, this.props);
   }
 }
 

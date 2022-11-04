@@ -1,0 +1,124 @@
+.spinner_block
+  display: flex
+  flex-direction: column
+  justify-content: center
+  width: 100%
+  height: 100%
+
+.spinner
+  $duration: .7
+  display: flex
+  justify-content: center
+  margin: auto
+  position: relative
+  overflow: hidden
+  height: 100px
+  width: 100px
+
+  // Use the first div for shifting the block from side to side
+  & > div:nth-of-type(1)
+    height: 20px
+    width: 20px
+    position: absolute
+    animation: spinner-slide calc($duration * 1s) infinite alternate ease-in-out
+    transform: translate(0, -100%)
+    top: 100%
+    left: 0
+
+    &:after
+      animation: spinner-flip calc($duration * 1s) infinite alternate ease-in-out
+      background: $red
+      content: ''
+      height: 20px
+      position: absolute
+      width: 20px
+
+
+
+  // Use the second for the staionary pillar
+  & > div:nth-of-type(2)
+    background: $white
+    height: 30px
+    left: 50%
+    position: absolute
+    top: 100%
+    transform: translate(-50%, -100%)
+    width: 20px
+
+
+  // Use the pseudo elements for the shifting pillars
+  &:after,
+  &:before
+    animation-timing-function: ease
+    animation-iteration-count: infinite
+    animation-duration: calc($duration * 4s)
+    background: $white
+    bottom: 0
+    content: ''
+    height: 40px
+    position: absolute
+    width: 20px
+
+
+  &:after
+    animation-name: spinner-pushed-1
+    right: 0
+
+
+  &:before
+    animation-name: spinner-pushed-2
+    left: 0
+
+
+@keyframes spinner-pushed-1
+  0%, 18.125%, 50%, 68.125%, 100%
+    transform: translate(0, 0)
+
+  25%, 43.125%, 75%, 93.125%
+    transform: translate(0, 100%)
+
+
+
+
+@keyframes spinner-pushed-2
+  0%, 18.125%, 50%, 68.125%, 100%
+    transform: translate(0, 100%)
+
+  25%, 43.125%, 75%, 93.125%
+    transform: translate(0, 0)
+
+
+
+
+@keyframes spinner-flip
+  0%
+    transform: translate(0, 0) rotate(0deg)
+
+  50%
+    transform: translate(0, -80px) rotate(90deg)
+
+  100%
+    transform: translate(0, 0) rotate(180deg)
+
+
+
+@keyframes spinner-slide
+  to
+    transform: translate(0, -100%) translate(80px, 0)
+
+.spinner_small
+  transform: scale(0.25)
+
+.spinner_medium
+  transform: scale(0.5)
+
+.spinner_small
+  transform: scale(1)
+
+.spinner_dark
+  & > div:nth-of-type(2)
+    background: $dark
+
+  &:after,
+  &:before
+    background: $dark

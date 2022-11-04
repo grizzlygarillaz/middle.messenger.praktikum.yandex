@@ -1,14 +1,13 @@
 import Block from 'core/Block';
-import { withRouter } from 'util/withRouter';
 import LinkProps from 'components/Link/type';
 import template from 'bundle-text:./link.hbs';
 
 const Themes: Record<string, string> = {
   light: 'link_light',
-  dark: 'dark_light',
+  dark: 'link_dark',
 };
 
-class BaseLink extends Block<LinkProps> {
+class Link extends Block<LinkProps> {
   constructor(props: LinkProps) {
     super({
       ...props,
@@ -24,10 +23,8 @@ class BaseLink extends Block<LinkProps> {
   }
 
   navigate() {
-    this.props.router.go(this.props.href);
+    window.router.go(this.props.href);
   }
 }
-
-const Link = withRouter(BaseLink);
 
 export default Link;

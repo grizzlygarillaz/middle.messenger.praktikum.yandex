@@ -6,11 +6,12 @@ export {
   set,
   merge,
   PlainObject,
+  objectToCamelCase,
+  pad,
+  padTime,
 };
 
-type PlainObject<T = unknown> = {
-  [k in string]: T;
-};
+type PlainObject = Record<string, any>;
 
 function isPlainObject(value: unknown): value is PlainObject {
   return typeof value === 'object'
@@ -28,6 +29,10 @@ function isArrayOrObject(value: unknown): value is ([] | PlainObject) {
 }
 
 function isEqual(lhs: PlainObject, rhs: PlainObject): boolean {
+  if (lhs === rhs) {
+    return true;
+  }
+
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
@@ -52,12 +57,11 @@ function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
   Object
     .keys(rhs)
     .forEach((key) => {
-      console.log(key);
-      if (key && !lhs.hasOwnProperty(key)) {
+      if (!rhs.hasOwnProperty(key)) {
         return;
       }
       try {
-        if (rhs[key] instanceof Object) {
+        if (rhs[key].constructor === Object) {
           rhs[key] = merge(lhs[key] as PlainObject, rhs[key] as PlainObject);
         } else {
           lhs[key] = rhs[key];
@@ -65,7 +69,6 @@ function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
       } catch (e) {
         lhs[key] = rhs[key];
       }
-      lhs[key] = merge(lhs[key] as PlainObject, rhs[key] as PlainObject);
     });
 
   return lhs;
@@ -79,8 +82,49 @@ function set(object: PlainObject | unknown, path: string, value: unknown): Plain
   const pathObject = path
     .split('.')
     .reduceRight((acc: PlainObject, key): PlainObject => ({
-      [key]: acc,
+      [key as string]: acc,
     }), value as any);
 
   return merge(object as PlainObject, pathObject as PlainObject);
+}
+
+function objectToCamelCase(object: PlainObject) {
+  if (!object) {
+    return object;
+  }
+  Object.keys(object).forEach((key) => {
+    if (object[key] && typeof object[key] === 'object') {
+      object[key] = objectToCamelCase(object[key] as PlainObject);
+    }
+
+    const newKey = key.split(/[_\-\s]/)
+      .filter((word) => word.length)
+      .reduce((acc, word, currentIndex) => {
+        const newWord = currentIndex ? word.charAt(0).toUpperCase() + word.slice(1) : word;
+
+        return acc + newWord;
+      }, '');
+
+    if (newKey !== key) {
+      object[newKey] = object[key];
+      delete object[key];
+    }
+  });
+
+  return object;
+}
+
+function pad(value: number) {
+  if (value < 10) {
+    return `0${value}`;
+  }
+  return value;
+}
+
+function padTime(time: string) {
+  const date = new Date(time);
+
+  const minutes = pad(date.getMinutes());
+
+  return `${date.getHours()}:${minutes}`;
 }

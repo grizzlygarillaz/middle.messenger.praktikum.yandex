@@ -1,7 +1,7 @@
 .button
-  width: fit-content
   background-color: $white
   border-radius: 12px
+  border: none
   font-size: 24px
   padding: 12px 24px
   align-items: center
@@ -10,9 +10,21 @@
   justify-content: center
   color: $dark
   box-sizing: content-box
-  border: 2px solid $white
   transition: all .2s ease-in-out
 
   &:hover
     cursor: pointer
-    border-color: transparent
+    filter: brightness(80%)
+
+.button_danger
+  color: $white
+  background-color: $red
+
+.button_dark
+  color: $white
+  background-color: $dark
+
+.button_small
+  font-size: 16px
+  padding: 8px 16px
+  border-radius: 8px

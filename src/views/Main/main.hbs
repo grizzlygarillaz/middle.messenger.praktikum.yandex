@@ -2,42 +2,22 @@
   <div class="chat__left-side">
     <div class="chat-panel">
       <div class="chat-panel__tools">
-        {{#ModalTrigger className="chat-panel__avatar" modal="profileModal"}}
+        {{#Trigger className="chat-panel__avatar" openModal="profileModal"}}
           <img src="#" alt="{{ "profile" }}">
-        {{/ModalTrigger}}
+        {{/Trigger}}
         <input class="chat-panel__search" type="text" placeholder="🔍 Поиск" title="Поиск по диалогам">
+        <div class="chat-tools">
+          {{#Trigger title="test" className="chat-tools__new-chat" openModal="addChat"}}
+            +
+          {{/Trigger}}
+        </div>
       </div>
-      <ul class="chat-list">
-        {{#each chats}}
-          {{{ChatItem chat_item=this}}}
-        {{/each}}
-      </ul>
+      {{{ ChatList ref="chat_list" }}}
     </div>
   </div>
   <div class="chat__right-side">
-    {{{Chat messages=messages current_chat="Chat number 1"}}}
+    {{{Chat settingsModal="chatSettings" }}}
   </div>
-  {{#Modal ref="profileModal"}}
-    {{#ModalBody}}
-      {{{InputBox type="text"
-                  name="login"
-                  placeholder="Логин"
-                  minLength=3
-                  maxLength=30
-                  regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
-                  error="От 3 до 20 символов, латиница, без спец символов"
-      }}}
-      {{{InputBox type="text"
-                  name="login2"
-                  placeholder="Логин"
-                  minLength=3
-                  maxLength=30
-                  regex='/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i'
-                  error="От 3 до 20 символов, латиница, без спец символов"
-      }}}
-    {{/ModalBody}}
-    {{#ModalFooter}}
-      {{{Button label="Сохранить"}}}
-    {{/ModalFooter}}
-  {{/Modal}}
+  {{{ProfileModal modal="profileModal"}}}
+  {{{AddChatModal modal="addChat"}}}
 </div>

@@ -15,7 +15,7 @@
     "paths": {
       "api/*": ["./api/*"],
       "components/*": ["./components/*"],
-      "controllers/*": ["./controllers/*"],
+      "services/*": ["./services/*"],
       "core/*": ["./core/*"],
       "helpers/*": ["./helpers/*"],
       "img/*": ["./img/*"],

@@ -1,7 +1,7 @@
 .chat-list
+  overflow-y: auto
   height: 100%
   width: 100%
-  overflow-y: auto
 
 .chat-item
   display: flex
@@ -71,8 +71,12 @@
   color: $gray
   text-overflow: ellipsis
   overflow: hidden
+  font-size: 16px
 
 .last-message
+  align-items: end
   display: flex
   gap: 4px
-  font-size: 16px
+
+.last-message__text_empty
+  font-style: italic

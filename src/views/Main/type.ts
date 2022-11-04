@@ -1,8 +1,10 @@
-interface MainProps {
-  currentChat: string,
-  user: Record<string, string>,
-  messages: Record<string, any>,
-  chats: Record<string, any>
+import BlockProps from 'typings/interfaces/Block';
+import { Store } from 'core';
+
+interface MainProps extends BlockProps {
+  user: User | null,
+  store: Store<AppState>,
+  chat: Chat | null,
 }
 
 export default MainProps;

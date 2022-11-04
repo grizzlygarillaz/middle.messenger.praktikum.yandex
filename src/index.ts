@@ -1,47 +1,28 @@
-import 'components/components';
 import './style.sass';
-import './bootstrap';
-import Router from 'core/Router';
-import pages from 'views/views';
-import AuthController from 'controllers/AuthController';
-import store from 'core/Store';
+import registerComponent from 'core/registerComponent';
+import defaultState from 'core/Store';
+import { PathRouter, Store } from 'core';
+import * as components from './components';
+import initApp from './services/initApp';
+import { initRouter } from './router';
 
-enum Routes {
-  LOGIN = '/',
-  REGISTER = '/register',
-  MAIN = '/messenger',
-}
+Object.values(components).forEach((Component: any) => {
+  registerComponent(Component);
+});
 
 window.addEventListener('DOMContentLoaded', async () => {
-  Router
-    .use('/', pages.login)
-    .use('/registration', pages.registration)
-    .use('/messenger', pages.chat)
-    .start();
+  const store = new Store<AppState>(defaultState);
+  const router = new PathRouter();
+  /**
+   * Помещаем роутер и стор в глобальную область для доступа в хоках with*
+   * @warning Не использовать такой способ на реальный проектах
+   */
+  window.router = router;
+  window.store = store;
 
-  let protectedRoute = true;
+  console.log(window.store, window.router);
 
-  switch (window.location.pathname) {
-    case Routes.LOGIN:
-    case Routes.REGISTER:
-      protectedRoute = false;
-      break;
-    default:
-  }
-  // const user = AuthController.read();
+  initRouter(router, store);
   //
-  // console.log(user.then());
-  try {
-    await AuthController.read();
-
-    if (!protectedRoute) {
-      Router.go(Routes.MAIN);
-    }
-  } catch (e) {
-    if (!protectedRoute) {
-      Router.go(Routes.LOGIN);
-    }
-  }
-
-  console.log(store.getState());
+  store.dispatch(initApp);
 });

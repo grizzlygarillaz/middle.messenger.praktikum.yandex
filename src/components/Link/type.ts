@@ -1,6 +1,7 @@
-import { PropsWithRouter } from '../../util/withRouter';
+import BlockProps from 'typings/interfaces/Block';
+import { PropsWithRouter } from 'util/withRouter';
 
-interface LinkProps extends PropsWithRouter {
+interface LinkProps extends BlockProps, PropsWithRouter {
   label: string,
   href: string,
   theme?: string,

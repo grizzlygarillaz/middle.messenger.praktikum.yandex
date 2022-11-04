@@ -8,32 +8,24 @@ class InputBox extends Block<InputBoxProps> {
   constructor(props: InputBoxProps) {
     super({
       ...props,
-      valid: true,
+      error: props.error ?? 'Некорректный формат ввода',
       events: {
         focusout: () => {
-          this.toggleError();
+          this.checkValid();
         },
       },
     });
   }
 
-  toggleError() {
+  checkValid() {
     const { input, error } = this.refs;
 
-    if ((input as Input).valid) {
+    if ((input as Input).checkValid()) {
       (error as InputError).setProps({ error: '' });
-    } else {
-      (error as InputError).setProps({ error: this.props.error });
+      return true;
     }
-
-    // this.props.valid = Object.values(this.inputs).every((input) => (input as Input).valid);
-    // this.errors.forEach((error) => {
-    //   if (this.props.valid) {
-    //     error.hide();
-    //   } else {
-    //     error.show();
-    //   }
-    // });
+    (error as InputError).setProps({ error: this.props.error });
+    return false;
   }
 
   get inputs() : Block[] {
