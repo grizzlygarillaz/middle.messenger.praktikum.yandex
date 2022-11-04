@@ -31,7 +31,7 @@ export const updateUser = async (
     await userAPI.updateProfile(profile);
 
     if (data.avatar) {
-      await userAPI.updateAvatar({ avatar: data.avatar });
+      await userAPI.updateAvatar(data.avatar);
     }
 
     if (password.oldPassword && password.newPassword) {
