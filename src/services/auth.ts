@@ -19,10 +19,6 @@ export const register = async (
   try {
     await authAPI.create(data);
 
-    const signIn = (({ login, password }) => ({ login, password }))(data);
-
-    await authAPI.store(signIn);
-
     const user = await authAPI.read();
 
     dispatch({ user });
