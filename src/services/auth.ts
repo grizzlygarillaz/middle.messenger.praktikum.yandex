@@ -19,7 +19,7 @@ export const register = async (
   try {
     await authAPI.create(data);
 
-    const user = await authAPI.read();
+    const user = objectToCamelCase(await authAPI.read()) as User;
 
     dispatch({ user });
 

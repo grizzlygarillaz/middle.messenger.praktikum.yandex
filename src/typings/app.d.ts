@@ -73,6 +73,7 @@ declare global {
     own: boolean
     date?: string
     user?: User,
+    senderName?: string
   };
 }
 

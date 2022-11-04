@@ -3,6 +3,7 @@ import template from 'bundle-text:./profile.hbs';
 import { logout } from 'services/auth';
 import withStore from 'util/withStore';
 import { Block } from 'core/index';
+import { updateUser } from 'services/user';
 
 interface ProfileModalProps extends FormProps {
   logout: () => void,
@@ -15,6 +16,16 @@ class ProfileModal extends FormBlock<ProfileModalProps> {
       ...props,
       logout: () => {
         window.store.dispatch(logout);
+      },
+      submit: () => {
+        const data = this.form_value;
+        if (data.avatar) {
+          const formData = new FormData();
+          formData.append('avatar', data.avatar[0]);
+          data.avatar = formData;
+        }
+        console.log(data);
+        this.props.store.dispatch(updateUser, data);
       },
     });
   }

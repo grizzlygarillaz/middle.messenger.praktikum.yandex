@@ -42,6 +42,12 @@ export default class FormBlock<T extends {} = FormProps> extends Block<T> {
   get form_value() {
     return this.inputs.reduce(
       (acc: Record<string, any>, child) => {
+        const input = (child as Input).getContent() as HTMLInputElement;
+
+        if (input.type === 'file') {
+          acc[(child as Input).name] = input.files;
+          return acc;
+        }
         acc[(child as Input).name] = (child as Input).value;
         return acc;
       },

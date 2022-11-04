@@ -7,8 +7,8 @@
         <div class="message {{#if this.own}}message_own{{/if}}">
           <div class="message__block {{#if this.data.sticker}}message__block_sticker{{/if}} {{#if this.own}}message__block_own{{/if}}">
             <span class="message__author">
-              {{#if this.user}}
-                {{ this.user.firstName }}
+              {{#if this.senderName}}
+                {{ this.senderName }}
               {{else}}
                 DELETED
               {{/if}}

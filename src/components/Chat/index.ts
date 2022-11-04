@@ -5,7 +5,6 @@ import template from 'bundle-text:./chat.hbs';
 import withStore from 'util/withStore';
 import { addUserToChat, deleteChat } from 'services/chat';
 import FormBlock from 'util/FormBlock';
-import UserAPI from 'api/UserAPI';
 import { objectToCamelCase, padTime } from 'util/helpers';
 import { Input } from 'components/index';
 
@@ -33,18 +32,10 @@ class Chat extends FormBlock<ChatProps> {
     return template;
   }
 
-  deleteChat() {
-    if (!this.props.currentChat) {
-      return;
-    }
-
-    this.props.store.dispatch(deleteChat, this.props.currentChat.id);
-  }
-
   protected componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
     const { currentChat } = this.props.store.getState();
 
-    if (!this.socket || currentChat !== this.props.currentChat) {
+    if (currentChat && currentChat !== this.props.currentChat) {
       this.initSocket();
     }
 
@@ -70,6 +61,8 @@ class Chat extends FormBlock<ChatProps> {
             message.user = this.props.store.getState().currentChat?.users
               .find((chatUser) => chatUser.id === message.userId);
 
+            message.senderName = message.user?.displayName ?? message.user?.firstName;
+
             message.date = padTime(message.time);
 
             return message;
@@ -93,10 +86,6 @@ class Chat extends FormBlock<ChatProps> {
         }));
       }, 1000);
     });
-  }
-
-  protected componentWillUnmount() {
-    super.componentWillUnmount();
   }
 
   destroySocket() {
@@ -126,20 +115,19 @@ class Chat extends FormBlock<ChatProps> {
     });
   }
 
-  async addUser() {
-    const { addUser } = this.form_value;
+  deleteChat() {
+    if (!this.props.currentChat) {
+      return;
+    }
 
-    if (addUser) {
-      try {
-        const user = await UserAPI.search({ login: addUser });
+    this.props.store.dispatch(deleteChat, this.props.currentChat.id);
+  }
 
-        this.props.store.dispatch(addUserToChat, {
-          chatId: this.props.currentChat!.id,
-          users: [user[0].id],
-        });
-      } catch (e) {
-        console.error(e);
-      }
+  addUser() {
+    const { login } = this.form_value;
+
+    if (login) {
+      this.props.store.dispatch(addUserToChat, { login, chatId: this.props.currentChat?.id });
     }
   }
 }

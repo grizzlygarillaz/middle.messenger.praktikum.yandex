@@ -14,14 +14,12 @@ export interface UserUpdateProfileData {
 }
 
 export interface UserUpdateAvatarData {
-  avatar: FormData
+  avatar: FormData,
 }
 
 export interface UserUpdatePasswordData {
-  changePasswordRequest: {
-    oldPassword: string,
-    newPassword: string,
-  }
+  oldPassword: string,
+  newPassword: string,
 }
 
 class UserAPI extends BaseAPI implements
@@ -42,8 +40,14 @@ class UserAPI extends BaseAPI implements
     return this.http.put('/profile', { body: JSON.stringify(data) });
   }
 
-  public updateAvatar(data: UserUpdateAvatarData): Promise<User> {
-    return this.http.put('/profile/avatar', { body: JSON.stringify(data) });
+  public updateAvatar(data: FormData): Promise<User> {
+    return this.http.put('/profile/avatar', {
+      body: data,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        accept: 'application/json',
+      },
+    });
   }
 
   public updatePassword(data: UserUpdatePasswordData): Promise<User> {

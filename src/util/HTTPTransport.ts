@@ -75,7 +75,7 @@ class HTTPTransport {
     const {
       method,
       body,
-      headers = {},
+      headers = { 'Content-Type': 'application/json' },
     } = options;
 
     url = `${this.endpoint}/${url.replace(/^\//, '')}`;
@@ -111,8 +111,6 @@ class HTTPTransport {
       if (method === METHOD.GET || !body) {
         xhr.send();
       } else {
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
         xhr.send(body as XMLHttpRequestBodyInit);
       }
     });

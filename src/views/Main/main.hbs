@@ -2,8 +2,12 @@
   <div class="chat__left-side">
     <div class="chat-panel">
       <div class="chat-panel__tools">
-        {{#Trigger className="chat-panel__avatar" openModal="profileModal"}}
-          <img src="#" alt="{{ "profile" }}">
+        {{#Trigger openModal="profileModal"}}
+          {{#if user.avatar}}
+            <img class="user-avatar" src="https://ya-praktikum.tech/api/v2/resources/{{user.avatar}}" alt="profile avatar">
+          {{else}}
+            <div class="chat-panel__avatar"></div>
+          {{/if}}
         {{/Trigger}}
         <input class="chat-panel__search" type="text" placeholder="🔍 Поиск" title="Поиск по диалогам">
         <div class="chat-tools">
