@@ -54,7 +54,7 @@
           {{#if user.avatar}}
             <img class="user-avatar user-avatar_large" src="https://ya-praktikum.tech/api/v2/resources/{{user.avatar}}" alt="profile avatar">
           {{else}}
-            Нет фото
+            <h2>Нет фото</h2>
           {{/if}}
           {{{Input type="file" name="avatar"}}}
         {{/ModalBody}}
@@ -82,7 +82,7 @@
     {{{Button label="Сохранить" onClick=submit}}}
     <div class="container_middle container">
       {{#Trigger onClick=logout}}
-        {{{Link label="выйти"}}}
+        {{{Link label="выйти" theme="light"}}}
       {{/Trigger}}
     </div>
   {{/ModalFooter}}

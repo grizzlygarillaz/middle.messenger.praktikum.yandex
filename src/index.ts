@@ -20,8 +20,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   window.router = router;
   window.store = store;
 
-  console.log(window.store, window.router);
-
   initRouter(router, store);
   //
   store.dispatch(initApp);

@@ -3,6 +3,9 @@ import Store from 'core/Store/Store';
 import { Views } from 'router';
 
 declare global {
+  export type ComponentTheme = 'light' | 'dark' | 'danger';
+  export type ComponentSize = 'small' | 'medium' | 'large';
+
   export type Nullable<T> = T | null;
 
   export type KeyOf<T extends Record<string, unknown>> = keyof T;

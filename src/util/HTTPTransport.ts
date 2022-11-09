@@ -21,14 +21,14 @@ interface Options extends DataProps {
 }
 
 class HTTPTransport {
-  static API_URL = 'https://ya-praktikum.tech/api/v2';
+  static BASE_URL = 'https://ya-praktikum.tech/api/v2';
 
   protected endpoint: string;
 
   constructor(endpoint: string) {
     endpoint = endpoint.replace(/^\//, '');
 
-    this.endpoint = `${HTTPTransport.API_URL}/${endpoint}`;
+    this.endpoint = `${HTTPTransport.BASE_URL}/${endpoint}`;
   }
 
   public get<Response>(url: string, options?: DataProps): Promise<Response> {

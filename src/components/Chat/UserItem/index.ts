@@ -21,7 +21,7 @@ class UserItem extends Block<UserItemProps> {
       deleteUser: () => {
         this.props.store.dispatch(
           chatUserDelete,
-          { users: [this.props.user.id], chatId: this.props.store.getState().currentChat?.id },
+          { userIds: [this.props.user.id], chatId: this.props.store.getState().currentChat?.id },
         );
       },
     });

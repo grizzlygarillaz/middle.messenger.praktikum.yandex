@@ -4,10 +4,7 @@ import { PropsWithRouter } from 'util/withRouter';
 interface LinkProps extends BlockProps, PropsWithRouter {
   label: string,
   href: string,
-  theme?: string,
-  events?: {
-    click: () => void,
-  },
+  theme?: ComponentTheme,
 }
 
 export default LinkProps;

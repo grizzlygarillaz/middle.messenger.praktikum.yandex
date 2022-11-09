@@ -69,7 +69,7 @@ export const addUserToChat = async (
       throw new Error('User not founded');
     }
 
-    await chatAPI.addUser({ chatId: data.chatId, users: [user[0].id] });
+    await chatAPI.addUser({ chatId: data.chatId, usersIds: [user[0].id] });
 
     const chats = objectToCamelCase(await chatAPI.read()) as Chat[];
 

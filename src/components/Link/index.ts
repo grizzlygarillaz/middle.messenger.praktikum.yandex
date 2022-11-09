@@ -2,11 +2,6 @@ import Block from 'core/Block';
 import LinkProps from 'components/Link/type';
 import template from 'bundle-text:./link.hbs';
 
-const Themes: Record<string, string> = {
-  light: 'link_light',
-  dark: 'link_dark',
-};
-
 class Link extends Block<LinkProps> {
   static componentName = 'Link';
 
@@ -16,7 +11,6 @@ class Link extends Block<LinkProps> {
       events: {
         click: () => this.navigate(),
       },
-      theme: Themes[props.theme ?? 'light'],
     });
   }
 

@@ -53,36 +53,18 @@ class Chat extends FormBlock<ChatProps> {
     this.socket.addEventListener('message', async (event) => {
       const data: Message[] = objectToCamelCase(JSON.parse(await event.data)) as Message[];
       if (data && Array.isArray(data)) {
-        const messages = data.sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
-          .map((message) => {
-            message.own = message.userId === this.props.store.getState().user?.id;
-
-            message.user = this.props.store.getState().currentChat?.users
-              .find((chatUser) => chatUser.id === message.userId);
-
-            message.senderName = message.user?.displayName ?? message.user?.firstName;
-
-            message.date = padTime(message.time);
-
-            return message;
-          });
+        const messages = this.formatMessages(data);
         this.props.store.dispatch({ messages });
       }
     });
 
     this.socket.addEventListener('open', () => {
-      this.socket.send(JSON.stringify({
-        content: '0',
-        type: 'get old',
-      }));
+      this.getOldMessages();
 
       this.intervalId = window.setInterval(() => {
         this.socket.send(JSON.stringify({ content: 'ping' }));
 
-        this.socket.send(JSON.stringify({
-          content: '0',
-          type: 'get old',
-        }));
+        this.getOldMessages();
       }, 1000);
     });
   }
@@ -95,6 +77,29 @@ class Chat extends FormBlock<ChatProps> {
     if (this.socket) {
       this.socket.close();
     }
+  }
+
+  formatMessages(messages: Message[]) {
+    return messages.sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+      .map((message) => {
+        message.own = message.userId === this.props.store.getState().user?.id;
+
+        message.user = this.props.store.getState().currentChat?.users
+          .find((chatUser) => chatUser.id === message.userId);
+
+        message.senderName = message.user?.displayName ?? message.user?.firstName;
+
+        message.date = padTime(message.time);
+
+        return message;
+      });
+  }
+
+  getOldMessages() {
+    this.socket.send(JSON.stringify({
+      content: '0',
+      type: 'get old',
+    }));
   }
 
   sendMessage() {
