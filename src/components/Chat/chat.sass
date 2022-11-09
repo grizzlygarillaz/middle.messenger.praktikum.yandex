@@ -11,16 +11,16 @@
   background-color: $dark
   border-bottom: 1px solid $dark-gray
   align-items: center
+  z-index: 1
 
 .chat__info
   display: flex
   align-items: start
   gap: 16px
   color: $white
-  font-size: 24px
+  font-size: 20px
 
 .chat__icon
-  position: relative
   height: 48px
   width: 48px
   transition: all .2s
@@ -28,6 +28,7 @@
   & svg
     fill: $gray
     transition: fill .2s ease-in-out
+    transform: scale(0.8)
 
   &:hover
     cursor: pointer
@@ -35,12 +36,10 @@
       fill: white
 
 .chat__body
-  display: flex
-  flex-direction: column
-  justify-content: end
-  gap: 10px
+  display: block
   padding: 24px
   height: 100%
+  overflow: auto
 
 .chat__footer
   background-color: $dark
@@ -53,5 +52,28 @@
   background-color: $dark-gray
   color: $light-gray
   border-radius: 8px
-  padding: 4px 12px
+  padding: 8px 12px
   width: 100%
+  font-size: 16px
+
+.icon__clip
+  transform: rotate(-135deg)
+
+.chat__user-list
+  display: flex
+  flex-direction: column
+  padding: 8px
+
+.chat__user-item
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  &:not(:last-child)
+    margin-bottom: 8px
+    padding-bottom: 8px
+    border-bottom: 1px solid $light-gray
+
+
+.chat__user-item_login
+  color: $gray

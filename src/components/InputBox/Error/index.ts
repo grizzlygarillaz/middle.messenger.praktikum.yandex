@@ -1,17 +1,12 @@
-import Block from '../../../util/Block';
-import template from './error.hbs';
-import ErrorProps from './type';
+import Block from 'core/Block';
+import ErrorProps from 'components/InputBox/Error/type';
+import template from 'bundle-text:./error.hbs';
 
 class InputError extends Block<ErrorProps> {
-  constructor(props: ErrorProps) {
-    super('span', {
-      ...props,
-      error: props.error ?? 'Некорректный формат ввода',
-    });
-  }
+  static componentName = 'InputError';
 
   protected render() {
-    return this.compile(template, this.props);
+    return template;
   }
 }
 

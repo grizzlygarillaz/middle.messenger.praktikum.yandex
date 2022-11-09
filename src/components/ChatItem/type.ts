@@ -1,12 +1,9 @@
-interface ChatItemProps {
-  name: string,
-  active: boolean,
-  date: string,
-  unread?: number,
-  lastMessage?: {
-    text: string,
-    author?: string
-  }
-}
+import BlockProps from 'typings/interfaces/Block';
+import { Store } from 'core/index';
 
-export default ChatItemProps;
+export interface ChatItemProps extends BlockProps {
+  chat: Chat,
+  active: boolean,
+  time: string,
+  store: Store<AppState>
+}

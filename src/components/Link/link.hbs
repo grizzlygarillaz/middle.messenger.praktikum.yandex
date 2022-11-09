@@ -1,1 +1,7 @@
-<a class="link {{ theme }}" href="{{ href }}">{{ label }}</a>
+<span class="link link_{{ theme }}">
+  {{#if label}}
+    {{label}}
+  {{else}}
+    <slot></slot>
+  {{/if}}
+</span>

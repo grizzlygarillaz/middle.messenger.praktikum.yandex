@@ -1,33 +1,45 @@
-// import BaseAPI from './utils/baseapi';
+import {
+  BaseAPI,
+  CreateApiMethod,
+  DeleteApiMethod,
+  ReadApiMethod,
+  StoreApiMethod,
+} from './BaseAPI';
 
-interface SignInData {
+export interface SignInData {
   login: string,
   password: string,
 }
 
-interface SignUpData {
-
+export interface SignUpData {
+  first_name: string,
+  second_name: string,
+  login: string,
+  email: string,
+  password: string,
+  phone: string,
 }
 
-class AuthAPI { //extends BaseApi
+class AuthAPI extends BaseAPI implements
+  CreateApiMethod, ReadApiMethod, DeleteApiMethod, StoreApiMethod {
   constructor() {
     super('/auth');
   }
 
-  signin(data: SignInData) {
-    return this.http.post('/signin', data)
+  public create(data: SignUpData) {
+    return this.http.post('/signup', { body: JSON.stringify(data) });
   }
 
-  signup(data: SignUpData) {
-    return this.http.post('/signup', data)
+  public store(data: SignInData) {
+    return this.http.post('/signin', { body: JSON.stringify(data) });
   }
 
-  read(){
+  public read(): Promise<User> {
     return this.http.get('/user');
   }
 
-  logout() {
-
+  public delete() {
+    return this.http.post('/logout');
   }
 }
 

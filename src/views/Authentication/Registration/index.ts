@@ -1,12 +1,30 @@
-import template from './registration.hbs';
-import FormBlock from '../../../util/FormBlock';
+import FormBlock, { FormProps } from 'util/FormBlock';
+import { SignUpData } from 'api/AuthAPI';
+import template from 'bundle-text:./registration.hbs';
+import { register } from 'services/auth';
+import { withRouter } from 'util/withRouter';
+import withStore from 'util/withStore';
+import { Block } from 'core/index';
 
 class RegistrationPage extends FormBlock {
-  render(): DocumentFragment {
-    return this.compile(template, {
-      children: this.children,
+  static componentName = 'RegistrationPage';
+
+  constructor(props: FormProps) {
+    super({
+      ...props,
+      submit: () => {
+        const data = this.form_value as SignUpData;
+
+        console.log(data);
+
+        this.props.store.dispatch(register, data);
+      },
     });
+  }
+
+  render() {
+    return template;
   }
 }
 
-export default RegistrationPage;
+export default withRouter(withStore(RegistrationPage as typeof Block));

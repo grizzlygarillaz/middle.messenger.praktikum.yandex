@@ -1,10 +1,12 @@
-import Block from '../../util/Block';
-import template from './button.hbs';
-import ButtonProps from './type';
+import Block from 'core/Block';
+import ButtonProps from 'components/Button/type';
+import template from 'bundle-text:./button.hbs';
 
 class Button extends Block<ButtonProps> {
+  static componentName = 'Button';
+
   constructor(props: ButtonProps) {
-    super('button', {
+    super({
       ...props,
       type: props.type ?? 'submit',
       events: {
@@ -14,7 +16,7 @@ class Button extends Block<ButtonProps> {
   }
 
   protected render() {
-    return this.compile(template, this.props);
+    return template;
   }
 }
 

@@ -1,15 +1,11 @@
-import Block from '../../../util/Block';
-import template from './header.hbs';
+import Block from 'core/Block';
+import template from 'bundle-text:./header.hbs';
 
 class CardHeader extends Block {
-  constructor() {
-    super('div');
-  }
+  static componentName = 'CardHeader';
 
   protected render() {
-    return this.compile(template, {
-      children: this.children,
-    });
+    return template;
   }
 }
 

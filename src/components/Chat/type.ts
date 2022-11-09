@@ -1,8 +1,13 @@
-import MessageProps from '../Message/type';
+import { Store } from 'core/index';
+import { FormProps } from 'util/FormBlock';
 
-interface ChatProps {
-  current_chat: string,
-  messages: MessageProps[]
+export default interface ChatProps extends FormProps {
+  currentChat: Chat | null,
+  messages: Message[],
+  store: Store<AppState>,
+  socket: WebSocket | null
+  deleteChat: () => void,
+  addUser: () => void,
+  removeUser: () => void,
+  sendMessage: () => void,
 }
-
-export default ChatProps;

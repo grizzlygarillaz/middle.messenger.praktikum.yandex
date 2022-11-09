@@ -9,9 +9,9 @@
     "project": ["./tsconfig.json"]
   },
   "rules": {
+    "no-param-reassign": "off",
     "no-prototype-builtins": "off",
     "no-underscore-dangle": "off",
-    "no-param-reassign": "off",
     "class-methods-use-this": "off"
   }
 }

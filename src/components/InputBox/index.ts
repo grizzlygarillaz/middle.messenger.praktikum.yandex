@@ -1,31 +1,33 @@
-import Block from '../../util/Block';
-import template from './input_box.hbs';
-import { InputBoxProps } from './type';
-import Input from '../Input';
-import InputError from './Error';
+import Block from 'core/Block';
+import InputBoxProps from 'components/InputBox/type';
+import InputError from 'components/InputBox/Error';
+import Input from 'components/Input';
+import template from 'bundle-text:./input_box.hbs';
 
 class InputBox extends Block<InputBoxProps> {
+  static componentName = 'InputBox';
+
   constructor(props: InputBoxProps) {
-    super('div', {
+    super({
       ...props,
-      valid: true,
+      error: props.error ?? 'Некорректный формат ввода',
       events: {
         focusout: () => {
-          this.toggleError();
+          this.checkValid();
         },
       },
     });
   }
 
-  toggleError() {
-    this.props.valid = Object.values(this.inputs).every((input) => (input as Input).valid);
-    this.errors.forEach((error) => {
-      if (this.props.valid) {
-        error.hide();
-      } else {
-        error.show();
-      }
-    });
+  checkValid() {
+    const { input, error } = this.refs;
+
+    if ((input as Input).checkValid()) {
+      (error as InputError).setProps({ error: '' });
+      return true;
+    }
+    (error as InputError).setProps({ error: this.props.error });
+    return false;
   }
 
   get inputs() : Block[] {
@@ -39,14 +41,7 @@ class InputBox extends Block<InputBoxProps> {
   }
 
   protected render() {
-    const fragment = this.compile(template, {
-      ...this.props,
-      children: this.children,
-    });
-
-    this.errors.forEach((error) => { error.hide(); });
-
-    return fragment;
+    return template;
   }
 }
 

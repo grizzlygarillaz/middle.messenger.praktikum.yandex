@@ -1,25 +1,51 @@
 <div class="chat">
-  <div class="chat__header">
-    <div class="chat__info">
-      <div class="chat-item__avatar"></div>
-      <span>{{current_chat}}</span>
+  {{#if currentChat}}
+    <div class="chat__header">
+      <div class="chat__info">
+        <div class="chat-item__avatar"></div>
+        <span>{{currentChat.title}}</span>
+      </div>
+      {{#Trigger openModal="chatSettings"}}
+        <div class="chat__icon">
+          {{{icons.chat_settings}}}
+        </div>
+      {{/Trigger}}
     </div>
-    <div class="chat__icon">
-      {{{icons.chat_settings}}}
+      {{{Messages messages=messages}}}
+    <div class="chat__footer">
+      {{{Input name="message" className="chat__message" placeholder="Сообщение" ref="send_message"}}}
+      {{#Trigger onClick=sendMessage className="chat__icon"}}
+        {{{icons.send}}}
+      {{/Trigger}}
     </div>
-  </div>
-  <div class="chat__body">
-    {{#each messages}}
-      {{{Message message=this}}}
-    {{/each}}
-  </div>
-  <div class="chat__footer">
-    <div class="chat__icon icon__clip">
-      {{{icons.clip}}}
+  {{else}}
+    <div class="container container_center container_middle">
+      {{#Label theme="secondary" size="large"}}
+        Выберите чат
+      {{/Label}}
     </div>
-    <textarea name="message" rows="1" class="chat__message" title="Напишите сообщение" placeholder="Сообщение"></textarea>
-    <div class="chat__icon">
-      {{{icons.send}}}
+  {{/if}}
+
+  {{#Modal modal="chatSettings" title=currentChat.title}}
+    {{#ModalBody}}
+      {{{InputBox type="text"
+                  name="login"
+                  placeholder="Введите логин пользователя"
+                  minLength=3
+                  maxLength=30
+                  regex="/^(?=.*[a-z]+)(?=.*[\d]{0,})[a-z0-9\-_]+$/i"
+                  error="От 3 до 20 символов, латиница, без спец символов"
+      }}}
+      {{{Button label="Добавить пользователя" className="bordered" size="small" onClick=addUser}}}
+
+    <div class="chat__user-list">
+      {{#each currentChat.users}}
+        {{{UserItem user=this}}}
+      {{/each}}
     </div>
-  </div>
+    {{/ModalBody}}
+    {{#ModalFooter}}
+      {{{Button label="Удалить чат" theme="danger" onClick=deleteChat}}}
+    {{/ModalFooter}}
+  {{/Modal}}
 </div>

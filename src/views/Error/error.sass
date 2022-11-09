@@ -13,7 +13,7 @@
 .error-box__side_left
   background-color: $dark
   width: 40%
-  justify-content: end
+  justify-content: center
 
 
 .error-box__side_right
@@ -22,7 +22,7 @@
   gap: 10px
   background-color: $white
   justify-content: center
-  align-items: start
+  align-items: center
   width: 100%
 
 .error__code
@@ -34,9 +34,14 @@
     color: $red !important
 
 .error-box__message
+  display: flex
+  flex-direction: column
+
+
+.error-message
   font-size: 40px
   font-weight: 500
 
 .error-box__option
   color: $gray
-  font-size: 24px
+  font-size: 18px

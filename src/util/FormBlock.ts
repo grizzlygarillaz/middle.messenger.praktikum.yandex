@@ -1,49 +1,57 @@
-import Block from './Block';
-import InputBox from '../components/InputBox';
-import Input from '../components/Input';
+import Block from 'core/Block';
+import InputBox from 'components/InputBox';
+import BlockProps from 'typings/interfaces/Block';
+import Input from 'components/Input';
+import { Store } from 'core/index';
 
-class FormBlock<P extends Record<string, any> = any> extends Block<P> {
-  constructor(props: P) {
-    super('form', {
-      ...props,
-      events: {
-        submit: (e: Event) => {
-          this.validate();
-          e.preventDefault();
+export interface FormProps extends BlockProps {
+  submit: () => void,
+  formError?: string,
+  store: Store<AppState>
+}
 
-          console.log(this.inputsValue);
-
-          if (this.valid) {
-            (this.getContent() as HTMLFormElement).submit();
-          }
-        },
-      },
-    });
+export default class FormBlock<T extends {} = FormProps> extends Block<T> {
+  get valid() {
+    return this.inputComponents.every((input: Block) => (input as Input).checkValid());
   }
 
-  get inputsValue() {
-    return this.inputs.reduce((previousValue, currentValue) => {
-      const input = (currentValue as Input);
-      previousValue[input.name] = input.value;
-      return previousValue;
-    }, {} as Record<string, string>);
+  get inputComponents() {
+    return Object
+      .values(this.children)
+      .filter((child: Block) => child instanceof InputBox || child instanceof Input);
   }
 
   get inputs() {
-    return Object.values(this.children)
-      .filter((child) => child instanceof InputBox)
-      .reduce((previous: Block[], current) => previous.concat((current as InputBox).inputs), []);
+    return this.inputComponents
+      .reduce((acc: Block[], current) => {
+        const input = current instanceof InputBox ? current.inputs : current;
+        return acc.concat(input);
+      }, []);
   }
 
   validate() {
-    this.inputs.forEach((input) => {
-      (input as Input).checkValid();
-    });
+    this.inputComponents.every((input) => (input as Input).checkValid());
   }
 
-  get valid() {
-    return this.inputs.every((input) => (input as Input).valid);
+  onSubmit() {
+    this.validate();
+
+    console.log(this.form_value);
+  }
+
+  get form_value() {
+    return this.inputs.reduce(
+      (acc: Record<string, any>, child) => {
+        const input = (child as Input).getContent() as HTMLInputElement;
+
+        if (input.type === 'file') {
+          acc[(child as Input).name] = input.files;
+          return acc;
+        }
+        acc[(child as Input).name] = (child as Input).value;
+        return acc;
+      },
+      {},
+    );
   }
 }
-
-export default FormBlock;

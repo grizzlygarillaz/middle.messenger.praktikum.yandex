@@ -1,5 +1,5 @@
-interface ErrorProps {
-  error?: string,
-}
+import BlockProps from 'typings/interfaces/Block';
 
-export default ErrorProps;
+export default interface ErrorProps extends BlockProps {
+  error: string,
+}

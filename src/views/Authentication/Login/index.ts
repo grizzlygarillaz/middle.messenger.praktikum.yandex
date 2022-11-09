@@ -1,19 +1,30 @@
-import template from './login.hbs';
-import FormBlock from '../../../util/FormBlock';
+import FormBlock, { FormProps } from 'util/FormBlock';
+import { SignUpData } from 'api/AuthAPI';
+import withStore from 'util/withStore';
+import template from 'bundle-text:./login.hbs';
+import Block from 'core/Block';
+import { withRouter } from 'util/withRouter';
+import { login } from 'services/auth';
 
-interface LoginPageProps {
-  events: {
-    submit: (e: Event) => void;
-  },
-}
+class LoginPage extends FormBlock<FormProps> {
+  static componentName = 'LoginPage';
 
-class LoginPage extends FormBlock<LoginPageProps> {
-  render(): DocumentFragment {
-    return this.compile(template, {
-      ...this.props,
-      children: this.children,
+  constructor(props: FormProps) {
+    super({
+      ...props,
+      submit: () => {
+        const data = this.form_value as SignUpData;
+
+        console.log(data);
+
+        this.props.store.dispatch(login, data);
+      },
     });
+  }
+
+  render() {
+    return template;
   }
 }
 
-export default LoginPage;
+export default withRouter(withStore(LoginPage as typeof Block));

@@ -2,19 +2,26 @@
   <div class="chat__left-side">
     <div class="chat-panel">
       <div class="chat-panel__tools">
-        <a class="chat-panel__avatar" href="/profile">
-          <img src="#" alt="profile">
-        </a>
+        {{#Trigger openModal="profileModal"}}
+          {{#if user.avatar}}
+            <img class="user-avatar" src="https://ya-praktikum.tech/api/v2/resources/{{user.avatar}}" alt="profile avatar">
+          {{else}}
+            <div class="chat-panel__avatar"></div>
+          {{/if}}
+        {{/Trigger}}
         <input class="chat-panel__search" type="text" placeholder="🔍 Поиск" title="Поиск по диалогам">
+        <div class="chat-tools">
+          {{#Trigger title="test" className="chat-tools__new-chat" openModal="addChatModal"}}
+            +
+          {{/Trigger}}
+        </div>
       </div>
-      <ul class="chat-list">
-        {{#each chats}}
-          {{{ChatItem chat_item=this}}}
-        {{/each}}
-      </ul>
+      {{{ ChatList ref="chat_list" }}}
     </div>
   </div>
   <div class="chat__right-side">
-    {{{Chat messages=messages current_chat="Chat number 1"}}}
+    {{{Chat }}}
   </div>
+  {{{ProfileModal modal="profileModal"}}}
+  {{{AddChatModal modal="addChatModal"}}}
 </div>

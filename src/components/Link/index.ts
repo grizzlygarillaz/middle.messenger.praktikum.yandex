@@ -1,22 +1,25 @@
-import Block from '../../util/Block';
-import template from './link.hbs';
-import LinkProps from './type';
-
-const Themes: Record<string, string> = {
-  light: 'link_light',
-  dark: 'dark_light',
-};
+import Block from 'core/Block';
+import LinkProps from 'components/Link/type';
+import template from 'bundle-text:./link.hbs';
 
 class Link extends Block<LinkProps> {
+  static componentName = 'Link';
+
   constructor(props: LinkProps) {
-    super('a', props);
+    super({
+      ...props,
+      events: {
+        click: () => this.navigate(),
+      },
+    });
   }
 
   protected render() {
-    return this.compile(template, {
-      ...this.props,
-      theme: Themes[this.props.theme ?? 'light'],
-    });
+    return template;
+  }
+
+  navigate() {
+    window.router.go(this.props.href);
   }
 }
 

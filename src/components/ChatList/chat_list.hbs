@@ -1,0 +1,17 @@
+<ul class="chat-list">
+  {{#if loading}}
+    {{{Spinner}}}
+  {{else}}
+    {{#if chats}}
+      {{#each chats}}
+        {{{ ChatItem chat=this }}}
+      {{/each}}
+    {{else}}
+      <div class="container container_center">
+        {{#Label theme="light"}}
+          Создайте чат
+        {{/Label}}
+      </div>
+    {{/if}}
+  {{/if}}
+</ul>

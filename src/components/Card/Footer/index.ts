@@ -1,15 +1,11 @@
-import Block from '../../../util/Block';
-import template from './footer.hbs';
+import Block from 'core/Block';
+import template from 'bundle-text:./footer.hbs';
 
 class CardFooter extends Block {
-  constructor() {
-    super('div');
-  }
+  static componentName = 'CardFooter';
 
   protected render() {
-    return this.compile(template, {
-      children: this.children,
-    });
+    return template;
   }
 }
 
