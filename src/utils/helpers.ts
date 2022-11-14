@@ -9,6 +9,7 @@ export {
   objectToCamelCase,
   pad,
   padTime,
+  sleep,
 };
 
 type PlainObject = Record<string, any>;
@@ -127,4 +128,10 @@ function padTime(time: string) {
   const minutes = pad(date.getMinutes());
 
   return `${date.getHours()}:${minutes}`;
+}
+
+function sleep(ms: number = 200) {
+  return new Promise((r) => {
+    setTimeout(r, ms);
+  });
 }

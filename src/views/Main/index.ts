@@ -1,6 +1,6 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./main.hbs';
-import withStore from 'util/withStore';
+import withStore from 'utils/withStore';
+import * as template from './main.hbs';
 import MainProps from './type';
 
 class MainPage extends Block<MainProps> {

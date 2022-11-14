@@ -1,5 +1,5 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./spinner.hbs';
+import * as template from './spinner.hbs';
 
 interface SpinnerProps {
   size: string,

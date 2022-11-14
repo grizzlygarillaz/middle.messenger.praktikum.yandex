@@ -1,6 +1,6 @@
 import { Block } from 'core/index';
-import { isEqual } from 'util/helpers';
 import { StoreEvents } from 'core/Store/Store';
+import { isEqual } from './helpers';
 
 type WithUserProps = { user: User | null };
 

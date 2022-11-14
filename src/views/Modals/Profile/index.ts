@@ -1,9 +1,9 @@
-import FormBlock, { FormProps } from 'util/FormBlock';
-import template from 'bundle-text:./profile.hbs';
 import { logout } from 'services/auth';
 import { Block } from 'core/index';
 import { updateUser } from 'services/user';
-import withStore from 'util/withStore';
+import FormBlock, { FormProps } from 'utils/FormBlock';
+import withStore from 'utils/withStore';
+import * as template from './profile.hbs';
 
 interface ProfileModalProps extends FormProps {
   logout: () => void,

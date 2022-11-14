@@ -81,7 +81,7 @@
   {{#ModalFooter}}
     {{{Button label="Сохранить" onClick=submit}}}
     <div class="container_middle container">
-      {{#Trigger onClick=logout}}
+      {{#Trigger onClick=logout dataTestId="logout_trigger"}}
         {{{Link label="выйти"}}}
       {{/Trigger}}
     </div>

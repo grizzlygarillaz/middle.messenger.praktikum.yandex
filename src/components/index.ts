@@ -1,4 +1,3 @@
-export { default as Trigger } from 'components/Trigger';
 export { default as Modal } from 'components/Modal';
 export { default as ModalBody } from 'components/Modal/ModalBody';
 export { default as ModalFooter } from 'components/Modal/ModalFooter';
@@ -12,7 +11,6 @@ export { default as Chat } from 'components/Chat';
 export { default as UserItem } from 'components/Chat/UserItem';
 export { default as ChatList } from 'components/ChatList';
 export { default as ChatItem } from 'components/ChatItem';
-export { default as Input } from 'components/Input';
 export { default as InputBox } from 'components/InputBox';
 export { default as InputError } from 'components/InputBox/Error';
 export { default as Link } from 'components/Link';

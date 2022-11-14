@@ -1,9 +1,9 @@
-import send from 'bundle-text:./send.svg';
-import arrowBack from 'bundle-text:./arrow-back.svg';
-import clip from 'bundle-text:./clip.svg';
-import close from 'bundle-text:./close.svg';
-import close_bold from 'bundle-text:./close_bold.svg';
-import chat_settings from 'bundle-text:./chat_settings.svg';
+import * as send from './send.svg';
+import * as arrowBack from './arrow-back.svg';
+import * as close from './close.svg';
+import * as close_bold from './close_bold.svg';
+import * as chat_settings from './chat_settings.svg';
+import * as clip from './clip.svg';
 
 export {
   arrowBack,

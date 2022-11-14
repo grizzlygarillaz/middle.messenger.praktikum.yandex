@@ -1,6 +1,6 @@
 import Block from 'core/Block';
 import ErrorProps from 'components/InputBox/Error/type';
-import template from 'bundle-text:./error.hbs';
+import * as template from './error.hbs';
 
 class InputError extends Block<ErrorProps> {
   static componentName = 'InputError';

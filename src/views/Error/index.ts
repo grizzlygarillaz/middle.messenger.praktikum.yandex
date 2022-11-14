@@ -1,6 +1,6 @@
 import ErrorProps from 'views/Error/type';
 import Block from 'core/Block';
-import template from 'bundle-text:./error.hbs';
+import * as template from './error.hbs';
 
 const defaultError = {
   code: 'Oops...',

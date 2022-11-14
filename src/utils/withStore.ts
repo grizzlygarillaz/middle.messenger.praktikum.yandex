@@ -1,6 +1,6 @@
 import { Block, Store } from 'core/index';
 import { StoreEvents } from 'core/Store/Store';
-import { isEqual } from 'util/helpers';
+import { isEqual } from './helpers';
 
 type WithStateProps = { store: Store<AppState> };
 

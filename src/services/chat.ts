@@ -2,8 +2,8 @@ import { Dispatch } from 'core/Store/Store';
 import chatAPI, {
   ChatAddUserData, ChatCreateData, ChatReadData, ChatToggleUserData,
 } from 'api/ChatAPI';
-import { objectToCamelCase } from 'util/helpers';
 import UserAPI from 'api/UserAPI';
+import { objectToCamelCase } from 'utils/helpers';
 
 export const getChats = async (
   dispatch: Dispatch<AppState>,

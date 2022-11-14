@@ -18,6 +18,9 @@ export default class PathRouter implements CoreRouter {
   }
 
   private onRouteChange(pathname: string = window.location.pathname) {
+    if (window.location.pathname === pathname) {
+      return;
+    }
     const found = Object.entries(this.routes).some(([routePath, callback]) => {
       if (routePath === pathname) {
         callback();
@@ -38,8 +41,8 @@ export default class PathRouter implements CoreRouter {
   }
 
   go(pathname: string) {
-    window.history.pushState({}, '', pathname);
     this.onRouteChange(pathname);
+    window.history.pushState({}, '', pathname);
   }
 
   back() {

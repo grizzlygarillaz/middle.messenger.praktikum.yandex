@@ -1,5 +1,5 @@
 import { Store } from 'core/index';
-import { FormProps } from 'util/FormBlock';
+import { FormProps } from '../../utils/FormBlock';
 
 export default interface ChatProps extends FormProps {
   currentChat: Chat | null,

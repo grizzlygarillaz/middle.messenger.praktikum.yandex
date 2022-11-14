@@ -1,8 +1,8 @@
-import FormBlock, { FormProps } from 'util/FormBlock';
-import template from 'bundle-text:./add_chat.hbs';
 import { addChat } from 'services/chat';
-import withStore from 'util/withStore';
 import { Block } from 'core/index';
+import FormBlock, { FormProps } from 'utils/FormBlock';
+import withStore from 'utils/withStore';
+import * as template from './add_chat.hbs';
 
 class AddChatModal extends FormBlock {
   static componentName = 'AddChatModal';

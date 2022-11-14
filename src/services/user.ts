@@ -1,7 +1,7 @@
 import { Dispatch } from 'core/Store/Store';
-import { objectToCamelCase } from 'util/helpers';
 import userAPI, { UserUpdatePasswordData } from 'api/UserAPI';
 import authAPI from 'api/AuthAPI';
+import { objectToCamelCase } from 'utils/helpers';
 
 export interface UpdateUserData {
   first_name: string,
