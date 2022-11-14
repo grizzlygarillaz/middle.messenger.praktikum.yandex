@@ -3,7 +3,7 @@ import { Block } from 'core/index';
 import { updateUser } from 'services/user';
 import FormBlock, { FormProps } from 'utils/FormBlock';
 import withStore from 'utils/withStore';
-import * as template from './profile.hbs';
+import template from './profile.hbs';
 
 interface ProfileModalProps extends FormProps {
   logout: () => void,

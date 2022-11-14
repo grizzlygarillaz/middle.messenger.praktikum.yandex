@@ -1,9 +1,9 @@
-import * as send from './send.svg';
-import * as arrowBack from './arrow-back.svg';
-import * as close from './close.svg';
-import * as close_bold from './close_bold.svg';
-import * as chat_settings from './chat_settings.svg';
-import * as clip from './clip.svg';
+import send from './send.svg';
+import arrowBack from './arrow-back.svg';
+import close from './close.svg';
+import close_bold from './close_bold.svg';
+import chat_settings from './chat_settings.svg';
+import clip from './clip.svg';
 
 export {
   arrowBack,

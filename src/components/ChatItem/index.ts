@@ -3,7 +3,7 @@ import { ChatItemProps } from 'components/ChatItem/type';
 import { changeChat } from 'services/chat';
 import withStore from 'utils/withStore';
 import { padTime } from 'utils/helpers';
-import * as template from './chat_item.hbs';
+import template from './chat_item.hbs';
 
 class ChatItem extends Block<ChatItemProps> {
   public static componentName = 'ChatItem';

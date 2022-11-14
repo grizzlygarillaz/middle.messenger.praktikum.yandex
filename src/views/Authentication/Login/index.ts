@@ -4,7 +4,7 @@ import { login } from 'services/auth';
 import FormBlock, { FormProps } from 'utils/FormBlock';
 import withStore from 'utils/withStore';
 import { withRouter } from 'utils/withRouter';
-import * as template from './login.hbs';
+import template from './login.hbs';
 
 class LoginPage extends FormBlock<FormProps> {
   static componentName = 'LoginPage';

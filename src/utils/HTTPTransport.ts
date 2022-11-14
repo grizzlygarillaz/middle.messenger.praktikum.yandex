@@ -21,7 +21,7 @@ interface Options extends DataProps {
 }
 
 class HTTPTransport {
-  static API_URL = process.env.API_ENDPOINT;
+  static API_URL = 'https://ya-praktikum.tech/api/v2';
 
   protected endpoint: string;
 

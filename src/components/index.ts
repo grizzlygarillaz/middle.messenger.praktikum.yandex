@@ -17,6 +17,8 @@ export { default as Link } from 'components/Link';
 export { default as Messages } from 'components/Message';
 export { default as Label } from 'components/Label';
 export { default as Spinner } from 'components/Spinner';
+export { default as Input } from 'components/Input';
+export { default as Trigger } from 'components/Trigger';
 
 export { default as ProfileModal } from 'views/Modals/Profile';
 export { default as AddChatModal } from 'views/Modals/AddChat';

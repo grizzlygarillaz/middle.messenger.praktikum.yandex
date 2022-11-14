@@ -4,7 +4,7 @@ import { Block } from 'core/index';
 import FormBlock, { FormProps } from 'utils/FormBlock';
 import withStore from 'utils/withStore';
 import { withRouter } from 'utils/withRouter';
-import * as template from './registration.hbs';
+import template from './registration.hbs';
 
 class RegistrationPage extends FormBlock {
   static componentName = 'RegistrationPage';

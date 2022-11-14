@@ -1,5 +1,5 @@
 import Block from 'core/Block';
-import * as template from './card.hbs';
+import template from './card.hbs';
 
 class Card extends Block {
   static componentName = 'Card';

@@ -1,7 +1,7 @@
 import CloseButtonProps from 'components/CloseButton/type';
 import Block from 'core/Block';
 import { close } from 'img/icons';
-import * as template from './close_button.hbs';
+import template from './close_button.hbs';
 
 class CloseButton extends Block<CloseButtonProps> {
   static componentName = 'CloseButton';

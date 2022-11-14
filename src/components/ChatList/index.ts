@@ -2,7 +2,7 @@ import Block from 'core/Block';
 import ChatListProps from 'components/ChatList/type';
 import { getChats } from 'services/chat';
 import withStore from 'utils/withStore';
-import * as template from './chat_list.hbs';
+import template from './chat_list.hbs';
 
 class ChatList extends Block<ChatListProps> {
   static componentName = 'ChatList';

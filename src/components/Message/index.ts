@@ -1,7 +1,7 @@
 import { MessageProps } from 'components/Message/type';
 import { Block } from 'core/index';
 import withStore from 'utils/withStore';
-import * as template from './message.hbs';
+import template from './message.hbs';
 
 class Messages extends Block<MessageProps> {
   static componentName = 'Messages';

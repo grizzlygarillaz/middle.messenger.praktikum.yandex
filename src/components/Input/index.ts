@@ -1,7 +1,7 @@
 import Block from 'core/Block';
 import { InputProps } from 'components/Input/type';
 import Validator from 'utils/Validator';
-import * as template from './input.hbs';
+import template from './input.hbs';
 
 class Input extends Block<InputProps> {
   static componentName = 'Input';

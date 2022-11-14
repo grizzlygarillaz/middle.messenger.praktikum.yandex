@@ -1,6 +1,6 @@
 import Block from 'core/Block';
 import LinkProps from 'components/Link/type';
-import * as template from './link.hbs';
+import template from './link.hbs';
 
 const Themes: Record<string, string> = {
   light: 'link_light',

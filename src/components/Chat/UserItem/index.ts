@@ -3,7 +3,7 @@ import BlockProps from 'typings/interfaces/Block';
 import { chatUserDelete } from 'services/chat';
 import { Store } from 'core/index';
 import withStore from 'utils/withStore';
-import * as template from './user_item.hbs';
+import template from './user_item.hbs';
 
 interface UserItemProps extends BlockProps {
   user: User,

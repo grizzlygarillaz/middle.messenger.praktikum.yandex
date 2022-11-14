@@ -1,18 +1,14 @@
-import * as components from 'components';
 import './style.sass';
 import registerComponent from 'core/registerComponent';
 import defaultState from 'core/Store';
 import { PathRouter, Store } from 'core';
 import initApp from 'services/initApp';
-import Input from 'components/Input';
-import Trigger from 'components/Trigger';
+import * as components from 'components';
 import { initRouter } from './router';
 
 Object.values(components).forEach((Component: any) => {
   registerComponent(Component);
 });
-registerComponent(Input);
-registerComponent(Trigger);
 
 window.addEventListener('DOMContentLoaded', async () => {
   const store = new Store<AppState>(defaultState);
@@ -25,6 +21,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   window.store = store;
 
   initRouter(router, store);
-  //
+
   store.dispatch(initApp);
 });

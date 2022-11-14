@@ -1,6 +1,6 @@
 import Block from 'core/Block';
 import TriggerProps from 'components/Trigger/type';
-import * as template from './trigger.hbs';
+import template from './trigger.hbs';
 
 class Trigger extends Block<TriggerProps> {
   static componentName = 'Trigger';

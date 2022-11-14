@@ -1,11 +1,11 @@
 import Block from 'core/Block';
 import ChatProps from 'components/Chat/type';
-import { chat_settings, send } from 'img/icons';
 import { addUserToChat, deleteChat } from 'services/chat';
 import FormBlock from 'utils/FormBlock';
 import withStore from 'utils/withStore';
 import { objectToCamelCase, padTime } from 'utils/helpers';
-import * as template from './chat.hbs';
+import { chat_settings, send } from 'img/icons';
+import template from './chat.hbs';
 
 class Chat extends FormBlock<ChatProps> {
   static componentName = 'Chat';
@@ -15,6 +15,10 @@ class Chat extends FormBlock<ChatProps> {
   intervalId: number;
 
   constructor(props: ChatProps) {
+    console.log(
+      send,
+      chat_settings,
+    );
     super({
       ...props,
       icons: {

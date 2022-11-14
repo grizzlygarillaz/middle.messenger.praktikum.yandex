@@ -22,15 +22,10 @@ describe('core/Router/PathRouter', () => {
     expect(window.history.length).toEqual(3);
   });
 
-  it('should emit callback on path change', () => {
+  it('should change page', () => {
     router.go('/login');
 
     expect(mock).toHaveReturnedWith('Login');
-    mock.mockClear();
-
-    router.go('/login');
-
-    expect(mock).not.toHaveBeenCalled();
 
     router.go('/');
 
