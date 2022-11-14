@@ -10,10 +10,6 @@ describe('core/Router/PathRouter', () => {
     .use('/chats', () => mock('Chats'))
     .start();
 
-  beforeEach(() => {
-    window.location.replace('/');
-  });
-
   it('should change state of history API', () => {
     router.go('/');
 
@@ -29,6 +25,6 @@ describe('core/Router/PathRouter', () => {
 
     router.go('/');
 
-    expect(mock).toHaveReturnedWith('Homes');
+    expect(mock).toHaveReturnedWith('Home');
   });
 });

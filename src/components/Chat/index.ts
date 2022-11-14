@@ -15,10 +15,6 @@ class Chat extends FormBlock<ChatProps> {
   intervalId: number;
 
   constructor(props: ChatProps) {
-    console.log(
-      send,
-      chat_settings,
-    );
     super({
       ...props,
       icons: {

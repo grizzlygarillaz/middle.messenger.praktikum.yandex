@@ -1,7 +1,7 @@
 import { ProfileModal } from 'components/index';
-import { Views } from 'router';
 import { renderBlock, step } from 'tests/renderBlock';
 import { getByTestId } from '@testing-library/dom';
+import { Views } from '../../../router';
 
 const USER_MOCK = {
   id: 1,
@@ -29,8 +29,10 @@ describe('pages/Modals/Profile', () => {
     });
 
     await step('logout from profile', () => {
-      getByTestId(document.body, 'logout_trigger').click();
+      const button = getByTestId(document.body, 'logout_trigger');
+      button.click();
     });
+    console.log(window.store.getState());
 
     await step('check user state', async () => {
       expect(window.store.getState().user).toEqual(null);

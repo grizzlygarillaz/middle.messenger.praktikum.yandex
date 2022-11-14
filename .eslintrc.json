@@ -13,6 +13,6 @@
     "no-prototype-builtins": "off",
     "no-underscore-dangle": "off",
     "class-methods-use-this": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "./src/tests/**"]}]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.ts", "./src/tests/**"]}]
   }
 }

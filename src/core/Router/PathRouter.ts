@@ -38,8 +38,8 @@ export default class PathRouter implements CoreRouter {
   }
 
   go(pathname: string) {
-    this.onRouteChange(pathname);
     window.history.pushState({}, '', pathname);
+    this.onRouteChange(pathname);
   }
 
   back() {
