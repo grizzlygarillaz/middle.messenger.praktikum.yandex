@@ -9,12 +9,8 @@
     "start": "npm run build && node ./server.js",
     "dev": "npm run lint && webpack serve",
     "lint": "tsc --noEmit",
-    "test": "jest"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test && npm run lint"
-    }
+    "test": "jest",
+    "precommit": "npm run test && npm run lint"
   },
   "repository": {
     "type": "git",
