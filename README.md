@@ -6,8 +6,8 @@
 + ### [Netlify](https://stellular-kleicha-0a14f8.netlify.app)
 + ### [Heroku](https://messenger-grizzly.herokuapp.com)
 ---
-# Макет:
-### [Figma](https://www.figma.com/file/8hm7diuIHJkfqrOv0gBmw3/Messanger?node-id=0%3A1)
+## Макет:
++ ### [Figma](https://www.figma.com/file/8hm7diuIHJkfqrOv0gBmw3/Messanger?node-id=0%3A1)
 
 ---
 ## Команды:
