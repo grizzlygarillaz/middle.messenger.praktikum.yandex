@@ -29,6 +29,6 @@ describe('core/Router/PathRouter', () => {
 
     router.go('/');
 
-    expect(mock).toHaveReturnedWith('Home');
+    expect(mock).toHaveReturnedWith('Homes');
   });
 });
