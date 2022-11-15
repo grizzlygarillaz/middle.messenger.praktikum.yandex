@@ -26,13 +26,22 @@ interface ChatTokenResponse {
   token: string,
 }
 
+interface ChatDeletedResponse {
+  userId: number,
+  result: {
+    id: number,
+    title: string,
+    avatar: string
+  }
+}
+
 class ChatAPI extends BaseAPI implements
     CreateApiMethod, ReadApiMethod, DeleteApiMethod {
   constructor() {
     super('/chats');
   }
 
-  public create(data: ChatCreateData) {
+  public create(data: ChatCreateData): Promise<Response> {
     console.log(data);
     return this.http.post('', { body: JSON.stringify(data) });
   }
@@ -41,7 +50,7 @@ class ChatAPI extends BaseAPI implements
     return this.http.get('', { body: data });
   }
 
-  public delete(chatId: number) {
+  public delete(chatId: number): Promise<ChatDeletedResponse> {
     return this.http.delete('', { body: JSON.stringify({ chatId }) });
   }
 
@@ -49,11 +58,11 @@ class ChatAPI extends BaseAPI implements
     return this.http.get(`/${chatId}/users`);
   }
 
-  public addUser(data: ChatToggleUserData) {
+  public addUser(data: ChatToggleUserData): Promise<Response> {
     return this.http.put('/users', { body: JSON.stringify(data) });
   }
 
-  public deleteUser(data: ChatToggleUserData) {
+  public deleteUser(data: ChatToggleUserData): Promise<Response> {
     return this.http.delete('/users', { body: JSON.stringify(data) });
   }
 

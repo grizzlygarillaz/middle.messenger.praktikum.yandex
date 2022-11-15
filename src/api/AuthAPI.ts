@@ -20,17 +20,21 @@ export interface SignUpData {
   phone: string,
 }
 
+export interface SignUpResponse {
+  id: number
+}
+
 class AuthAPI extends BaseAPI implements
   CreateApiMethod, ReadApiMethod, DeleteApiMethod, StoreApiMethod {
   constructor() {
     super('/auth');
   }
 
-  public create(data: SignUpData) {
+  public create(data: SignUpData): Promise<SignUpResponse> {
     return this.http.post('/signup', { body: JSON.stringify(data) });
   }
 
-  public store(data: SignInData) {
+  public store(data: SignInData): Promise<Response> {
     return this.http.post('/signin', { body: JSON.stringify(data) });
   }
 
@@ -38,7 +42,7 @@ class AuthAPI extends BaseAPI implements
     return this.http.get('/user');
   }
 
-  public delete() {
+  public delete(): Promise<Response> {
     return this.http.post('/logout');
   }
 }

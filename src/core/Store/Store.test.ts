@@ -16,7 +16,7 @@ describe('core/Store/Store', () => {
 
     expect(store.getState()).toEqual({ userId: 12, null: null });
 
-    // @ts-ignore
+    // @ts-expect-error
     store.forget('test');
 
     expect(store.getState()).toEqual({ userId: 12, null: null });
