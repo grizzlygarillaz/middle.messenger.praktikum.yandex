@@ -88,6 +88,8 @@ export function initRouter(router: CoreRouter, store: Store<AppState>) {
       router.start();
     }
 
+    // prevState.screen = null
+    // nextState.screen = null
     if (prevState.screen !== nextState.screen) {
       const Page = getViewComponent(nextState.screen!);
       renderDOM('#app', new Page({}));

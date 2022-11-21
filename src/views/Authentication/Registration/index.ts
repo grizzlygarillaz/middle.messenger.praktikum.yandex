@@ -1,10 +1,10 @@
-import FormBlock, { FormProps } from 'util/FormBlock';
 import { SignUpData } from 'api/AuthAPI';
-import template from 'bundle-text:./registration.hbs';
 import { register } from 'services/auth';
-import { withRouter } from 'util/withRouter';
-import withStore from 'util/withStore';
 import { Block } from 'core/index';
+import FormBlock, { FormProps } from 'utils/FormBlock';
+import withStore from 'utils/withStore';
+import { withRouter } from 'utils/withRouter';
+import template from './registration.hbs';
 
 class RegistrationPage extends FormBlock {
   static componentName = 'RegistrationPage';

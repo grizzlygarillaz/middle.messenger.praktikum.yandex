@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2017",
-    "declaration": true,
+    "target": "es2020",
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -12,20 +11,6 @@
     "strictNullChecks": true,
     "rootDir": "./src",
     "baseUrl": "./src",
-    "paths": {
-      "api/*": ["./api/*"],
-      "components/*": ["./components/*"],
-      "services/*": ["./services/*"],
-      "core/*": ["./core/*"],
-      "helpers/*": ["./helpers/*"],
-      "img/*": ["./img/*"],
-      "typings/*": ["./typings/*"],
-      "util/*": ["./util/*"],
-      "views/*": ["./views/*"]
-    },
-    "lib": [
-      "ESNext",
-      "DOM"
-    ]
+    "outDir": "./dist",
   }
 }

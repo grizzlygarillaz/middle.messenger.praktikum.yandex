@@ -1,6 +1,7 @@
-/yarn-error.log
 /.idea
 /.parcel-cache
 /dist
 /node_modules
+/coverage
+yarn-error.log
 .env

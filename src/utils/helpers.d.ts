@@ -1,0 +1,12 @@
+export { isEqual, isPlainObject, isArray, isArrayOrObject, set, merge, PlainObject, objectToCamelCase, pad, padTime, sleep, };
+declare type PlainObject = Record<string, any>;
+declare function isPlainObject(value: unknown): value is PlainObject;
+declare function isArray(value: unknown): value is [];
+declare function isArrayOrObject(value: unknown): value is ([] | PlainObject);
+declare function isEqual(lhs: PlainObject, rhs: PlainObject): boolean;
+declare function merge(lhs: PlainObject, rhs: PlainObject): PlainObject;
+declare function set(object: PlainObject | unknown, path: string, value: unknown): PlainObject | unknown;
+declare function objectToCamelCase(object: PlainObject): PlainObject;
+declare function pad(value: number): string | number;
+declare function padTime(time: string): string;
+declare function sleep(ms?: number): Promise<unknown>;

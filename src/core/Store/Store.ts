@@ -1,4 +1,5 @@
 import EventBus from 'core/EventBus';
+import { isEqual } from 'utils/helpers';
 
 export enum StoreEvents {
   UPDATED = 'UPDATED',
@@ -27,10 +28,29 @@ class Store<State extends AnyRecord> extends EventBus {
 
   public set(nextState: Partial<State>) {
     const prevState = { ...this.state };
+    const newState = { ...this.state, ...nextState };
 
-    this.state = { ...this.state, ...nextState };
+    if (isEqual(prevState, newState)) {
+      return;
+    }
+
+    this.state = newState;
 
     this.emit(StoreEvents.UPDATED, prevState, nextState);
+  }
+
+  public forget(...forget: (keyof State)[]) {
+    const prevState = { ...this.state };
+
+    try {
+      forget.forEach((key) => {
+        delete this.state[key];
+      });
+
+      this.emit(StoreEvents.UPDATED, prevState, this.state);
+    } catch {
+      console.error(`${String(forget)} not found at Store`);
+    }
   }
 
   public getState() {

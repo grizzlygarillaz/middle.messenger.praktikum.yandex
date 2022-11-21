@@ -1,4 +1,8 @@
-import HTTPTransport from 'util/HTTPTransport';
+import HTTPTransport from 'utils/HTTPTransport';
+
+export interface ErrorResponse {
+  reason: string
+}
 
 abstract class BaseAPI {
   protected http: HTTPTransport;

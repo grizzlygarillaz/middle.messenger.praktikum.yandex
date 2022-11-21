@@ -1,6 +1,6 @@
 import { Dispatch } from 'core/Store/Store';
 import authAPI from 'api/AuthAPI';
-import { objectToCamelCase } from 'util/helpers';
+import { objectToCamelCase } from 'utils/helpers';
 
 export default async function initApp(dispatch: Dispatch<AppState>) {
   try {

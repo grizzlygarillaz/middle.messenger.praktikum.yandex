@@ -1,6 +1,6 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./modal.hbs';
 import ModalProps from 'components/Modal/type';
+import template from './modal.hbs';
 
 class Modal extends Block<ModalProps> {
   static componentName = 'Modal';

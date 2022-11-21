@@ -13,7 +13,7 @@ export interface ChatCreateData {
 }
 
 export interface ChatToggleUserData {
-  usersIds: number[],
+  users: number[],
   chatId: number,
 }
 
@@ -22,17 +22,17 @@ export interface ChatAddUserData {
   chatId: number,
 }
 
-interface DeletedChat {
+interface ChatTokenResponse {
+  token: string,
+}
+
+interface ChatDeletedResponse {
   userId: number,
   result: {
     id: number,
     title: string,
     avatar: string
   }
-}
-
-interface ChatTokenResponse {
-  token: string,
 }
 
 class ChatAPI extends BaseAPI implements
@@ -42,6 +42,7 @@ class ChatAPI extends BaseAPI implements
   }
 
   public create(data: ChatCreateData): Promise<Response> {
+    console.log(data);
     return this.http.post('', { body: JSON.stringify(data) });
   }
 
@@ -49,20 +50,20 @@ class ChatAPI extends BaseAPI implements
     return this.http.get('', { body: data });
   }
 
-  public delete(chatId: number): Promise<DeletedChat> {
+  public delete(chatId: number): Promise<ChatDeletedResponse> {
     return this.http.delete('', { body: JSON.stringify({ chatId }) });
   }
 
-  public getUsers(chatId: number): Promise<User[]> {
+  public getUsers(chatId: number) : Promise<User[]> {
     return this.http.get(`/${chatId}/users`);
   }
 
-  public addUser(data: ChatToggleUserData) {
-    return this.http.put('/users', { body: JSON.stringify({ chatId: data.chatId, users: data.usersIds }) });
+  public addUser(data: ChatToggleUserData): Promise<Response> {
+    return this.http.put('/users', { body: JSON.stringify(data) });
   }
 
-  public deleteUser(data: ChatToggleUserData) {
-    return this.http.delete('/users', { body: JSON.stringify({ chatId: data.chatId, users: data.usersIds }) });
+  public deleteUser(data: ChatToggleUserData): Promise<Response> {
+    return this.http.delete('/users', { body: JSON.stringify(data) });
   }
 
   public token(chatId: number): Promise<ChatTokenResponse> {

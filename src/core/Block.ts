@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
 import EventBus from 'core/EventBus';
 import BlockProps from 'typings/interfaces/Block';
-import { isEqual, merge } from 'util/helpers';
 import Handlebars from 'handlebars';
-import { Trigger } from 'components/index';
+import { isEqual, merge } from 'utils/helpers';
+import Trigger from 'components/Trigger/index';
 
 export interface BlockClass<P extends AnyRecord> extends Function {
   new (props: P): Block<P>;

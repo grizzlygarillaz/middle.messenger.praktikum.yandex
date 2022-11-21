@@ -1,6 +1,6 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./modal_trigger.hbs';
 import TriggerProps from 'components/Trigger/type';
+import template from './trigger.hbs';
 
 class Trigger extends Block<TriggerProps> {
   static componentName = 'Trigger';

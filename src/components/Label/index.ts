@@ -1,6 +1,6 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./label.hbs';
 import LabelProps from 'components/Label/type';
+import template from './label.hbs';
 
 class Label extends Block<LabelProps> {
   static componentName = 'Label';

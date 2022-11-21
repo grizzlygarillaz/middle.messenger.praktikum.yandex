@@ -1,6 +1,6 @@
 import Block from 'core/Block';
 import ButtonProps from 'components/Button/type';
-import template from 'bundle-text:./button.hbs';
+import template from './button.hbs';
 
 class Button extends Block<ButtonProps> {
   static componentName = 'Button';

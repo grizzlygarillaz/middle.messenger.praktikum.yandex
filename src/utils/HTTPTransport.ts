@@ -41,7 +41,7 @@ class HTTPTransport {
     );
   }
 
-  public put<Response>(url: string, options: DataProps): Promise<Response> {
+  public put<Response>(url: string, options?: DataProps): Promise<Response> {
     return this.request(
       url,
       {

@@ -1,5 +1,5 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./card.hbs';
+import template from './card.hbs';
 
 class Card extends Block {
   static componentName = 'Card';

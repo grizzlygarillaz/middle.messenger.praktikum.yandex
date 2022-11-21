@@ -1,6 +1,6 @@
 import { Dispatch } from 'core/Store/Store';
 import authAPI, { SignInData, SignUpData } from 'api/AuthAPI';
-import { objectToCamelCase } from 'util/helpers';
+import { objectToCamelCase } from 'utils/helpers';
 import { Paths } from '../router';
 
 export const logout = async (dispatch: Dispatch<AppState>) => {

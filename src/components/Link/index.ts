@@ -1,6 +1,6 @@
 import Block from 'core/Block';
 import LinkProps from 'components/Link/type';
-import template from 'bundle-text:./link.hbs';
+import template from './link.hbs';
 
 class Link extends Block<LinkProps> {
   static componentName = 'Link';

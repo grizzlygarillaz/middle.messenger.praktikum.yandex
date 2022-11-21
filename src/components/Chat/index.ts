@@ -1,11 +1,11 @@
 import Block from 'core/Block';
 import ChatProps from 'components/Chat/type';
-import { chat_settings, send } from 'img/icons';
-import template from 'bundle-text:./chat.hbs';
-import withStore from 'util/withStore';
 import { addUserToChat, deleteChat } from 'services/chat';
-import FormBlock from 'util/FormBlock';
-import { objectToCamelCase, padTime } from 'util/helpers';
+import FormBlock from 'utils/FormBlock';
+import withStore from 'utils/withStore';
+import { objectToCamelCase, padTime } from 'utils/helpers';
+import { chat_settings, send } from 'img/icons';
+import template from './chat.hbs';
 
 class Chat extends FormBlock<ChatProps> {
   static componentName = 'Chat';

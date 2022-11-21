@@ -1,9 +1,9 @@
 import Block from 'core/Block';
-import template from 'bundle-text:./chat_item.hbs';
 import { ChatItemProps } from 'components/ChatItem/type';
-import withStore from 'util/withStore';
 import { changeChat } from 'services/chat';
-import { padTime } from 'util/helpers';
+import withStore from 'utils/withStore';
+import { padTime } from 'utils/helpers';
+import template from './chat_item.hbs';
 
 class ChatItem extends Block<ChatItemProps> {
   public static componentName = 'ChatItem';
