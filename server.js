@@ -1,23 +1,11 @@
-// import { create } from 'express-handlebars';
-// import express from 'express';
-
+const dotenv = require('dotenv');
 const express = require('express')
-const PORT = 3000;
+
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
 const app = express();
 const root = __dirname + '/dist'
-//
-// const hbs = create({
-//   partialsDir: './src/components',
-//   layoutsDir: './src/views/layouts'
-// })
-//
-// app.engine('hbs', hbs.engine);
-// app.set('view engine', '.hbs');
-// app.set('views', './dist/views');
-
-// app.get('/', (req, res) => {
-//   app.use(express.static('index.html'));
-// })
 
 app.use(express.static(root));
 
